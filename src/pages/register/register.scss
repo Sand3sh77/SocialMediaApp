@@ -1,0 +1,87 @@
+.register {
+    height: 100vh;
+    background-color: rgb(195, 190, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .card {
+        width: 55%;
+        display: flex;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+
+        .right {
+            flex: 1;
+
+            background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+                url("https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600");
+            background-size: cover;
+            padding: 4rem;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1.5rem;
+            color: white;
+
+            h1 {
+                font-size: 5.5rem;
+                line-height: 5rem;
+            }
+
+            p {}
+
+            span {
+                font-size: 14px;
+            }
+
+            button {
+                width: 50%;
+                padding: 10px;
+                border: none;
+                background-color: white;
+                color: rebeccapurple;
+                cursor: pointer;
+                font-weight: bold;
+            }
+        }
+
+        .left {
+            flex: 1;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.5rem;
+
+            h1 {
+                color: #555;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+
+                input {
+                    border: none;
+                    border-bottom: 1px solid lightgray;
+                    padding: 1rem 0.5rem;
+                }
+
+                button {
+                    width: 50%;
+                    padding: 0.5rem;
+                    border: none;
+                    background-color: #938eef;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
+            }
+
+
+        }
+    }
+}
