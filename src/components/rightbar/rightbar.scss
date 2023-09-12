@@ -1,0 +1,101 @@
+@import "../../app.scss";
+
+.rightbar {
+    @include themify($themes) {
+        flex: 3.6;
+        position: sticky;
+        left: 0;
+        top: 4rem;
+        height: calc(100vh - 4rem);
+        overflow: scroll;
+        background-color: themed('bgSoft');
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .container {
+            margin: 1rem 0;
+            padding: 0 1rem;
+
+            .item {
+                -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                padding: 1.2rem;
+                margin-bottom: 1rem;
+                background-color: themed('bg');
+
+                span {
+                    color: gray;
+                }
+
+                .user {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin: 0.8rem 0;
+
+                    span {
+                        width: 20%;
+                    }
+
+                    .userInfo {
+                        display: flex;
+                        align-items: center;
+                        gap: 1.1rem;
+                        position: relative;
+
+                        img {
+                            width: 2.1rem;
+                            height: 2.1rem;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+
+                        p {
+                            color: themed("textColorSoft");
+                        }
+
+                        span {
+                            font-weight: 500;
+                            color: themed("textColor");;
+                            width: 70%;
+                        }
+
+                        .online {
+                            width: 0.7rem;
+                            height: 0.6rem;
+                            border-radius: 100%;
+                            background-color: limegreen;
+                            position: absolute;
+                            top: 0;
+                            left: 1.5rem;
+                        }
+                    }
+
+                    .buttons {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.8rem;
+
+                        button {
+                            border: none;
+                            padding: 0.5rem;
+                            color: white;
+                            cursor: pointer;
+
+                            &:first-child {
+                                background-color: #5271ff;
+                            }
+
+                            &:last-child {
+                                background-color: #f0544f;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

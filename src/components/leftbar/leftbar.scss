@@ -1,0 +1,71 @@
+@import "../../app.scss";
+
+.leftbar {
+    @include themify($themes) {
+        flex: 2;
+        position: sticky;
+        left: 0;
+        top: 4rem;
+        height: calc(100vh - 4rem);
+        overflow: scroll;
+        background: themed("bg");
+        color: themed("textColor");
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .container {
+            padding: 1rem;
+
+            hr {
+                margin: 1rem 0;
+                border: none;
+                height: 0.5px;
+                background-color: themed("border");
+            }
+
+            .menu {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                span {
+                    font-size: 0.8rem;
+                }
+
+                .user {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    img {
+                        width: 2.1rem;
+                        height: 2.1rem;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    span {
+                        font-size: 0.9rem;
+                    }
+                }
+
+                .item {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    img {
+                        width: 1.8rem;
+                        height: 1.8rem;
+                    }
+
+                    span {
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
+    }
+}
