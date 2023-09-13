@@ -12,6 +12,7 @@
         top: 0;
         background-color: themed("bg");
         color: themed("textColor");
+        z-index: 50;
 
         .left {
             display: flex;
@@ -36,12 +37,19 @@
                 border-radius: 5px;
                 padding: 5px;
 
+
                 input {
                     padding: 0.2rem;
                     width: 30rem;
                     border: none;
                     background: transparent;
+                    color: themed('textColor');
                 }
+
+                input:focus {
+                    outline: none;
+                }
+
             }
 
 

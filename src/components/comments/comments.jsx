@@ -1,10 +1,9 @@
-import Post from '../post/post';
-import './posts.scss';
+import './comments.scss';
 
-const Posts = () => {
+const Comments = () => {
 
     //TEMPORARY
-    const posts = [
+    const comments = [
         {
             id: 1,
             name: "John Doe",
@@ -24,16 +23,20 @@ const Posts = () => {
             img: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
         },
     ];
-
     return (
-        <div className='posts'>
-            {posts.map((post) => (
-                <Post post={post} key={post.id} />
-            )
-            )}
-
+        <div className='comments'>
+            {comments.map((comment) => (
+                <div className="comment" key={comment.id}>
+                    <img src={comment.profilePic} />
+                    <div className="cinfo">
+                        <span>{comment.name}</span>
+                        <p>{comment.desc}</p>
+                    </div>
+                    <span className='date'>1 hour ago.</span>
+                </div>
+            ))}
         </div>
     )
 }
 
-export default Posts;
+export default Comments

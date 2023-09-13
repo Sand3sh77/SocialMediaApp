@@ -2,7 +2,7 @@
 
 .rightbar {
     @include themify($themes) {
-        flex: 3.6;
+        flex: 3;
         position: sticky;
         left: 0;
         top: 4rem;
@@ -16,18 +16,19 @@
 
         .container {
             margin: 1rem 0;
-            padding: 0 1rem;
+            padding-right:1rem;
 
             .item {
                 -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
                 -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
                 box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                background-color: themed('bg');
                 padding: 1.2rem;
                 margin-bottom: 1rem;
-                background-color: themed('bg');
 
                 span {
                     color: gray;
+                    font-size: 0.8rem;
                 }
 
                 .user {
@@ -37,7 +38,7 @@
                     margin: 0.8rem 0;
 
                     span {
-                        width: 20%;
+                        white-space: nowrap;
                     }
 
                     .userInfo {
@@ -55,12 +56,15 @@
 
                         p {
                             color: themed("textColorSoft");
+                            font-size: 0.9rem;
+                            padding-right: 10px;
                         }
 
                         span {
                             font-weight: 500;
                             color: themed("textColor");;
                             width: 70%;
+                            font-size: 0.95rem;
                         }
 
                         .online {
