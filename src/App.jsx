@@ -16,12 +16,12 @@ import {
   Navigate,
 } from "react-router-dom";
 import { DarkModeContext } from './context/darkmodeContext';
+import { AuthContext } from './context/authContext';
 
 function App() {
-  const currentUser = true;
 
   const { darkMode } = useContext(DarkModeContext);
-  console.log(darkMode);
+  const { currentUser } = useContext(AuthContext);
 
   const Layout = () => {
     return (
@@ -29,7 +29,7 @@ function App() {
         <Navbar />
         <div style={{ display: "flex" }}>
           <Leftbar />
-          <div style={{ flex: '6' }}>
+          <div style={{ flex: '6'}}>
             <Outlet />
           </div>
           <Rightbar />
@@ -39,7 +39,7 @@ function App() {
   }
 
   const ProtectedRoute = ({ children }) => {
-    if (!currentUser) {
+    if (!currentUser.loginStatus) {
       return <Navigate to="/login" />;
     }
     return children;
@@ -75,7 +75,7 @@ function App() {
   ]);
 
   return (
-    <RouterProvider router={router} />
+    <RouterProvider router={router} className="main" />
   )
 }
 
