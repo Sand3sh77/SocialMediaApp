@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
                 loginStatus: true,
                 id: 7,
                 name: "Sandesh Subedi",
-                img: "./src/assets/profile.jpg",
+                img: "../src/assets/profile.jpg",
             }
         )
     }

@@ -11,7 +11,7 @@ import { useState } from 'react';
 const Post = ({ post }) => {
 
     const [comments, setComments] = useState(false);
-    const liked = false;
+    const [liked,setLiked]=useState(false);
 
     return (
         <div className='post'>
@@ -30,10 +30,10 @@ const Post = ({ post }) => {
                 </div>
                 <div className="content">
                     <p>{post.desc}</p>
-                    <img src={post.img} alt='' />
+                    <img src={post.img} alt='' onClick={(e)=>{e.target.classList.toggle('objectFit')}}/>
                 </div>
                 <div className="info">
-                    <div className="item">
+                    <div className="item" onClick={() => setLiked(!liked)}>
                         {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
                         99 likes
                     </div>
