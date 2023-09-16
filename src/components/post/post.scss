@@ -11,7 +11,6 @@
         color: themed('textColor');
 
         .container {
-            // padding: 1.2rem;
 
             .user {
                 display: flex;
@@ -44,6 +43,7 @@
             }
 
             .content {
+
                 p {
                     padding: 0.8rem 1.2rem;
                 }
@@ -52,8 +52,11 @@
                     width: 100%;
                     max-height: 30rem;
                     object-fit: cover;
-                    // border-radius: 5px;
                     cursor: pointer;
+                }
+                @include mobile{
+                    width: 98%;
+                    // display:none;
                 }
 
                 .objectFit {
@@ -64,6 +67,7 @@
             .info {
                 display: flex;
                 align-items: center;
+                justify-content: space-evenly;
                 gap: 1.2rem;
                 padding: 0.8rem 1.2rem;
 

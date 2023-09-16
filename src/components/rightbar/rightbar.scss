@@ -10,13 +10,17 @@
         overflow: scroll;
         background-color: themed('bgSoft');
 
+        @include small-tablet {
+            display: none;
+        }
+
         &::-webkit-scrollbar {
             display: none;
         }
 
         .container {
             margin: 1rem 0;
-            padding-right:1rem;
+            padding-right: 1rem;
 
             .item {
                 -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
@@ -36,6 +40,7 @@
                     align-items: center;
                     justify-content: space-between;
                     margin: 0.8rem 0;
+                    flex-wrap: wrap;
 
                     span {
                         white-space: nowrap;
@@ -63,7 +68,8 @@
 
                         span {
                             font-weight: 500;
-                            color: themed("textColor");;
+                            color: themed("textColor");
+                            ;
                             width: 70%;
                             font-size: 0.95rem;
                         }

@@ -7,6 +7,9 @@
         min-height: 100vh;
         color: themed('textColor');
         padding-right: 1rem;
+        @include small-tablet{
+            padding-right: 0;
+        }
 
         .images {
             width: 100%;
@@ -30,7 +33,7 @@
                 height: 10rem;
                 border-radius: 50%;
                 object-fit: cover;
-                z-index: 100;
+                // z-index: 100;
                 border: 3px solid #5271ff;
                 padding: 3px;
                 background-color: themed('bgSoft');
@@ -54,6 +57,10 @@
                 justify-content: space-between;
                 align-items: center;
 
+                @include mobile {
+                    flex-direction: column;
+                    padding-top: 4.4rem;
+                }
                 .left {
                     flex: 1;
                     display: flex;

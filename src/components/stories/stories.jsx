@@ -26,6 +26,16 @@ const Stories = () => {
             id: 5,
             name: 'Sandesh Subedi',
             img: "https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        },
+        {
+            id: 6,
+            name: 'Sandesh Subedi',
+            img: "https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        },
+        {
+            id: 7,
+            name: 'Sandesh Subedi',
+            img: "https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         }
     ]
     return (
