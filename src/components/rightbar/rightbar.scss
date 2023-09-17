@@ -35,12 +35,19 @@
                     font-size: 0.8rem;
                 }
 
+                .suggestion {
+                    flex-wrap: wrap;
+                }
+
                 .user {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     margin: 0.8rem 0;
-                    flex-wrap: wrap;
+
+                    @include tablet {
+                        flex-wrap: wrap;
+                    }
 
                     span {
                         white-space: nowrap;

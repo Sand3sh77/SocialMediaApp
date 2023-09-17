@@ -2,6 +2,7 @@
 
 .stories {
     display: flex;
+    justify-content:space-evenly;
     gap: 0.8rem;
     height: 12rem;
     max-width: 50vw;
@@ -12,7 +13,10 @@
 
     @include tablet {
         height: 10rem;
-        max-width: 100vw;
+    }
+    @include small-tablet {
+        height: 10rem;
+        max-width: 70vw;
     }
 
     @include mobile {

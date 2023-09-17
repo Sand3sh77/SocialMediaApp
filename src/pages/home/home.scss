@@ -8,8 +8,15 @@
         padding: 1.2rem 2.8rem;
         color: themed('textColor');
 
+        @include tablet{
+            max-width: 60vw;
+        }
+        @include small-tablet{
+            max-width: 80vw;
+        }
         @include mobile {
             padding: 0;
+            max-width: 100vw;
         }
     }
 }

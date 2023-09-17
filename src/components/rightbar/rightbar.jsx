@@ -6,7 +6,7 @@ const Rightbar = () => {
       <div className="container">
         <div className="item">
           <span>Suggestions For You</span>
-          <div className="user">
+          <div className="user suggestion">
             <div className="userInfo">
               <img src='../src/assets/profile.jpg' />
               <span>Sandesh Subedi</span>
