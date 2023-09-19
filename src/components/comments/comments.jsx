@@ -30,7 +30,7 @@ const Comments = () => {
     return (
         <div className='comments'>
             <div className='write'>
-                <img src={currentUser.img} />
+                <img src={currentUser.profilePic} />
                 <input type='text' placeholder='write a comment.' />
                 <button>Send</button>
             </div>

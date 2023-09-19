@@ -3,9 +3,10 @@ import './register.scss';
 import { useContext, useEffect, useState } from 'react';
 import Alert from '../../components/alert/alert';
 import { AlertContext } from '../../context/alertContext';
+import axios from 'axios';
 
 const Register = () => {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const { alert, setAlert } = useContext(AlertContext);
     const [formData, setFormData] = useState({
         username: '',
@@ -26,23 +27,13 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(formData)
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            setAlert(data);
-            if (data.status === 200) {
-                // setFormData({
-                //     username: '',
-                //     email: '',
-                //     password: '',
-                //     name: ''
-                // })
+            const response = await axios.post(url, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data", "Accept": "application/json",
+                }
+            })
+            setAlert(response.data);
+            if (response.data.status === 200) {
                 navigate('/login');
             }
         } catch (error) {

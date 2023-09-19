@@ -4,6 +4,7 @@ import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
 import { AlertContext } from '../../context/alertContext'
 import Alert from '../../components/alert/alert'
+import axios from 'axios'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Login = () => {
         username: "",
         password: ""
     })
-    // const { login } = useContext(AuthContext);
+    const { setUserToken } = useContext(AuthContext);
     const { alert, setAlert } = useContext(AlertContext);
 
     const handleChange = (e) => {
@@ -28,23 +29,15 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const resp = await fetch(url, {
-                method: "POST",
-                body: JSON.stringify(formData)
-            });
-            if (!resp.ok) {
-                throw new Error('Network response was not ok');
+            const response = await axios.post(url, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data", "Accept": "application/json",
+                }
             }
-            const data = await resp.json();
-            setAlert(data);
-            // login(data);
-            if (data.status === 200) {
-                // setFormData({
-                //     username: '',
-                //     email: '',
-                //     password: '',
-                //     name: ''
-                // })
+            )
+            setAlert(response.data);
+            if (response.data.status === 200) {
+                setUserToken(response.data.token);
                 navigate('/');
             }
         }

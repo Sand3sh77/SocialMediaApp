@@ -9,18 +9,44 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from '../../components/posts/posts';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const Profile = () => {
+    const params = useParams();
+    const url = `http://localhost/social/api/functions/profile.php?id=${params.id}`;
+    const [userInfo, setUserInfo] = useState({});
+
+    useEffect(() => {
+        const userDetails = async () => {
+            try {
+                const resp = await axios.get(url, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "Accept": "application/json",
+                    }
+                })
+                const userData = resp.data.data[0];
+                setUserInfo(userData);
+            }
+            catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        userDetails();
+    }, [])
+
     return (
         <div className="profile">
             <div className="images">
                 <img
-                    src="https://images.pexels.com/photos/13440765/pexels-photo-13440765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    src={userInfo.coverPic}
                     alt=""
                     className="cover"
                 />
                 <img
-                    src="../src/assets/profile.jpg"
+                    src={userInfo.profilePic}
                     alt=""
                     className="profilePic"
                 />
@@ -45,15 +71,15 @@ const Profile = () => {
                         </a>
                     </div>
                     <div className="center">
-                        <span  className='name'>Sandesh Subedi</span>
+                        <span className='name'>{userInfo.name}</span>
                         <div className="info">
                             <div className="item">
                                 <PlaceIcon />
-                                <span>Nepal</span>
+                                <span>{userInfo.city}</span>
                             </div>
                             <div className="item">
                                 <LanguageIcon />
-                                <span>sandesh.subedi</span>
+                                <span>{userInfo.website}</span>
                             </div>
                         </div>
                         <button>Follow</button>
@@ -64,7 +90,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <Posts/>
+            <Posts />
         </div>
     )
 }

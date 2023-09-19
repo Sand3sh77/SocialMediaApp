@@ -7,7 +7,7 @@ import { AuthContextProvider } from './context/authContext.jsx'
 import { AlertContextProvider } from './context/alertContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <DarkModeContextProvider>
       <AuthContextProvider>
         <AlertContextProvider>
@@ -15,5 +15,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </AlertContextProvider>
       </AuthContextProvider>
     </DarkModeContextProvider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

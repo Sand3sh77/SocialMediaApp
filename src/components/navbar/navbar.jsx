@@ -36,10 +36,12 @@ const Navbar = () => {
                 <PersonOutlinedIcon className='icon' />
                 <EmailOutlinedIcon className='icon' />
                 <NotificationsOutlinedIcon className='icon' />
-                <div className="user">
-                    <img src={currentUser.img} />
-                    <span>{currentUser.name}</span>
-                </div>
+                <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <div className="user">
+                        <img src={currentUser.profilePic} />
+                        <span>{currentUser.name}</span>
+                    </div>
+                </Link>
             </div>
         </div>
     )
