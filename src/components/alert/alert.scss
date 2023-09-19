@@ -1,0 +1,39 @@
+.alert-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:0.4rem;
+    position: fixed;
+    top: 0.5rem;
+    right: 0.3rem;
+    z-index: 500;
+    border-radius: 10px;
+    opacity: 0;
+    animation: myAnimation 5s ease-in-out;
+    color: white;
+    background: linear-gradient(to right, #3fa83f, #0ba10b);
+    background: linear-gradient(to right, #ad3535, #a30606);
+    padding: 0.6rem 1rem;
+}
+
+@keyframes myAnimation {
+    0% {
+        opacity: 0;
+        translate: -10rem;
+    }
+
+    15% {
+        opacity: 1;
+        translate: 0px;
+    }
+
+    85% {
+        opacity: 1;
+        translate: 0px;
+    }
+
+    100% {
+        opacity: 0;
+        translate: 10rem;
+    }
+}

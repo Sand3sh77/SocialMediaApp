@@ -1,17 +1,89 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import './register.scss';
+import { useContext, useEffect, useState } from 'react';
+import Alert from '../../components/alert/alert';
+import { AlertContext } from '../../context/alertContext';
 
 const Register = () => {
+    const navigate=useNavigate();
+    const { alert, setAlert } = useContext(AlertContext);
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        password: '',
+        name: ''
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const url = "http://localhost/social/api/authentication/signup.php";
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setAlert(data);
+            if (data.status === 200) {
+                // setFormData({
+                //     username: '',
+                //     email: '',
+                //     password: '',
+                //     name: ''
+                // })
+                navigate('/login');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
     return (
         <div className='register'>
+            {alert && <Alert />}
             <div className='card'>
                 <div className="left">
                     <h1>Register</h1>
-                    <form>
-                        <input type="text" placeholder='Username' />
-                        <input type="email" placeholder='Email' />
-                        <input type="password" placeholder='Password' />
-                        <input type="text" placeholder='Name' />
+                    <form onSubmit={handleSubmit} action='#'>
+                        <input type="text"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            placeholder="Username"
+                        />
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Email"
+                        />
+                        <input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            placeholder="Password"
+                        />
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Name"
+                        />
                         <button type='submit'>Register</button>
                     </form>
                 </div>
