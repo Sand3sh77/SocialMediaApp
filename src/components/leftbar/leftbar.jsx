@@ -1,19 +1,21 @@
 import './leftbar.scss';
-import Friends from "../../assets/1.png";
-import Groups from "../../assets/2.png";
-import Market from "../../assets/3.png";
-import Watch from "../../assets/4.png";
-import Memories from "../../assets/5.png";
-import Events from "../../assets/6.png";
-import Gaming from "../../assets/7.png";
-import Gallery from "../../assets/8.png";
-import Videos from "../../assets/9.png";
-import Messages from "../../assets/10.png";
-import Tutorials from "../../assets/11.png";
-import Courses from "../../assets/12.png";
-import Fund from "../../assets/13.png";
+import Friends from "../../assets/logo/1.png";
+import Groups from "../../assets/logo/2.png";
+import Market from "../../assets/logo/3.png";
+import Watch from "../../assets/logo/4.png";
+import Memories from "../../assets/logo/5.png";
+import Events from "../../assets/logo/6.png";
+import Gaming from "../../assets/logo/7.png";
+import Gallery from "../../assets/logo/8.png";
+import Videos from "../../assets/logo/9.png";
+import Messages from "../../assets/logo/10.png";
+import Tutorials from "../../assets/logo/11.png";
+import Courses from "../../assets/logo/12.png";
+import Fund from "../../assets/logo/13.png";
 import { useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
+import { ProfileSvg } from '../../assets/svg/svg';
+import { Link } from 'react-router-dom';
 
 const Leftbar = () => {
   const { currentUser } = useContext(AuthContext);
@@ -21,10 +23,20 @@ const Leftbar = () => {
     <div className="leftbar">
       <div className="container">
         <div className="menu">
+          <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
           <div className="user">
-            <img src={currentUser.profilePic} />
+            {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
             <span>{currentUser.name}</span>
           </div>
+            </Link>
           <div className="item">
             <img src={Friends} alt='' />
             <span>Friends</span>

@@ -21,13 +21,19 @@
 
                 .userInfo {
                     display: flex;
-                    gap: 1.2rem;
+                    gap: 1rem;
 
-                    img {
+                    img,
+                    svg {
                         width: 2rem;
                         height: 2rem;
                         border-radius: 100%;
                         object-fit: cover;
+                    }
+
+                    svg {
+                        padding: 2px;
+                        border: 1px solid themed('textColor');
                     }
 
                     .details {
@@ -54,7 +60,8 @@
                     object-fit: cover;
                     cursor: pointer;
                 }
-                @include mobile{
+
+                @include mobile {
                     width: 98%;
                     // display:none;
                 }

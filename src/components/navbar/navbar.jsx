@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { DarkModeContext } from '../../context/darkmodeContext';
 import { AuthContext } from '../../context/authContext';
+import { ProfileSvg } from '../../assets/svg/svg';
 
 
 const Navbar = () => {
@@ -38,7 +39,15 @@ const Navbar = () => {
                 <NotificationsOutlinedIcon className='icon' />
                 <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <div className="user">
-                        <img src={currentUser.profilePic} />
+                        {currentUser.profilePic ?
+                            <img
+                                src={currentUser.profilePic}
+                                alt=""
+                                className=""
+                            />
+                            :
+                            <ProfileSvg />
+                        }
                         <span>{currentUser.name}</span>
                     </div>
                 </Link>

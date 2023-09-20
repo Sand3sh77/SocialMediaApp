@@ -7,30 +7,41 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from 'react-router-dom';
 import Comments from '../comments/comments';
 import { useState } from 'react';
+import { ProfileSvg } from '../../assets/svg/svg';
 
 const Post = ({ post }) => {
 
     const [comments, setComments] = useState(false);
-    const [liked,setLiked]=useState(false);
+    const [liked, setLiked] = useState(false);
 
     return (
         <div className='post'>
             <div className="container">
                 <div className="user">
                     <div className="userInfo">
-                        <img src={post.profilePic} />
+                        <Link to={`/profile/${post.userId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+
+                            {post.profilePic ?
+                                <img
+                                    src={post.profilePic}
+                                    alt=""
+                                    className=""
+                                />
+                                : <ProfileSvg />
+                            }
+                        </Link>
                         <div className="details">
                             <Link to={`/profile/${post.userId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <span className='name'>{post.name}</span>
                             </Link>
-                            <div className='date'>1 min ago</div>
+                            <div className='date'>{post.createdAt}</div>
                         </div>
                     </div>
                     <MoreHorizIcon />
                 </div>
                 <div className="content">
-                    <p>{post.desc}</p>
-                    <img src={post.img} alt='' onClick={(e)=>{e.target.classList.toggle('objectFit')}}/>
+                    <p>{post.description}</p>
+                    <img src={post.img} alt='' onClick={(e) => { e.target.classList.toggle('objectFit') }} />
                 </div>
                 <div className="info">
                     <div className="item" onClick={() => setLiked(!liked)}>
@@ -48,7 +59,7 @@ const Post = ({ post }) => {
                 </div>
                 {comments && <Comments />}
             </div>
-        </div>
+        </div >
     )
 }
 

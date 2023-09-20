@@ -13,15 +13,17 @@
         background-color: themed("bg");
         color: themed("textColor");
         z-index: 50;
+
         .left {
             display: flex;
             align-items: center;
             gap: 1rem;
-            
+
             @include mobile {
                 width: 100%;
-                justify-content:flex-start;
+                justify-content: flex-start;
             }
+
             .icon {
                 cursor: pointer;
             }
@@ -31,7 +33,7 @@
                 font-size: 1.2rem;
                 color: themed('logo');
             }
-            
+
             .search {
                 display: flex;
                 align-items: center;
@@ -39,10 +41,12 @@
                 border: 1px solid themed("border");
                 border-radius: 5px;
                 padding: 5px;
+
                 @include mobile {
                     position: absolute;
-                    right:15px;
+                    right: 15px;
                 }
+
                 input {
                     padding: 0.2rem;
                     width: 30rem;
@@ -50,10 +54,11 @@
                     background: transparent;
                     color: themed('textColor');
 
-                    @include tablet{
+                    @include tablet {
                         width: 15rem;
                     }
-                    @include small-tablet{
+
+                    @include small-tablet {
                         width: 5rem;
                     }
 
@@ -92,12 +97,17 @@
                 gap: 0.5rem;
                 font-weight: 500;
 
-                img {
-                    width: 2.5rem;
-                    height: 2.5rem;
+                img,
+                svg {
+                    width: 2.2rem;
+                    height: 2.2rem;
                     border-radius: 50%;
                     object-fit: cover;
+                }
 
+                svg {
+                    padding: 2px;
+                    border: 1px solid themed('textColor');
                 }
 
                 span {}

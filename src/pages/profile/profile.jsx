@@ -12,6 +12,7 @@ import Posts from '../../components/posts/posts';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { ProfileSvg } from '../../assets/svg/svg';
 
 const Profile = () => {
     const params = useParams();
@@ -35,7 +36,7 @@ const Profile = () => {
             }
         }
         userDetails();
-    }, [])
+    }, [params])
 
     return (
         <div className="profile">
@@ -45,11 +46,16 @@ const Profile = () => {
                     alt=""
                     className="cover"
                 />
-                <img
-                    src={userInfo.profilePic}
-                    alt=""
-                    className="profilePic"
-                />
+                {userInfo.profilePic ?
+                    <img
+                        src={userInfo.profilePic}
+                        alt=""
+                        className="profilePic"
+                    />
+                    : <div className="profilePic svg">
+                        <ProfileSvg />
+                    </div>
+                }
             </div>
             <div className="profileContainer">
                 <div className="uInfo">

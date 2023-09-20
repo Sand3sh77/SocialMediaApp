@@ -8,7 +8,7 @@ const Rightbar = () => {
           <span>Suggestions For You</span>
           <div className="user suggestion">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <span>Sandesh Subedi</span>
             </div>
             <div className="buttons">
@@ -21,7 +21,7 @@ const Rightbar = () => {
           <span>Latest Activities</span>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <p>
                 <span>Sandesh Subedi</span> changed cover picture.
               </p>
@@ -30,7 +30,7 @@ const Rightbar = () => {
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <p>
                 <span>Sandesh Subedi</span> liked a post.
               </p>
@@ -39,7 +39,7 @@ const Rightbar = () => {
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <p>
                 <span>Sandesh Subedi</span> liked a comment.
               </p>
@@ -48,7 +48,7 @@ const Rightbar = () => {
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <p>
                 <span>Sandesh Subedi</span> posted.
               </p>
@@ -60,49 +60,49 @@ const Rightbar = () => {
           <span>Online Friends</span>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/profile.jpg' />
+              <img src='../src/assets/user/profile.jpg' />
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>

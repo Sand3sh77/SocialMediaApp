@@ -43,16 +43,22 @@
                     align-items: center;
                     gap: 0.5rem;
 
-                    img {
+                    img,
+                    svg {
                         width: 2.1rem;
                         height: 2.1rem;
                         border-radius: 50%;
                         object-fit: cover;
                     }
 
+                    svg {
+                        padding: 2px;
+                        border: 1px solid themed('textColor');
+                    }
+
                     span {
                         font-size: 0.9rem;
-                        font-weight:500;
+                        font-weight: 500;
                     }
                 }
 
