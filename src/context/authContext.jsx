@@ -1,12 +1,13 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+    // const navigate= useNavigate();
     const [userToken, setUserToken] = useState(
-        JSON.parse(localStorage.getItem('token')) || null
+        JSON.parse(localStorage.getItem('token')) || 'invalid'
     );
 
     const [currentUser, setCurrentUser] = useState({
@@ -31,6 +32,11 @@ export const AuthContextProvider = ({ children }) => {
                     setCurrentUser({
                         ...data, loginStatus: true
                     });
+                    // navigate("/");
+                    console.log(document.location);
+                    if(document.location.pathname ==='/') return;
+
+                    document.location.replace("/");
                 }
                 else {
                     setCurrentUser({
@@ -46,7 +52,7 @@ export const AuthContextProvider = ({ children }) => {
     }, [userToken]);
 
     return (
-        <AuthContext.Provider value={{ currentUser, setUserToken }}>
+        <AuthContext.Provider value={{ currentUser,userToken, setUserToken,setCurrentUser }}>
             {children}
         </AuthContext.Provider>
     );

@@ -19,7 +19,7 @@ const Post = ({ post }) => {
             <div className="container">
                 <div className="user">
                     <div className="userInfo">
-                        <Link to={`/profile/${post.userId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Link onClick={()=>{document.body.scrollTop=0}} to={`/profile/${post.userId}`} style={{ textDecoration: 'none', color: 'inherit' }} href="#">
 
                             {post.profilePic ?
                                 <img

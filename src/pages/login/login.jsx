@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './login.scss'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
@@ -7,12 +7,11 @@ import Alert from '../../components/alert/alert'
 import axios from 'axios'
 
 const Login = () => {
-    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: "",
         password: ""
     })
-    const { setUserToken } = useContext(AuthContext);
+    const {userToken, setUserToken } = useContext(AuthContext);
     const { alert, setAlert } = useContext(AlertContext);
 
     const handleChange = (e) => {
@@ -38,7 +37,6 @@ const Login = () => {
             setAlert(response.data);
             if (response.data.status === 200) {
                 setUserToken(response.data.token);
-                navigate('/');
             }
         }
         catch (error) {

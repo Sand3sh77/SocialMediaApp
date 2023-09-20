@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import './comments.scss';
 import { AuthContext } from '../../context/authContext';
+import { ProfileSvg } from '../../assets/svg/svg';
 
 const Comments = () => {
 
@@ -30,13 +31,27 @@ const Comments = () => {
     return (
         <div className='comments'>
             <div className='write'>
-                <img src={currentUser.profilePic} />
+                {currentUser.profilePic ?
+                    <img
+                        src={currentUser.profilePic}
+                        alt=""
+                        className=""
+                    />
+                    : <ProfileSvg />
+                }
                 <input type='text' placeholder='write a comment.' />
                 <button>Send</button>
             </div>
             {comments.map((comment) => (
                 <div className="comment" key={comment.id}>
-                    <img src={comment.profilePic} />
+                    {comment.profilePic ?
+                        <img
+                            src={comment.profilePic}
+                            alt=""
+                            className=""
+                        />
+                        : <ProfileSvg />
+                    }
                     <div className="cinfo">
                         <span>{comment.name}</span>
                         <p>{comment.desc}</p>

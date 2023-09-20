@@ -14,11 +14,17 @@
             align-items: center;
             gap: 0.8rem;
 
-            img {
+            img,
+            svg {
                 width: 2.12rem;
                 height: 2.12rem;
                 border-radius: 100%;
                 object-fit: cover;
+            }
+
+            svg {
+                padding: 2px;
+                border: 1px solid themed('textColor');
             }
 
             input {
@@ -29,6 +35,7 @@
                 background: transparent;
                 color: themed('textColor');
             }
+
             input:focus {
                 outline: 1.5px solid #5271ff;
             }
@@ -50,11 +57,17 @@
             justify-content: space-between;
             gap: 1rem;
 
-            img {
+            img,
+            svg {
                 width: 2rem;
                 height: 2rem;
                 border-radius: 100%;
                 object-fit: cover;
+            }
+
+            svg {
+                padding: 2px;
+                border: 1px solid themed('textColor');
             }
 
             .cinfo {
