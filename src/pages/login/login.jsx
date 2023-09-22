@@ -23,7 +23,7 @@ const Login = () => {
     }
 
     // LOGIN API CALL
-    const url = "http://localhost/social/api/authentication/login.php";
+    const url = "http://localhost/social/api/authentication/login";
 
     const handleSubmit = async (e) => {
         e.preventDefault();

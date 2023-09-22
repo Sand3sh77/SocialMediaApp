@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-    // const navigate= useNavigate();
     const [userToken, setUserToken] = useState(
         JSON.parse(localStorage.getItem('token')) || 'invalid'
     );
@@ -18,7 +17,7 @@ export const AuthContextProvider = ({ children }) => {
         localStorage.setItem("token", JSON.stringify(userToken));
 
         // TOKEN CHECK API
-        const url = "http://localhost/social/api/authentication/token.php";
+        const url = "http://localhost/social/api/authentication/token";
         const checkToken = async () => {
             try {
                 const resp = await axios.post(url, { token: userToken }, {
@@ -32,9 +31,7 @@ export const AuthContextProvider = ({ children }) => {
                     setCurrentUser({
                         ...data, loginStatus: true
                     });
-                    // navigate("/");
-                    console.log(document.location);
-                    if(document.location.pathname ==='/') return;
+                    if (document.location.pathname === '/') return;
 
                     document.location.replace("/");
                 }
@@ -52,7 +49,7 @@ export const AuthContextProvider = ({ children }) => {
     }, [userToken]);
 
     return (
-        <AuthContext.Provider value={{ currentUser,userToken, setUserToken,setCurrentUser }}>
+        <AuthContext.Provider value={{ currentUser, userToken, setUserToken, setCurrentUser }}>
             {children}
         </AuthContext.Provider>
     );

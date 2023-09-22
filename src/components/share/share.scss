@@ -38,26 +38,23 @@
                 border: 1px solid themed('textColor');
             }
 
-            form {
+            textarea {
                 width: 100%;
-
-                textarea {
-                    width: 100%;
-                    padding: 1rem;
-                    background: none;
-                    border: none;
-                    font-size: 0.9rem;
-                    color: themed('textColor');
-                    resize: vertical;
-                }
-
-                input:focus {
-                    outline: 1px solid grey;
-                    border-radius: 4px;
-                }
-
+                padding: 1rem;
+                background: none;
+                border: none;
+                font-size: 0.9rem;
+                color: themed('textColor');
+                resize: vertical;
             }
+
+            input:focus {
+                outline: 1px solid grey;
+                border-radius: 4px;
+            }
+
         }
+
 
         hr {
             margin: 1rem 0;
@@ -86,6 +83,20 @@
 
                     img {
                         width: 1.5rem;
+                    }
+
+                    label {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.4rem;
+                        font-size: small;
+                        color: themed("textColorSoft");
+                        cursor: pointer;
+                    }
+
+                    input {
+                        display: none;
                     }
                 }
             }

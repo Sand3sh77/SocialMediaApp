@@ -23,7 +23,7 @@ const Register = () => {
         });
     }
 
-    const url = "http://localhost/social/api/authentication/signup.php";
+    const url = "http://localhost/social/api/authentication/signup";
     const handleSubmit = async (e) => {
         e.preventDefault();
 

@@ -11,7 +11,7 @@ const Posts = () => {
 
     useEffect(() => {
         // POST DETAILS API CALL  
-        const url = `http://localhost/social/api/functions/posts.php?id=${currentUser.id}`;
+        const url = `http://localhost/social/api/functions/posts?id=${currentUser.id}`;
         const handlePosts = async () => {
             const resp = await axios.get(url, {
                 headers: {

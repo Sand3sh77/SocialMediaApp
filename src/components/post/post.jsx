@@ -10,6 +10,7 @@ import { useContext, useState } from 'react';
 import { ProfileSvg } from '../../assets/svg/svg';
 import axios from 'axios';
 import { AuthContext } from '../../context/authContext';
+import moment from "moment";
 
 const Post = ({ post }) => {
 
@@ -29,7 +30,7 @@ const Post = ({ post }) => {
             setTotalLikes(totalLikes + 1);
         }
 
-        const url = "http://localhost/social/api/functions/likes.php";
+        const url = "http://localhost/social/api/functions/likes";
 
         const Like = async () => {
             try {
@@ -66,7 +67,7 @@ const Post = ({ post }) => {
                             <Link to={`/profile/${post.userId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <span className='name'>{post.name}</span>
                             </Link>
-                            <div className='date'>{post.createdAt}</div>
+                            <div className='date'>{moment(post.createdAt).fromNow()}</div>
                         </div>
                     </div>
                     <MoreHorizIcon />

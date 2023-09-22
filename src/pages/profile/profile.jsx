@@ -23,7 +23,7 @@ const Profile = () => {
     const [isUser, setIsUser] = useState('');
 
     const params = useParams();
-    const url = `http://localhost/social/api/functions/profile.php?id=${params.id}`;
+    const url = `http://localhost/social/api/functions/profile?id=${params.id}`;
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -54,7 +54,7 @@ const Profile = () => {
 
     // LOGOUT API CALL
     const handleLogout = async () => {
-        const url = "http://localhost/social/api/authentication/logout.php";
+        const url = "http://localhost/social/api/authentication/logout";
         const logout = async () => {
             try {
                 const resp=await axios.post(url, { token: userToken }, {
