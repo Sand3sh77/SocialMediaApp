@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Post from '../post/post';
 import './posts.scss';
 import axios from 'axios';
+import { AuthContext } from '../../context/authContext';
 
 const Posts = () => {
     const [posts, setPosts] = useState([{}]);
-
+    const { currentUser } = useContext(AuthContext);
 
 
     useEffect(() => {
         // POST DETAILS API CALL  
-        const url = "http://localhost/social/api/functions/posts.php";
+        const url = `http://localhost/social/api/functions/posts.php?id=${currentUser.id}`;
         const handlePosts = async () => {
             const resp = await axios.get(url, {
                 headers: {
@@ -23,7 +24,7 @@ const Posts = () => {
         handlePosts();
 
         //POST LIKE API CALL
-        const lurl="";
+        const lurl = "";
     }, [])
 
 
@@ -31,7 +32,7 @@ const Posts = () => {
         (
             <div className='posts'>
                 {posts.map((post) => (
-                    <Post post={post} key={post.id ? post.id : 'random'} />
+                    <Post post={post} key={post.id ? post.id : 'random'}/>
                 )
                 )}
             </div>

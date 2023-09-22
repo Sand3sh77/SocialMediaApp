@@ -6,26 +6,44 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from 'react-router-dom';
 import Comments from '../comments/comments';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ProfileSvg } from '../../assets/svg/svg';
 import axios from 'axios';
+import { AuthContext } from '../../context/authContext';
 
 const Post = ({ post }) => {
 
     const [comments, setComments] = useState(false);
-    const [liked, setLiked] = useState(false);
+    const [liked, setLiked] = useState(post.isLiked);
+    const [totalLikes, setTotalLikes] = useState(post.totalLikes);
+    const { currentUser } = useContext(AuthContext);
+
 
     // LIKE API CALL
     const handleLike = () => {
-        const url="";
-        const Like=async()=>{
-            try{
-                await axios.post()
+        setLiked(!liked);
+        if (liked) {
+            setTotalLikes(totalLikes - 1);
+        }
+        else {
+            setTotalLikes(totalLikes + 1);
+        }
+
+        const url = "http://localhost/social/api/functions/likes.php";
+
+        const Like = async () => {
+            try {
+                await axios.post(url, { userId: currentUser.id, postId: post.id, isLiked: liked }, {
+                    headers: {
+                        "Content-Type": "multipart/form-data", "Accept": "application/json",
+                    }
+                })
             }
-            catch(error){
-                console.error("Error:",error);
+            catch (error) {
+                console.error("Error:", error);
             }
         }
+        Like();
     }
 
     return (
@@ -58,9 +76,9 @@ const Post = ({ post }) => {
                     <img src={post.img} alt='' onClick={(e) => { e.target.classList.toggle('objectFit') }} />
                 </div>
                 <div className="info">
-                    <div className="item" onClick={() => setLiked(!liked)}>
-                        {liked ? <FavoriteOutlinedIcon onClick={handleLike} /> : <FavoriteBorderOutlinedIcon />}
-                        99 likes
+                    <div className="item" onClick={handleLike}>
+                        {liked ? <FavoriteOutlinedIcon style={{ color: "red" }} /> : <FavoriteBorderOutlinedIcon />}
+                        {totalLikes} {totalLikes === 1 ? 'like' : 'likes'}
                     </div>
                     <div className="item" onClick={() => setComments(!comments)}>
                         <TextsmsOutlinedIcon />

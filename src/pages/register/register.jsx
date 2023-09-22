@@ -75,7 +75,12 @@ const Register = () => {
                             onChange={handleChange}
                             placeholder="Name"
                         />
-                        <button type='submit'>Register</button>
+                        <div className='buttons'>
+                            <button type='submit'>Register</button>
+                            <Link to="/login" style={{textDecoration:'none'}}>
+                                <button type='submit' className='hide'>Login</button>
+                            </Link>
+                        </div>
                     </form>
                 </div>
                 <div className="right">

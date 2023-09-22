@@ -11,7 +11,7 @@ const Login = () => {
         username: "",
         password: ""
     })
-    const {userToken, setUserToken } = useContext(AuthContext);
+    const { userToken, setUserToken } = useContext(AuthContext);
     const { alert, setAlert } = useContext(AlertContext);
 
     const handleChange = (e) => {
@@ -69,7 +69,12 @@ const Login = () => {
                             name='password'
                             value={formData.password}
                             onChange={handleChange} />
-                        <button type='submit'>Login</button>
+                        <div className='buttons'>
+                            <button type='submit'>Login</button>
+                            <Link to="/register" style={{textDecoration:'none'}}>
+                                <button className='hide'>Register</button>
+                            </Link>
+                        </div>
                     </form>
                 </div>
             </div>

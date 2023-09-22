@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/authContext';
 import Image from "../../assets/logo/img.png";
 import Map from "../../assets/logo/map.png";
 import Friend from "../../assets/logo/friend.png";
+import { ProfileSvg } from '../../assets/svg/svg';
 
 const Share = () => {
     const { currentUser } = useContext(AuthContext);
@@ -11,7 +12,14 @@ const Share = () => {
     return (
         <div className='share'>
             <div className='top'>
-                <img src={currentUser.profilePic} />
+                {currentUser.profilePic ?
+                    <img
+                        src={currentUser.profilePic}
+                        alt=""
+                        className=""
+                    />
+                    : <ProfileSvg />
+                }
                 <form>
                     <textarea rows="1" type='text' placeholder={`What's on your mind, ${currentUser.name?.split(' ')[0]}?`} />
                 </form>

@@ -24,12 +24,18 @@
             align-items: center;
             gap: 1rem;
 
-            img {
+            img,
+            svg {
                 width: 2.5rem;
                 height: 2.5rem;
                 border-radius: 100%;
                 object-fit: cover;
                 object-position: center;
+            }
+
+            svg {
+                padding: 2px;
+                border: 1px solid themed('textColor');
             }
 
             form {
@@ -63,11 +69,12 @@
         .bottom {
             display: flex;
             justify-content: space-between;
-            
+
             .left {
                 display: flex;
                 align-items: center;
                 gap: 0.8rem;
+
                 .item {
                     display: flex;
                     align-items: center;
@@ -82,15 +89,17 @@
                     }
                 }
             }
-            .right{
-                button{
+
+            .right {
+                button {
                     // width: 3rem;
                     border: none;
                     padding: 0.5rem;
                     border-radius: 3px;
                     color: white;
                     cursor: pointer;
-                    background-color: #5271ff;;
+                    background-color: #5271ff;
+                    ;
                 }
             }
         }
