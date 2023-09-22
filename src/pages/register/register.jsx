@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import Alert from '../../components/alert/alert';
 import { AlertContext } from '../../context/alertContext';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -32,9 +33,12 @@ const Register = () => {
                     "Content-Type": "multipart/form-data", "Accept": "application/json",
                 }
             })
-            setAlert(response.data);
             if (response.data.status === 200) {
                 navigate('/login');
+                toast.success(response.data.message);
+            }
+            else{
+                toast.error(response.data.message);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -43,7 +47,6 @@ const Register = () => {
 
     return (
         <div className='register'>
-            {alert && <Alert />}
             <div className='card'>
                 <div className="left">
                     <h1>Register</h1>
@@ -77,7 +80,7 @@ const Register = () => {
                         />
                         <div className='buttons'>
                             <button type='submit'>Register</button>
-                            <Link to="/login" style={{textDecoration:'none'}}>
+                            <Link to="/login" style={{ textDecoration: 'none' }}>
                                 <button type='submit' className='hide'>Login</button>
                             </Link>
                         </div>

@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/authContext'
 import { AlertContext } from '../../context/alertContext'
 import Alert from '../../components/alert/alert'
 import axios from 'axios'
+import toast, { Toaster } from 'react-hot-toast'
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -34,9 +35,12 @@ const Login = () => {
                 }
             }
             )
-            setAlert(response.data);
             if (response.data.status === 200) {
                 setUserToken(response.data.token);
+                toast.success(response.data.message);
+            }
+            else{
+                toast.error(response.data.message);
             }
         }
         catch (error) {
@@ -46,7 +50,6 @@ const Login = () => {
     }
     return (
         <div className='login'>
-            {alert && <Alert />}
             <div className='card'>
                 <div className="left">
                     <h1>Hello World</h1>
@@ -71,7 +74,7 @@ const Login = () => {
                             onChange={handleChange} />
                         <div className='buttons'>
                             <button type='submit'>Login</button>
-                            <Link to="/register" style={{textDecoration:'none'}}>
+                            <Link to="/register" style={{ textDecoration: 'none' }}>
                                 <button className='hide'>Register</button>
                             </Link>
                         </div>

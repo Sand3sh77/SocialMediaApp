@@ -19,6 +19,7 @@ import { DarkModeContext } from './context/darkmodeContext';
 import { AuthContext } from './context/authContext';
 import { AlertContext } from './context/alertContext';
 import Alert from './components/alert/alert';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
     return (
       <div className={`theme-${darkMode ? 'dark' : 'light'}`}>
         <Navbar />
-        {alert && <Alert />}
+        {/* {alert && <Alert />} */}
         <div style={{ display: "flex" }}>
           <Leftbar />
           <div style={{ flex: '6' }}>
@@ -79,7 +80,10 @@ function App() {
   ]);
 
   return (
-    <RouterProvider router={router} className="main" />
+    <>
+      <RouterProvider router={router} className="main" />
+      <Toaster />
+    </>
   )
 }
 

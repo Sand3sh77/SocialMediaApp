@@ -14,6 +14,7 @@ import axios, { Axios } from 'axios';
 import { useParams } from 'react-router-dom';
 import { ProfileSvg } from '../../assets/svg/svg';
 import { AuthContext } from '../../context/authContext';
+import toast from 'react-hot-toast';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -56,11 +57,12 @@ const Profile = () => {
         const url = "http://localhost/social/api/authentication/logout.php";
         const logout = async () => {
             try {
-                await axios.post(url, { token: userToken }, {
+                const resp=await axios.post(url, { token: userToken }, {
                     headers: {
                         "Content-Type": "multipart/form-data", "Accept": "application/json",
                     }
                 })
+                toast.success(resp.data.message)
             }
             catch (error) {
                 console.error("Error:", error);
