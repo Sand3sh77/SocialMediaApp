@@ -38,8 +38,8 @@
                 border-radius: 50%;
                 object-fit: cover;
                 // z-index: 100;
-                border: 3px solid #5271ff;
-                padding: 3px;
+                border: 3px solid themed("textColor");
+                padding: 2px;
                 background-color: themed('bgSoft');
                 object-fit: cover;
                 object-position: center;

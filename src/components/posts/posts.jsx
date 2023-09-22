@@ -6,9 +6,11 @@ import axios from 'axios';
 const Posts = () => {
     const [posts, setPosts] = useState([{}]);
 
-    const url = "http://localhost/social/api/functions/posts.php";
+
 
     useEffect(() => {
+        // POST DETAILS API CALL  
+        const url = "http://localhost/social/api/functions/posts.php";
         const handlePosts = async () => {
             const resp = await axios.get(url, {
                 headers: {
@@ -19,6 +21,9 @@ const Posts = () => {
             setPosts(resp.data.data);
         }
         handlePosts();
+
+        //POST LIKE API CALL
+        const lurl="";
     }, [])
 
 

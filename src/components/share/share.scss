@@ -1,0 +1,98 @@
+@import "../../app.scss";
+
+.share {
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem auto;
+    width: 85%;
+    padding: 1rem;
+
+    @include themify($themes) {
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        background-color: themed('bg');
+        border-radius: 0.5rem;
+        color: themed('textColor');
+
+        @include mobile {
+            width: 99vw;
+        }
+
+        .top {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            img {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            form {
+                width: 100%;
+
+                textarea {
+                    width: 100%;
+                    padding: 1rem;
+                    background: none;
+                    border: none;
+                    font-size: 0.9rem;
+                    color: themed('textColor');
+                    resize: vertical;
+                }
+
+                input:focus {
+                    outline: 1px solid grey;
+                    border-radius: 4px;
+                }
+
+            }
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            height: 0.5px;
+            background-color: themed('border');
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            
+            .left {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                .item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.4rem;
+                    font-size: small;
+                    color: themed("textColorSoft");
+                    cursor: pointer;
+
+                    img {
+                        width: 1.5rem;
+                    }
+                }
+            }
+            .right{
+                button{
+                    // width: 3rem;
+                    border: none;
+                    padding: 0.5rem;
+                    border-radius: 3px;
+                    color: white;
+                    cursor: pointer;
+                    background-color: #5271ff;;
+                }
+            }
+        }
+    }
+}

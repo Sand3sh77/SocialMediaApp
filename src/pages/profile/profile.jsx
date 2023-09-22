@@ -25,7 +25,7 @@ const Profile = () => {
     const url = `http://localhost/social/api/functions/profile.php?id=${params.id}`;
 
     useEffect(() => {
-        document.body.scrollTop=0;
+        window.scrollTo(0, 0);
         const userDetails = async () => {
             try {
                 const resp = await axios.get(url, {
