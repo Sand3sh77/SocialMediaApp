@@ -45,7 +45,26 @@
                             font-size: 0.8rem;
                         }
                     }
+
                 }
+
+                .modal {
+                    position: relative;
+
+                    button {
+                        position: absolute;
+                        top: 0rem;
+                        right: 2rem;
+                        background-color: #f03d37;
+                        border: none;
+                        padding: 0.5rem;
+                        color: white;
+                        cursor: pointer;
+                        border-radius: 3px;
+
+                    }
+                }
+
             }
 
             .content {

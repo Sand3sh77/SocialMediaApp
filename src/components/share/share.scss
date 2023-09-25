@@ -26,7 +26,7 @@
 
             img,
             svg {
-                width: 2.5rem;
+                width: 2.7rem;
                 height: 2.5rem;
                 border-radius: 100%;
                 object-fit: cover;
@@ -36,6 +36,20 @@
             svg {
                 padding: 2px;
                 border: 1px solid themed('textColor');
+            }
+
+            .cross {
+                border: none;
+                padding: 0;
+                position: absolute;
+                right: -0.5rem;
+                top: -0.5rem;
+                color: red;
+                width: 1.6rem;
+                height: 1.6rem;
+                cursor: pointer;
+                filter: contrast(0.7);
+                background-color: white;
             }
 
             textarea {
@@ -48,11 +62,22 @@
                 resize: vertical;
             }
 
+            .textarea {
+                width: 80%;
+            }
+
             input:focus {
                 outline: 1px solid grey;
                 border-radius: 4px;
             }
 
+            .selected {
+                width: 5rem;
+                height: 4rem;
+                border-radius: 2px;
+                object-fit: cover;
+                filter: contrast(0.7);
+            }
         }
 
 
@@ -93,10 +118,6 @@
                         font-size: small;
                         color: themed("textColorSoft");
                         cursor: pointer;
-                    }
-
-                    input {
-                        display: none;
                     }
                 }
             }

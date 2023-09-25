@@ -57,7 +57,7 @@ const Profile = () => {
         const url = "http://localhost/social/api/authentication/logout";
         const logout = async () => {
             try {
-                const resp=await axios.post(url, { token: userToken }, {
+                const resp = await axios.post(url, { token: userToken }, {
                     headers: {
                         "Content-Type": "multipart/form-data", "Accept": "application/json",
                     }

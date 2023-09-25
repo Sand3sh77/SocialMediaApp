@@ -11,12 +11,14 @@ import { ProfileSvg } from '../../assets/svg/svg';
 import axios from 'axios';
 import { AuthContext } from '../../context/authContext';
 import moment from "moment";
+import toast from 'react-hot-toast';
 
 const Post = ({ post }) => {
 
     const [comments, setComments] = useState(false);
     const [liked, setLiked] = useState(post.isLiked);
     const [totalLikes, setTotalLikes] = useState(post.totalLikes);
+    const [modal, setModal] = useState(false);
     const { currentUser } = useContext(AuthContext);
 
 
@@ -47,6 +49,27 @@ const Post = ({ post }) => {
         Like();
     }
 
+    // DELETE POST API CALL
+    const handleDelete = () => {
+
+        const url = `http://localhost/social/api/functions/deletePosts?id=${post.id}`;
+
+        const Delete = async () => {
+            try {
+                const dresp = await axios.get(url, { id: post.id }, {
+                    headers: {
+                        "Content-Type": "multipart/form-data", "Accept": "application/json",
+                    }
+                })
+                toast.success(dresp.data.message);
+            }
+            catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        Delete();
+    }
+
     return (
         <div className='post'>
             <div className="container">
@@ -70,7 +93,14 @@ const Post = ({ post }) => {
                             <div className='date'>{moment(post.createdAt).fromNow()}</div>
                         </div>
                     </div>
-                    <MoreHorizIcon />
+                    <div onClick={() => setModal(!modal)} style={{ cursor: 'pointer' }} className='modal'>
+                        <MoreHorizIcon />
+                        {modal &&
+                            <button onClick={() => handleDelete()}>
+                                Delete
+                            </button>
+                        }
+                    </div>
                 </div>
                 <div className="content">
                     <p>{post.description}</p>
