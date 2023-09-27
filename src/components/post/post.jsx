@@ -18,6 +18,7 @@ const Post = ({ post }) => {
     const [comments, setComments] = useState(false);
     const [liked, setLiked] = useState(post.isLiked);
     const [totalLikes, setTotalLikes] = useState(post.totalLikes);
+    const [totalComments, setTotalComments] = useState(post.totalComments);
     const [modal, setModal] = useState(false);
     const { currentUser } = useContext(AuthContext);
 
@@ -52,11 +53,11 @@ const Post = ({ post }) => {
     // DELETE POST API CALL
     const handleDelete = () => {
 
-        const url = `http://localhost/social/api/functions/deletePosts?id=${post.id}`;
+        const url = `http://localhost/social/api/functions/deletePosts`;
 
         const Delete = async () => {
             try {
-                const dresp = await axios.get(url, { id: post.id }, {
+                const dresp = await axios.post(url, { id: post.id, file_path: post.img }, {
                     headers: {
                         "Content-Type": "multipart/form-data", "Accept": "application/json",
                     }
@@ -113,14 +114,14 @@ const Post = ({ post }) => {
                     </div>
                     <div className="item" onClick={() => setComments(!comments)}>
                         <TextsmsOutlinedIcon />
-                        9 comments
+                        {totalComments} {totalComments === 1 ? 'comment' : 'comments'}
                     </div>
                     <div className="item">
                         <ShareOutlinedIcon />
                         Share
                     </div>
                 </div>
-                {comments && <Comments />}
+                {comments && <Comments postId={post.id} setTC={setTotalComments}/>}
             </div>
         </div >
     )

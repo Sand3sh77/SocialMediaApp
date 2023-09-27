@@ -1,48 +1,85 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './comments.scss';
 import { AuthContext } from '../../context/authContext';
 import { ProfileSvg } from '../../assets/svg/svg';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
-const Comments = () => {
+const Comments = ({ postId }) => {
 
     const { currentUser } = useContext(AuthContext);
+    const [comments, setComments] = useState(null);
 
-    //TEMPORARY
-    const comments = [
-        {
-            id: 1,
-            name: "John Doe",
-            userId: 1,
-            profilePic:
-                "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            img: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        },
-        {
-            id: 2,
-            name: "Anne Marie",
-            userId: 2,
-            profilePic:
-                "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            desc: "Tenetur iste voluptates dolorem rem commodi voluptate pariatur, voluptatum, laboriosam consequatur enim nostrum cumque! Maiores a nam non adipisci minima modi tempore.",
-            img: "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        },
-    ];
+
+    // VIEW COMMENT API CALL
+    useEffect(() => {
+        const url = `http://localhost/social/api/functions/comments?id=${postId}`;
+        const comment = async () => {
+            try {
+                const resp = await axios.get(url, {
+                    headers: {
+                        "Content-Type": "multipart/form-data", "Accept": "application/json",
+                    }
+                })
+                if (resp.data.status === 200) {
+                    // toast.success(resp.data.message);
+                    setComments(resp.data.data);
+                }
+                else {
+                    toast.error(resp.data.message);
+                }
+            }
+            catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        comment();
+    }, [])
+
+    // ADD COMMENT API CALL
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const ac_url = "http://localhost/social/api/functions/addComment";
+        const addComment = async () => {
+            try {
+                const resp = await axios.post(ac_url, { postId: post.id, userId: currentUser.id }, {
+                    headers: {
+                        "Content-Type": "multipart/form-data", "Accept": "application/json",
+                    }
+                })
+                if (resp.data.status === 200) {
+                    setComments(resp.data.data);
+                }
+                else {
+                    toast.error(resp.data.message);
+                }
+                set
+            }
+            catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        addComment();
+    }
+
     return (
         <div className='comments'>
-            <div className='write'>
-                {currentUser.profilePic ?
-                    <img
-                        src={currentUser.profilePic}
-                        alt=""
-                        className=""
-                    />
-                    : <ProfileSvg />
-                }
-                <input type='text' placeholder='write a comment.' />
-                <button>Send</button>
-            </div>
-            {comments.map((comment) => (
+            <form onSubmit={handleSubmit}>
+                <div className='write'>
+                    {currentUser.profilePic ?
+                        <img
+                            src={currentUser.profilePic}
+                            alt=""
+                            className=""
+                        />
+                        : <ProfileSvg />
+                    }
+                    <input type='text' placeholder='write a comment.' required />
+                    <button type='submit'>Send</button>
+                </div>
+            </form>
+            {comments?.map((comment) => (
                 <div className="comment" key={comment.id}>
                     {comment.profilePic ?
                         <img
@@ -54,11 +91,17 @@ const Comments = () => {
                     }
                     <div className="cinfo">
                         <span>{comment.name}</span>
-                        <p>{comment.desc}</p>
+                        <p>{comment.description}</p>
                     </div>
                     <span className='date'>1 hour ago.</span>
                 </div>
             ))}
+            {comments ? '' :
+                <div className='noComments'>
+                    {/* No comments available for this post. */}
+                    Be the first one to comment.
+                </div>
+            }
         </div>
     )
 }

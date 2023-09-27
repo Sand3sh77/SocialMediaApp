@@ -59,7 +59,17 @@ const Share = () => {
                         />
                         : <ProfileSvg />
                     }
-                    <textarea rows="1" type='text' className={file ? "textarea" : ''} value={desc} name="desc" onChange={(e) => setDesc(e.target.value)} placeholder={`What's on your mind, ${currentUser.name?.split(' ')[0]}?`} />
+                    <textarea
+                        rows="1"
+                        type='text'
+                        className={file ? "textarea" : ''}
+                        value={desc}
+                        name="desc"
+                        onChange={(e) => setDesc(e.target.value)}
+                        placeholder={`What's on your mind, ${currentUser.name?.split(' ')[0]}?`}
+                        maxLength="1000"
+                        required
+                    />
                     {file && (
                         <div style={{ position: 'relative' }}>
                             <img
@@ -88,7 +98,7 @@ const Share = () => {
                                 id="file"
                                 name='file'
                                 style={{ display: "none" }}
-                                accept="image/png, image/jpeg"
+                                accept="image/png, image/jpeg,image/jpg,image/webp"
                                 onChange={(e) => setFile(e.target.files[0])}
                             />
                         </div>
