@@ -20,6 +20,7 @@ import { AuthContext } from './context/authContext';
 import { AlertContext } from './context/alertContext';
 import Alert from './components/alert/alert';
 import { Toaster } from 'react-hot-toast';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 function App() {
 
@@ -27,8 +28,11 @@ function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
 
+  const queryClient = new QueryClient();
+
   const Layout = () => {
     return (
+      <QueryClientProvider client={queryClient}>
       <div className={`theme-${darkMode ? 'dark' : 'light'}`}>
         <Navbar />
         {/* {alert && <Alert />} */}
@@ -40,6 +44,7 @@ function App() {
           <Rightbar />
         </div>
       </div>
+      </QueryClientProvider >
     );
   }
 

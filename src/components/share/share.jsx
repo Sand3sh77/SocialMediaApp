@@ -7,9 +7,11 @@ import Friend from "../../assets/logo/friend.png";
 import { CrossSvg, ProfileSvg } from '../../assets/svg/svg';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useQueryClient } from 'react-query';
 
 const Share = () => {
     const [desc, setDesc] = useState('');
+    const queryClient = useQueryClient();
     const [file, setFile] = useState(null);
     const { currentUser } = useContext(AuthContext);
 
@@ -32,6 +34,7 @@ const Share = () => {
                     }
                 });
                 if (resp.data.status === 200) {
+                    queryClient.invalidateQueries('posts');
                     toast.success(resp.data.message);
                     setDesc('');
                     setFile(null);

@@ -12,6 +12,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/authContext';
 import moment from "moment";
 import toast from 'react-hot-toast';
+import usePosts from '../../hooks/usePosts';
 
 const Post = ({ post }) => {
 
@@ -21,6 +22,9 @@ const Post = ({ post }) => {
     const [totalComments, setTotalComments] = useState(post.totalComments);
     const [modal, setModal] = useState(false);
     const { currentUser } = useContext(AuthContext);
+
+
+
 
 
     // LIKE API CALL
@@ -121,7 +125,7 @@ const Post = ({ post }) => {
                         Share
                     </div>
                 </div>
-                {comments && <Comments postId={post.id} setTC={setTotalComments}/>}
+                {comments && <Comments postId={post.id} TC={totalComments} setTC={setTotalComments} />}
             </div>
         </div >
     )

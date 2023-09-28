@@ -5,11 +5,12 @@ import { ProfileSvg } from '../../assets/svg/svg';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const Comments = ({ postId }) => {
+const Comments = ({ postId, TC, setTC }) => {
 
     const { currentUser } = useContext(AuthContext);
     const [comments, setComments] = useState(null);
-
+    const [desc, setDesc] = useState('');
+    const [callApi, setCallApi] = useState('');
 
     // VIEW COMMENT API CALL
     useEffect(() => {
@@ -34,27 +35,30 @@ const Comments = ({ postId }) => {
             }
         }
         comment();
-    }, [])
+    }, [callApi])
 
     // ADD COMMENT API CALL
     const handleSubmit = (e) => {
         e.preventDefault();
 
+
         const ac_url = "http://localhost/social/api/functions/addComment";
         const addComment = async () => {
             try {
-                const resp = await axios.post(ac_url, { postId: post.id, userId: currentUser.id }, {
+                const resp = await axios.post(ac_url, { postId: postId, userId: currentUser.id, desc: desc }, {
                     headers: {
                         "Content-Type": "multipart/form-data", "Accept": "application/json",
                     }
                 })
                 if (resp.data.status === 200) {
-                    setComments(resp.data.data);
+                    toast.success(resp.data.message);
+                    setDesc('');
+                    setCallApi(resp.data);
+                    setTC(TC + 1);
                 }
                 else {
                     toast.error(resp.data.message);
                 }
-                set
             }
             catch (error) {
                 console.error("Error:", error);
@@ -75,7 +79,12 @@ const Comments = ({ postId }) => {
                         />
                         : <ProfileSvg />
                     }
-                    <input type='text' placeholder='write a comment.' required />
+                    <input type='text'
+                        placeholder='write a comment.'
+                        value={desc}
+                        name='desc'
+                        onChange={(e) => setDesc(e.target.value)}
+                        required />
                     <button type='submit'>Send</button>
                 </div>
             </form>
