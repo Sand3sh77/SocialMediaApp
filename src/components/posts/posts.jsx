@@ -23,28 +23,19 @@ const Posts = () => {
     //         setPosts(resp.data.data);
     //     }
     //     handlePosts();
-
-    //     //POST LIKE API CALL
-    //     const lurl = "";
     // }, [])
 
-    const {isLoading,error,data,refetch}= usePosts(currentUser.id);
+    const { isLoading, error, data, refetch } = usePosts(currentUser.id);
 
     // if(isLoading){
     //     return <p>Loading ...</p>
     // }
 
-
-    console.log(data);
-
-
-
-
     return (data &&
         (
             <div className='posts'>
                 {data.data.data.map((post) => (
-                    <Post post={post} key={post.id ? post.id : 'random'}/>
+                    <Post post={post} key={post.id ? post.id : 'random'} />
                 )
                 )}
             </div>

@@ -25,7 +25,8 @@
     "react-router-dom": "^6.15.0",
     "sass": "^1.66.1",
     "scss": "^0.2.4",
-    "sort-by": "^0.0.2"
+    "sort-by": "^0.0.2",
+    "vercel": "^32.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
