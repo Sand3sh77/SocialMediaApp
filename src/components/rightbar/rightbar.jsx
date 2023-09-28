@@ -1,6 +1,11 @@
-import './rightbar.scss'
+import { useContext } from 'react';
+import './rightbar.scss';
+import { AuthContext } from '../../context/authContext';
+import { ProfileSvg } from '../../assets/svg/svg';
+
 
 const Rightbar = () => {
+  const { currentUser } = useContext(AuthContext);
   return (
     <div className="rightbar">
       <div className="container">
@@ -8,7 +13,15 @@ const Rightbar = () => {
           <span>Suggestions For You</span>
           <div className="user suggestion">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <span>Sandesh Subedi</span>
             </div>
             <div className="buttons">
@@ -21,7 +34,15 @@ const Rightbar = () => {
           <span>Latest Activities</span>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <p>
                 <span>Sandesh Subedi</span> changed cover picture.
               </p>
@@ -30,7 +51,15 @@ const Rightbar = () => {
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <p>
                 <span>Sandesh Subedi</span> liked a post.
               </p>
@@ -39,7 +68,15 @@ const Rightbar = () => {
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <p>
                 <span>Sandesh Subedi</span> liked a comment.
               </p>
@@ -48,7 +85,15 @@ const Rightbar = () => {
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <p>
                 <span>Sandesh Subedi</span> posted.
               </p>
@@ -60,49 +105,105 @@ const Rightbar = () => {
           <span>Online Friends</span>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img src='../src/assets/user/profile.jpg' />
+              {currentUser.profilePic ?
+              <img
+                src={currentUser.profilePic}
+                alt=""
+                className="profilePic"
+              />
+              :
+              <ProfileSvg />
+            }
               <div className="online" />
               <span>Sandesh Subedi</span>
             </div>

@@ -59,11 +59,18 @@
                         gap: 1.1rem;
                         position: relative;
 
-                        img {
+                        img,
+                        svg {
                             width: 2.1rem;
                             height: 2.1rem;
                             border-radius: 50%;
                             object-fit: cover;
+                            color: themed('textColor');
+                        }
+
+                        svg {
+                            padding: 2px;
+                            border: 1px solid themed('textColor');
                         }
 
                         p {

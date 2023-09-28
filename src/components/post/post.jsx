@@ -13,6 +13,7 @@ import { AuthContext } from '../../context/authContext';
 import moment from "moment";
 import toast from 'react-hot-toast';
 import usePosts from '../../hooks/usePosts';
+import { useQueryClient } from 'react-query';
 
 const Post = ({ post }) => {
 
@@ -22,10 +23,7 @@ const Post = ({ post }) => {
     const [totalComments, setTotalComments] = useState(post.totalComments);
     const [modal, setModal] = useState(false);
     const { currentUser } = useContext(AuthContext);
-
-
-
-
+    const queryClient = useQueryClient();
 
     // LIKE API CALL
     const handleLike = () => {
@@ -66,7 +64,13 @@ const Post = ({ post }) => {
                         "Content-Type": "multipart/form-data", "Accept": "application/json",
                     }
                 })
-                toast.success(dresp.data.message);
+                if (dresp.data.status === 200) {
+                    toast.success(dresp.data.message);
+                    queryClient.invalidateQueries('posts');
+                }
+                else {
+                    toast.error(dresp.data.message);
+                }
             }
             catch (error) {
                 console.error("Error:", error);
