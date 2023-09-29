@@ -13,6 +13,7 @@ import { DarkModeContext } from '../../context/darkmodeContext';
 import { AuthContext } from '../../context/authContext';
 import { ProfileSvg } from '../../assets/svg/svg';
 import { QueryClient, useQueryClient } from 'react-query';
+import Api from '../../api/Api';
 
 
 const Navbar = () => {
@@ -47,7 +48,7 @@ const Navbar = () => {
                         <div className="user">
                             {currentUser.profilePic ?
                                 <img
-                                    src={currentUser.profilePic}
+                                    src={Api + currentUser.profilePic}
                                     alt=""
                                     className=""
                                 />

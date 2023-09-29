@@ -57,7 +57,7 @@ const Share = () => {
                 <div className='top'>
                     {currentUser.profilePic ?
                         <img
-                            src={currentUser.profilePic}
+                            src={Api + currentUser.profilePic}
                             alt=""
                             className=""
                         />

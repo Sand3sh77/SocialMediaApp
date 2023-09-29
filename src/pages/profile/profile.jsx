@@ -96,19 +96,19 @@ const Profile = () => {
             <div className="profileContainer">
                 <div className="uInfo">
                     <div className="left">
-                        <a href="http://facebook.com">
+                        <a href="https://facebook.com">
                             <FacebookTwoToneIcon fontSize="medium" />
                         </a>
-                        <a href="http://facebook.com">
+                        <a href="https://facebook.com">
                             <InstagramIcon fontSize="medium" />
                         </a>
-                        <a href="http://facebook.com">
+                        <a href="https://facebook.com">
                             <TwitterIcon fontSize="medium" />
                         </a>
-                        <a href="http://facebook.com">
+                        <a href="https://facebook.com">
                             <LinkedInIcon fontSize="medium" />
                         </a>
-                        <a href="http://facebook.com">
+                        <a href="https://facebook.com">
                             <PinterestIcon fontSize="medium" />
                         </a>
                     </div>

@@ -114,7 +114,7 @@ const Post = ({ post }) => {
                 </div>
                 <div className="content">
                     <p>{post.description}</p>
-                    <img src={post.img} alt='' onClick={(e) => { e.target.classList.toggle('objectFit') }} />
+                    <img src={Api + post.img} alt='' onClick={(e) => { e.target.classList.toggle('objectFit') }} />
                 </div>
                 <div className="info">
                     <div className="item" onClick={handleLike}>

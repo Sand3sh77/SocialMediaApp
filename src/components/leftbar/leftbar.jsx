@@ -16,6 +16,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
 import { ProfileSvg } from '../../assets/svg/svg';
 import { Link } from 'react-router-dom';
+import Api from '../../api/Api';
 
 const Leftbar = () => {
   const { currentUser } = useContext(AuthContext);
@@ -24,19 +25,19 @@ const Leftbar = () => {
       <div className="container">
         <div className="menu">
           <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-          <div className="user">
-            {currentUser.profilePic ?
-              <img
-                src={currentUser.profilePic}
-                alt=""
-                className="profilePic"
-              />
-              :
-              <ProfileSvg />
-            }
-            <span>{currentUser.name}</span>
-          </div>
-            </Link>
+            <div className="user">
+              {currentUser.profilePic ?
+                <img
+                  src={Api + currentUser.profilePic}
+                  alt=""
+                  className="profilePic"
+                />
+                :
+                <ProfileSvg />
+              }
+              <span>{currentUser.name}</span>
+            </div>
+          </Link>
           <div className="item">
             <img src={Friends} alt='' />
             <span>Friends</span>

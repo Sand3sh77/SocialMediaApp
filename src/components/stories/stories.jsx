@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import './stories.scss';
 import { AuthContext } from '../../context/authContext';
+import Api from '../../api/Api';
 
 const Stories = () => {
 
@@ -33,10 +34,10 @@ const Stories = () => {
             <div className="story">
 
                 <img
-                    src={currentUser.profilePic ? currentUser.profilePic : "https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
+                    src={currentUser.profilePic ? Api + currentUser.profilePic : "https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
                     alt=""
                     className=""
-                    style={{filter:'sepia(10%)'}}
+                    style={{ filter: 'sepia(10%)' }}
                 />
                 <span>Create Story</span>
                 <button>+</button>
