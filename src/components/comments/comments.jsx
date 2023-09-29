@@ -75,7 +75,7 @@ const Comments = ({ postId, TC, setTC }) => {
                 <div className='write'>
                     {currentUser.profilePic ?
                         <img
-                            src={currentUser.profilePic}
+                            src={Api + currentUser.profilePic}
                             alt=""
                             className=""
                         />
@@ -94,7 +94,7 @@ const Comments = ({ postId, TC, setTC }) => {
                 <div className="comment" key={comment.id}>
                     {comment.profilePic ?
                         <img
-                            src={comment.profilePic}
+                            src={Api + comment.profilePic}
                             alt=""
                             className=""
                         />

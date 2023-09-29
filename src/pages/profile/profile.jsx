@@ -78,13 +78,13 @@ const Profile = () => {
         <div className="profile">
             <div className="images">
                 <img
-                    src={userInfo.coverPic ? userInfo.coverPic : "https://images.pexels.com/photos/7135121/pexels-photo-7135121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
+                    src={userInfo.coverPic ? Api + userInfo.coverPic : "https://images.pexels.com/photos/7135121/pexels-photo-7135121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
                     alt=""
                     className="cover"
                 />
                 {userInfo.profilePic ?
                     <img
-                        src={userInfo.profilePic}
+                        src={Api + userInfo.profilePic}
                         alt=""
                         className="profilePic"
                     />
@@ -115,14 +115,18 @@ const Profile = () => {
                     <div className="center">
                         <span className='name'>{userInfo.name}</span>
                         <div className="info">
-                            <div className="item">
-                                <PlaceIcon />
-                                <span>{userInfo.city}</span>
-                            </div>
-                            <div className="item">
-                                <LanguageIcon />
-                                <span>{userInfo.website}</span>
-                            </div>
+                            {userInfo.city &&
+                                <div className="item">
+                                    <PlaceIcon />
+                                    <span>{userInfo.city}</span>
+                                </div>
+                            }
+                            {userInfo.website &&
+                                <div className="item">
+                                    <LanguageIcon />
+                                    <span>{userInfo.website}</span>
+                                </div>
+                            }
                         </div>
                         {!isUser ? <button style={{ backgroundColor: '#5271ff' }}>Follow</button> : <button style={{ backgroundColor: '#fd253a' }} onClick={handleLogout}>Log Out</button>}
                     </div>
@@ -132,7 +136,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <Posts calledFrom={'profile'} paramsId={params.id}/>
+            <Posts calledFrom={'profile'} paramsId={params.id} />
         </div>
     )
 }
