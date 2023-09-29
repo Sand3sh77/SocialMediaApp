@@ -12,12 +12,14 @@ import { useContext } from 'react';
 import { DarkModeContext } from '../../context/darkmodeContext';
 import { AuthContext } from '../../context/authContext';
 import { ProfileSvg } from '../../assets/svg/svg';
+import { QueryClient, useQueryClient } from 'react-query';
 
 
 const Navbar = () => {
 
     const { Toggle, darkMode } = useContext(DarkModeContext);
     const { currentUser } = useContext(AuthContext);
+    const QueryClient = useQueryClient();
     return (
         <div className="navbar">
             <div className="left">
@@ -37,20 +39,25 @@ const Navbar = () => {
                 <PersonOutlinedIcon className='icon' />
                 <EmailOutlinedIcon className='icon' />
                 <NotificationsOutlinedIcon className='icon' />
-                <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <div className="user">
-                        {currentUser.profilePic ?
-                            <img
-                                src={currentUser.profilePic}
-                                alt=""
-                                className=""
-                            />
-                            :
-                            <ProfileSvg />
-                        }
-                        <span>{currentUser.name}</span>
-                    </div>
-                </Link>
+                <div onClick={() => {
+                    console.log("hello");
+                    QueryClient.invalidateQueries('posts');
+                }}>
+                    <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }} >
+                        <div className="user">
+                            {currentUser.profilePic ?
+                                <img
+                                    src={currentUser.profilePic}
+                                    alt=""
+                                    className=""
+                                />
+                                :
+                                <ProfileSvg />
+                            }
+                            <span>{currentUser.name}</span>
+                        </div>
+                    </Link>
+                </div>
             </div>
         </div>
     )

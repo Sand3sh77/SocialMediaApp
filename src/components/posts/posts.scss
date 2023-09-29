@@ -13,3 +13,32 @@
         width: 99vw;
     }
 }
+
+.noPosts {
+    width: 85%;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem auto;
+    gap: 2rem;
+    width: 85%;
+    padding-bottom: 1.5rem;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 2rem;
+    letter-spacing: 2px;
+
+    @include themify($themes) {
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        background-color: themed('bg');
+        border-radius: 0.5rem;
+        color: themed('textColor');
+
+        @include mobile {
+            width: 99vw;
+        }
+    }
+}
