@@ -6,13 +6,12 @@ import Api from "../api/Api";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+
     const [userToken, setUserToken] = useState(
         JSON.parse(localStorage.getItem('token')) || 'invalid'
     );
 
-    const [currentUser, setCurrentUser] = useState({
-        loginStatus: true,
-    });
+    const [currentUser, setCurrentUser] = useState('');
 
     useEffect(() => {
         localStorage.setItem("token", JSON.stringify(userToken));
@@ -29,17 +28,13 @@ export const AuthContextProvider = ({ children }) => {
 
                 if (resp.data.status === 200) {
                     const data = resp.data.data[0];
-                    setCurrentUser({
-                        ...data, loginStatus: true
-                    });
+                    setCurrentUser(data);
                     if (document.location.pathname === '/') return;
 
                     document.location.replace("/");
                 }
                 else {
-                    setCurrentUser({
-                        loginStatus: false,
-                    });
+                    JSON.parse(localStorage.setItem('invalid'));
                 }
             }
             catch (error) {

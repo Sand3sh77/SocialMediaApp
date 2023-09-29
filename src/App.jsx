@@ -26,30 +26,30 @@ function App() {
 
   const { alert } = useContext(AlertContext);
   const { darkMode } = useContext(DarkModeContext);
-  const { currentUser } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   const queryClient = new QueryClient();
 
   const Layout = () => {
     return (
       <QueryClientProvider client={queryClient}>
-      <div className={`theme-${darkMode ? 'dark' : 'light'}`}>
-        <Navbar />
-        {/* {alert && <Alert />} */}
-        <div style={{ display: "flex" }}>
-          <Leftbar />
-          <div style={{ flex: '6' }}>
-            <Outlet />
+        <div className={`theme-${darkMode ? 'dark' : 'light'}`}>
+          <Navbar />
+          {/* {alert && <Alert />} */}
+          <div style={{ display: "flex" }}>
+            <Leftbar />
+            <div style={{ flex: '6' }}>
+              <Outlet />
+            </div>
+            <Rightbar />
           </div>
-          <Rightbar />
         </div>
-      </div>
       </QueryClientProvider >
     );
   }
 
   const ProtectedRoute = ({ children }) => {
-    if (!currentUser.loginStatus) {
+    if (token==="invalid") {
       return <Navigate to="/login" />;
     }
     return children;
