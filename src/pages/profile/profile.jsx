@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom';
 import { ProfileSvg } from '../../assets/svg/svg';
 import { AuthContext } from '../../context/authContext';
 import toast from 'react-hot-toast';
+import Api from '../../api/Api';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -23,7 +24,7 @@ const Profile = () => {
     const [isUser, setIsUser] = useState('');
 
     const params = useParams();
-    const url = `http://localhost/social/api/functions/profile?id=${params.id}`;
+    const url = `${Api}api/functions/profile?id=${params.id}`;
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -54,7 +55,7 @@ const Profile = () => {
 
     // LOGOUT API CALL
     const handleLogout = async () => {
-        const url = "http://localhost/social/api/authentication/logout";
+        const url = `${Api}api/authentication/logout`;
         const logout = async () => {
             try {
                 const resp = await axios.post(url, { token: userToken }, {
@@ -131,7 +132,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <Posts />
+            <Posts calledFrom={'profile'} paramsId={params.id}/>
         </div>
     )
 }

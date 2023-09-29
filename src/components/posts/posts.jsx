@@ -5,27 +5,11 @@ import axios from 'axios';
 import { AuthContext } from '../../context/authContext';
 import usePosts from '../../hooks/usePosts';
 
-const Posts = () => {
+const Posts = ({calledFrom,paramsId}) => {
     const [posts, setPosts] = useState([{}]);
     const { currentUser } = useContext(AuthContext);
 
-
-    // useEffect(() => {
-    //     // POST DETAILS API CALL  
-    //     const url = `http://localhost/social/api/functions/posts?id=${currentUser.id}`;
-    //     const handlePosts = async () => {
-    //         const resp = await axios.get(url, {
-    //             headers: {
-    //                 "Content-Type": "multipart/form-data",
-    //                 "Accept": "application/json",
-    //             }
-    //         })
-    //         setPosts(resp.data.data);
-    //     }
-    //     handlePosts();
-    // }, [])
-
-    const { isLoading, error, data, refetch } = usePosts(currentUser.id);
+    const { isLoading, error, data, refetch } = usePosts(currentUser.id,calledFrom,paramsId);
 
     // if(isLoading){
     //     return <p>Loading ...</p>

@@ -4,6 +4,8 @@ import { AuthContext } from '../../context/authContext';
 import { ProfileSvg } from '../../assets/svg/svg';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import Api from '../../api/Api';
+import moment from "moment";
 
 const Comments = ({ postId, TC, setTC }) => {
 
@@ -14,7 +16,7 @@ const Comments = ({ postId, TC, setTC }) => {
 
     // VIEW COMMENT API CALL
     useEffect(() => {
-        const url = `http://localhost/social/api/functions/comments?id=${postId}`;
+        const url = `${Api}api/functions/comments?id=${postId}`;
         const comment = async () => {
             try {
                 const resp = await axios.get(url, {
@@ -42,7 +44,7 @@ const Comments = ({ postId, TC, setTC }) => {
         e.preventDefault();
 
 
-        const ac_url = "http://localhost/social/api/functions/addComment";
+        const ac_url = `${Api}api/functions/addComment`;
         const addComment = async () => {
             try {
                 const resp = await axios.post(ac_url, { postId: postId, userId: currentUser.id, desc: desc }, {
@@ -102,7 +104,7 @@ const Comments = ({ postId, TC, setTC }) => {
                         <span>{comment.name}</span>
                         <p>{comment.description}</p>
                     </div>
-                    <span className='date'>1 hour ago.</span>
+                    <span className='date'>{moment(comment.createdAt).fromNow()}</span>
                 </div>
             ))}
             {comments ? '' :

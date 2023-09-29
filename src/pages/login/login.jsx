@@ -6,6 +6,7 @@ import { AlertContext } from '../../context/alertContext'
 import Alert from '../../components/alert/alert'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
+import Api from '../../api/Api'
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Login = () => {
     }
 
     // LOGIN API CALL
-    const url = "http://localhost/social/api/authentication/login";
+    const url = `${Api}api/authentication/login`;
 
     const handleSubmit = async (e) => {
         e.preventDefault();

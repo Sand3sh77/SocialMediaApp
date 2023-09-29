@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Api from "../api/Api";
 
 export const AuthContext = createContext();
 
@@ -17,7 +18,7 @@ export const AuthContextProvider = ({ children }) => {
         localStorage.setItem("token", JSON.stringify(userToken));
 
         // TOKEN CHECK API
-        const url = "http://localhost/social/api/authentication/token";
+        const url = `${Api}api/authentication/token`;
         const checkToken = async () => {
             try {
                 const resp = await axios.post(url, { token: userToken }, {

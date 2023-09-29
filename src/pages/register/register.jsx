@@ -5,6 +5,7 @@ import Alert from '../../components/alert/alert';
 import { AlertContext } from '../../context/alertContext';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+import Api from '../../api/Api';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Register = () => {
         });
     }
 
-    const url = "http://localhost/social/api/authentication/signup";
+    const url = `${Api}api/authentication/signup`;
     const handleSubmit = async (e) => {
         e.preventDefault();
 

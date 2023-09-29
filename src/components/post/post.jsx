@@ -14,6 +14,7 @@ import moment from "moment";
 import toast from 'react-hot-toast';
 import usePosts from '../../hooks/usePosts';
 import { useQueryClient } from 'react-query';
+import Api from '../../api/Api';
 
 const Post = ({ post }) => {
 
@@ -35,7 +36,7 @@ const Post = ({ post }) => {
             setTotalLikes(totalLikes + 1);
         }
 
-        const url = "http://localhost/social/api/functions/likes";
+        const url = `${Api}api/functions/likes`;
 
         const Like = async () => {
             try {
@@ -55,7 +56,7 @@ const Post = ({ post }) => {
     // DELETE POST API CALL
     const handleDelete = () => {
 
-        const url = `http://localhost/social/api/functions/deletePosts`;
+        const url = `${Api}api/functions/deletePosts`;
 
         const Delete = async () => {
             try {

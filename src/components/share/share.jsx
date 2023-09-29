@@ -8,6 +8,7 @@ import { CrossSvg, ProfileSvg } from '../../assets/svg/svg';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useQueryClient } from 'react-query';
+import Api from '../../api/Api';
 
 const Share = () => {
     const [desc, setDesc] = useState('');
@@ -23,7 +24,7 @@ const Share = () => {
         // formData.append("userId", currentUser.Id);
         // formData.append("desc", desc);
 
-        const url = "http://localhost/social/api/functions/addPosts";
+        const url = `${Api}api/functions/addPosts`;
 
         // CREATE POST API CALL
         const createPost = async () => {

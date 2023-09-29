@@ -7,8 +7,8 @@ const Home = () => {
     return (
         <div className='home'>
             <Stories />
-            <Share/>
-            <Posts />
+            <Share />
+            <Posts calledFrom={'home'} paramsId={-1} />
         </div>
     )
 }
