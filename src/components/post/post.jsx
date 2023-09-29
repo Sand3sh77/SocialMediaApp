@@ -89,7 +89,7 @@ const Post = ({ post }) => {
 
                             {post.profilePic ?
                                 <img
-                                    src={post.profilePic}
+                                    src={Api+post.profilePic}
                                     alt=""
                                     className=""
                                 />
