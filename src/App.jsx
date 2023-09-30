@@ -49,7 +49,7 @@ function App() {
   }
 
   const ProtectedRoute = ({ children }) => {
-    if (token==="invalid") {
+    if (token === "invalid" || token == null) {
       return <Navigate to="/login" />;
     }
     return children;
