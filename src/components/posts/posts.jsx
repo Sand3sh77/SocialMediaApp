@@ -5,7 +5,6 @@ import { AuthContext } from '../../context/authContext';
 import usePosts from '../../hooks/usePosts';
 
 const Posts = ({ calledFrom, paramsId }) => {
-    const [posts, setPosts] = useState([{}]);
     const { currentUser } = useContext(AuthContext);
 
     if (currentUser.id) {

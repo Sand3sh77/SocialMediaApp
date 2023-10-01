@@ -41,7 +41,6 @@ const Navbar = () => {
                 <EmailOutlinedIcon className='icon' />
                 <NotificationsOutlinedIcon className='icon' />
                 <div onClick={() => {
-                    console.log("hello");
                     QueryClient.invalidateQueries('posts');
                 }}>
                     <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }} >

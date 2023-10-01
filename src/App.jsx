@@ -26,7 +26,7 @@ function App() {
 
   const { alert } = useContext(AlertContext);
   const { darkMode } = useContext(DarkModeContext);
-  const { token } = useContext(AuthContext);
+  const { userToken } = useContext(AuthContext);
 
   const queryClient = new QueryClient();
 
@@ -49,7 +49,7 @@ function App() {
   }
 
   const ProtectedRoute = ({ children }) => {
-    if (token === "invalid" || token == null) {
+    if (!userToken) {
       return <Navigate to="/login" />;
     }
     return children;

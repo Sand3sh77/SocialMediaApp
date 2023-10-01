@@ -1,21 +1,16 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Api from "../api/Api";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-
-    const [userToken, setUserToken] = useState(
-        JSON.parse(localStorage.getItem('token')) || 'invalid'
-    );
-
     const [currentUser, setCurrentUser] = useState('');
 
-    useEffect(() => {
-        localStorage.setItem("token", JSON.stringify(userToken));
+    const [userToken, setUserToken] = useState(JSON.parse(localStorage.getItem('token')) || false);
 
+    useEffect(() => {
         // TOKEN CHECK API
         const url = `${Api}api/authentication/token`;
         const checkToken = async () => {
@@ -29,12 +24,11 @@ export const AuthContextProvider = ({ children }) => {
                 if (resp.data.status === 200) {
                     const data = resp.data.data[0];
                     setCurrentUser(data);
-                    if (document.location.pathname === '/') return;
-
-                    document.location.replace("/");
+                    localStorage.setItem("token", JSON.stringify(userToken));
                 }
                 else {
-                    JSON.parse(localStorage.setItem('invalid'));
+                    localStorage.setItem('token', false);
+                    toast.error(resp.data.message);
                 }
             }
             catch (error) {
@@ -45,7 +39,7 @@ export const AuthContextProvider = ({ children }) => {
     }, [userToken]);
 
     return (
-        <AuthContext.Provider value={{ currentUser, userToken, setUserToken, setCurrentUser }}>
+        <AuthContext.Provider value={{ currentUser, setCurrentUser, userToken,setUserToken }}>
             {children}
         </AuthContext.Provider>
     );

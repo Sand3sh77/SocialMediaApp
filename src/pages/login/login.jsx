@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './login.scss'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
@@ -9,12 +9,12 @@ import toast, { Toaster } from 'react-hot-toast'
 import Api from '../../api/Api'
 
 const Login = () => {
+    const Navigate = useNavigate();
+    const { setUserToken } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         username: "",
         password: ""
     })
-    const { userToken, setUserToken } = useContext(AuthContext);
-    const { alert, setAlert } = useContext(AlertContext);
 
     const handleChange = (e) => {
         setFormData({
@@ -39,8 +39,9 @@ const Login = () => {
             if (response.data.status === 200) {
                 setUserToken(response.data.token);
                 toast.success(response.data.message);
+                Navigate('/');
             }
-            else{
+            else {
                 toast.error(response.data.message);
             }
         }

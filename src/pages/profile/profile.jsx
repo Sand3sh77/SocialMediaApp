@@ -19,7 +19,7 @@ import Api from '../../api/Api';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
-    const { currentUser, userToken, setUserToken, setCurrentUser } = useContext(AuthContext);
+    const { currentUser, userToken, setUserToken } = useContext(AuthContext);
 
     const [isUser, setIsUser] = useState('');
 
@@ -56,6 +56,7 @@ const Profile = () => {
     // LOGOUT API CALL
     const handleLogout = async () => {
         const url = `${Api}api/authentication/logout`;
+        console.log(userToken);
         const logout = async () => {
             try {
                 const resp = await axios.post(url, { token: userToken }, {
@@ -63,14 +64,19 @@ const Profile = () => {
                         "Content-Type": "multipart/form-data", "Accept": "application/json",
                     }
                 })
-                toast.success(resp.data.message)
+                if (resp.data.status === 200) {
+                    toast.success(resp.data.message);
+                    setUserToken(false);
+                    // localStorage.setItem('token', false);
+                }
+                else {
+                    toast.error(resp.data.message);
+                }
             }
             catch (error) {
                 console.error("Error:", error);
             }
         }
-        setUserToken('invalid');
-        setCurrentUser({ loginStatus: false });
         logout();
     }
 
