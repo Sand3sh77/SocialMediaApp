@@ -18,12 +18,6 @@ const Share = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // const formData = new FormData();
-        // formData.append("file", file);
-        // formData.append("userId", currentUser.Id);
-        // formData.append("desc", desc);
-
         const url = `${Api}api/functions/addPosts`;
 
         // CREATE POST API CALL

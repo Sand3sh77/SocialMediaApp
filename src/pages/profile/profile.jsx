@@ -61,7 +61,6 @@ const Profile = () => {
     // LOGOUT API CALL
     const handleLogout = async () => {
         const url = `${Api}api/authentication/logout`;
-        console.log(userToken);
         const logout = async () => {
             try {
                 const resp = await axios.post(url, { token: userToken }, {

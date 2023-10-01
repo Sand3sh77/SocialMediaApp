@@ -50,11 +50,22 @@
 
                 .modal {
                     position: relative;
+                    
+                    svg{
+                        width: 2rem;
+                        height: 2rem;
+                        padding: 0.2rem;
+                        border-radius: 100%;
+                        object-fit: cover;
+                    }
+                    svg:hover{
+                        background-color: #37393a;
 
+                    }
                     button {
                         position: absolute;
                         top: 0rem;
-                        right: 2rem;
+                        right: 2.5rem;
                         background-color: #f03d37;
                         border: none;
                         padding: 0.5rem;

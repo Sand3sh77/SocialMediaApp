@@ -1,85 +1,151 @@
 @import "../../App.scss";
 
-.stories {
-    display: flex;
-    justify-content:space-evenly;
-    gap: 0.8rem;
-    height: 12rem;
-    max-width: 50vw;
-    overflow: scroll;
+.storycontainer {
+    position: relative;
+
+    .stories {
+        display: flex;
+        justify-content: flex-start;
+        height: 12rem;
+        max-width: 50vw;
+        overflow-x: scroll;
+
+
         &::-webkit-scrollbar {
             display: none;
         }
 
-    @include tablet {
-        height: 10rem;
-    }
-    @include small-tablet {
-        height: 10rem;
-        max-width: 70vw;
-    }
+        @include tablet {
+            height: 10rem;
+        }
 
-    @include mobile {
-        padding-top: 0.5rem;
-        height: 5.5rem;
-        justify-content: flex-start;
-        max-width: 100vw;
-    }
-
-    .story {
-        width: 7.4rem;
-        border-radius: 10px;
-        overflow: hidden;
-        position: relative;
+        @include small-tablet {
+            height: 10rem;
+            max-width: 70vw;
+        }
 
         @include mobile {
-            flex: none;
-            height: 5rem;
-            width: 5rem;
-            border-radius: 50%;
+            padding-top: 0.5rem;
+            height: 5.5rem;
+            justify-content: flex-start;
+            max-width: 100vw;
         }
 
-        img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
+        @include themify($themes) {
+            .navigation {
+                button {
+                    position: absolute;
+                    bottom: 42%;
+                    width: 2rem;
+                    height: 2rem;
+                    border-radius: 100%;
+                    padding: 0.25rem;
+                    z-index: 10;
+                    border: none;
+                    cursor: pointer;
+                    background-color: themed('bgSoft');
 
-        span {
-            position: absolute;
-            color: white;
-            bottom: 0.5rem;
-            left: 0.5rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-shadow: 5px 5px 20px black;
+                    @include mobile {
+                        display: none;
+                    }
 
-            @include mobile {
-                display: none;
+                    svg {
+                        color: themed('textColor');
+                    }
+                }
+
+                .left {
+                    left: 0.5rem;
+                }
+
+                .right {
+                    right: 0.5rem;
+
+                }
             }
-        }
 
-        button {
-            position: absolute;
-            bottom: 1.7rem;
-            left: 0.5rem;
-            background-color: #5271ff;
-            padding: 0.2rem;
-            width: 1.7rem;
-            border: none;
-            color: white;
-            border-radius: 100%;
-            cursor: pointer;
-            font-size: 1.2rem;
+            .story {
+                flex: none;
+                width: 19%;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+                margin-right: 0.5rem;
 
-            @include mobile {
-                left: 0;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                margin: auto;
-                height: 1.6rem;
-                font-size: 1.1rem;
+                @include mobile {
+                    flex: none;
+                    height: 5rem;
+                    width: 5rem;
+                    border-radius: 50%;
+                }
+
+                form {
+                    button {
+                        position: absolute;
+                        right: 0rem;
+                        z-index: 100;
+                        bottom: 0.1rem;
+                        border: none;
+                        padding: 0.3rem 0.4rem;
+                        color: white;
+                        cursor: pointer;
+                        border-radius: 3px;
+                        background-color: #5271ff;
+                    }
+
+                }
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+
+                .date {
+                    bottom: 1.5rem;
+                    font-size: 0.7rem;
+                }
+
+                span {
+                    position: absolute;
+                    color: white;
+                    bottom: 0.5rem;
+                    left: 0.5rem;
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    text-shadow: 5px 5px 20px black;
+
+                    @include mobile {
+                        display: none;
+                    }
+                }
+
+                div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    bottom: 1.7rem;
+                    left: 0.5rem;
+                    background-color: #5271ff;
+                    padding: 0.2rem;
+                    width: 1.7rem;
+                    border: none;
+                    color: white;
+                    border-radius: 100%;
+                    cursor: pointer;
+                    font-size: 1.2rem;
+
+                    @include mobile {
+                        left: 0;
+                        right: 0;
+                        top: 0;
+                        bottom: 0;
+                        margin: auto;
+                        height: 1.6rem;
+                        font-size: 1.1rem;
+                    }
+                }
             }
         }
     }
