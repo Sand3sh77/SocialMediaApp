@@ -16,32 +16,37 @@ import { ProfileSvg } from '../../assets/svg/svg';
 import { AuthContext } from '../../context/authContext';
 import toast from 'react-hot-toast';
 import Api from '../../api/Api';
+import useFollow from '../../hooks/useFollow';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
     const { currentUser, userToken, setUserToken } = useContext(AuthContext);
 
     const [isUser, setIsUser] = useState('');
+    const [isFollowed, setIsFollowed] = useState('');
 
     const params = useParams();
-    const url = `${Api}api/functions/profile?id=${params.id}`;
+    const url = `${Api}api/functions/profile`;
 
     useEffect(() => {
         window.scrollTo(0, 0);
         const userDetails = async () => {
             try {
-                const resp = await axios.get(url, {
+                const resp = await axios.post(url, { id: params.id, currentUserId: currentUser.id }, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                         "Accept": "application/json",
                     }
                 })
-                const userData = resp.data.data[0];
-                setUserInfo(userData);
-                if (currentUser.id === userData.id) {
-                    setIsUser(true);
-                } else {
-                    setIsUser(false);
+                if (resp.data.status === 200) {
+                    const userData = resp.data.data[0];
+                    setUserInfo(userData);
+                    if (currentUser.id === userData.id) {
+                        setIsUser(true);
+                    } else {
+                        setIsUser(false);
+                    }
+                    setIsFollowed(resp.data.data[0].isFollowed);
                 }
             }
             catch (error) {
@@ -67,7 +72,6 @@ const Profile = () => {
                 if (resp.data.status === 200) {
                     toast.success(resp.data.message);
                     setUserToken(false);
-                    // localStorage.setItem('token', false);
                 }
                 else {
                     toast.error(resp.data.message);
@@ -79,6 +83,12 @@ const Profile = () => {
         }
         logout();
     }
+
+    // FOLLOW / UNFOLLOW API CALL
+    const handleFollow = () => {
+        useFollow(currentUser.id, userInfo.id, isFollowed);
+        setIsFollowed(!isFollowed);
+    };
 
     return (
         <div className="profile">
@@ -134,7 +144,17 @@ const Profile = () => {
                                 </div>
                             }
                         </div>
-                        {!isUser ? <button style={{ backgroundColor: '#5271ff' }}>Follow</button> : <button style={{ backgroundColor: '#fd253a' }} onClick={handleLogout}>Log Out</button>}
+                        {!isUser ?
+                            <>
+                                {isFollowed ?
+                                    <button style={{ backgroundColor: '#fd253a' }} onClick={handleFollow}>Unfollow</button>
+                                    :
+                                    <button style={{ backgroundColor: '#5271ff' }} onClick={handleFollow}>Follow</button>
+                                }
+                            </>
+                            :
+                            <button style={{ backgroundColor: '#fd253a' }} onClick={handleLogout}>Log Out</button>
+                        }
                     </div>
                     <div className="right">
                         <EmailOutlinedIcon />

@@ -89,7 +89,7 @@ const Post = ({ post }) => {
 
                             {post.profilePic ?
                                 <img
-                                    src={Api+post.profilePic}
+                                    src={Api + post.profilePic}
                                     alt=""
                                     className=""
                                 />
@@ -103,14 +103,15 @@ const Post = ({ post }) => {
                             <div className='date'>{moment(post.createdAt).fromNow()}</div>
                         </div>
                     </div>
-                    <div onClick={() => setModal(!modal)} style={{ cursor: 'pointer' }} className='modal'>
-                        <MoreHorizIcon />
-                        {modal &&
-                            <button onClick={() => handleDelete()}>
-                                Delete
-                            </button>
-                        }
-                    </div>
+                    {currentUser.id === post.userId ?
+                        <div onClick={() => setModal(!modal)} style={{ cursor: 'pointer' }} className='modal'>
+                            <MoreHorizIcon />
+                            {modal &&
+                                <button onClick={() => handleDelete()}>
+                                    Delete
+                                </button>
+                            }
+                        </div> : ''}
                 </div>
                 <div className="content">
                     <p>{post.description}</p>
