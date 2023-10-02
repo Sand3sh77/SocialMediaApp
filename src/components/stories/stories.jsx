@@ -20,25 +20,27 @@ const Stories = () => {
     }
     //VIEW STORY API CALL
     useEffect(() => {
-        const url = `${Api}api/functions/stories`;
-        const viewStory = async () => {
-            try {
-                const resp = await axios.post(url, {}, {
-                    headers: {
-                        "Content-Type": "multipart/form-data", "Accept": "application/json",
+        if (currentUser) {
+            const url = `${Api}api/functions/stories`;
+            const viewStory = async () => {
+                try {
+                    const resp = await axios.post(url, {}, {
+                        headers: {
+                            "Content-Type": "multipart/form-data", "Accept": "application/json",
+                        }
+                    });
+                    if (resp.data.status === 200) {
+                        setStories(resp.data.data);
+                    } else {
+                        toast.error(resp.data.message);
                     }
-                });
-                if (resp.data.status === 200) {
-                    setStories(resp.data.data);
-                } else {
-                    toast.error(resp.data.message);
+                }
+                catch (error) {
+                    console.error("Error:", error);
                 }
             }
-            catch (error) {
-                console.error("Error:", error);
-            }
+            viewStory();
         }
-        viewStory();
     }, [callApi])
 
     // ADD STORY API CALL
@@ -106,9 +108,17 @@ const Stories = () => {
                 {stories.map((story) => {
                     return (
                         <div className="story" key={story.id}>
-                            <img src={Api + story.img} />
-                            <span>{story.name}</span>
-                            <span className='date'>{moment(story.createdAt).fromNow()}</span>
+                            <img
+                                src={Api + story.img}
+                            // onError={() => { this.src = 'https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }}
+                            />
+
+                            <span>
+                                <section className='date'>
+                                    {moment(story.createdAt).fromNow()}
+                                </section>
+                                {story.name}
+                            </span>
                         </div>
                     );
                 })}
