@@ -34,7 +34,15 @@ const Story = () => {
             let i = 0;
             for (i = 0; i < resp.data.data.length; i++) {
               if (resp.data.data[i].active === true) {
-                setCount({ previous: resp.data.data[i - 1].id, next: resp.data.data[i + 1].id });
+                if (i === 0) {
+                  setCount({ previous: null, next: resp.data.data[i + 1].id });
+                }
+                else if (i === resp.data.data.length-1) {
+                  setCount({ previous: resp.data.data[i - 1].id, next: null });
+                }
+                else {
+                  setCount({ previous: resp.data.data[i - 1].id, next: resp.data.data[i + 1].id });
+                }
                 setMainStory(resp.data.data[i]);
                 break;
               }
@@ -105,9 +113,11 @@ const Story = () => {
         </div>
         <div className="storyView">
           <div className="left">
-            <Link to={`/story/${count.previous}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <button ><ArrowLeft /></button>
-            </Link>
+            {count.previous !== null ?
+              <Link to={`/story/${count.previous}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <button ><ArrowLeft /></button>
+              </Link> : ''
+            }
           </div>
           <div className="center">
             <div className="storyimg" key={mainStory.id}>
@@ -118,9 +128,11 @@ const Story = () => {
             </div>
           </div>
           <div className="right">
-            <Link to={`/story/${count.next}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <button ><ArrowRight /></button>
-            </Link>
+            {count.next !== null ?
+              <Link to={`/story/${count.next}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <button ><ArrowRight /></button>
+              </Link> : ""
+            }
           </div>
         </div>
       </div >
