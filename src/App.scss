@@ -2,7 +2,8 @@ $themes: (
     light:(textColor:#000,
         bg:white,
         logo:darkblue,
-        bgSoft:#f6f3f3,
+        bgSoft:#ffffff,
+        bgSoftT:#ffffffab,
         textColorSoft:#555,
         border:lightgray,
     ),
@@ -10,6 +11,7 @@ $themes: (
         bg:#222,
         logo:white,
         bgSoft:#333,
+        bgSoftT:#33333391,
         textColorSoft:lightgray,
         border:#444,
     )

@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight } from '../../assets/svg/svg';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const Stories = () => {
     const { currentUser } = useContext(AuthContext);
@@ -24,7 +25,7 @@ const Stories = () => {
             const url = `${Api}api/functions/stories`;
             const viewStory = async () => {
                 try {
-                    const resp = await axios.post(url, {}, {
+                    const resp = await axios.post(url,{id:currentUser.id} ,{
                         headers: {
                             "Content-Type": "multipart/form-data", "Accept": "application/json",
                         }
@@ -108,17 +109,19 @@ const Stories = () => {
                 {stories.map((story) => {
                     return (
                         <div className="story" key={story.id}>
-                            <img
-                                src={Api + story.img}
-                            // onError={() => { this.src = 'https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }}
-                            />
+                            <Link to={`/story/${story.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <img
+                                    src={Api + story.img}
+                                // onError={() => { this.src = 'https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }}
+                                />
 
-                            <span>
-                                <section className='date'>
-                                    {moment(story.createdAt).fromNow()}
-                                </section>
-                                {story.name}
-                            </span>
+                                <span>
+                                    <section className='date'>
+                                        {moment(story.createdAt).fromNow()}
+                                    </section>
+                                    {story.name}
+                                </span>
+                            </Link>
                         </div>
                     );
                 })}

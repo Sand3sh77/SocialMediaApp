@@ -7,6 +7,7 @@ import Home from './pages/home/home';
 import Login from './pages/login/login';
 import Profile from './pages/profile/profile';
 import Register from './pages/register/register';
+import Story from './pages/story/story';
 
 import {
   createBrowserRouter,
@@ -82,6 +83,10 @@ function App() {
       path: "/register",
       element: <Register />,
     },
+    {
+      path: "/story/:id",
+      element: <Story />
+    }
   ]);
 
   return (

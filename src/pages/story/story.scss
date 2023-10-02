@@ -1,0 +1,249 @@
+@import "../../App.scss";
+
+.story_container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    justify-content: space-between;
+
+    @include themify($themes) {
+        color: themed('textColor');
+
+        .allStories {
+            width: 27%;
+            height: 100vh;
+            background-color: themed('bgSoftT');
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+            .topCont {
+                border-bottom: 0.5px solid themed('border');
+                position: sticky;
+                top: 0;
+                -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                background-color: themed('bgSoftT');
+                backdrop-filter: blur(5px);
+            }
+
+            .topContScroll {
+                background-color: themed('bgSoft');
+            }
+
+            .top {
+                height: 4rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+                width: 90%;
+                margin: 0 0.8rem;
+
+                svg {
+                    height: 2.2rem;
+                    color: themed('textColor');
+                    background-color: themed('bgSoft');
+                    border-radius: 50%;
+                    padding: 0.3rem;
+                }
+
+                span {
+                    color: themed("logo");
+                    font-weight: bolder;
+                    font-size: 1.2rem;
+                }
+            }
+
+            hr {
+                // margin: 1rem 0;
+                border: none;
+                height: 0.5px;
+                background-color: themed('border');
+                width: 90%;
+                margin: auto;
+            }
+
+            .middle {
+                width: 90%;
+                margin: auto;
+                margin: 1rem;
+                color: themed('textColorSoft');
+
+                h2,
+                h4 {
+                    margin-bottom: 1rem;
+                }
+
+                .createStory {
+                    height: 10%;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.7rem;
+
+                    .addStory {
+                        height: 2.2rem;
+                        width: 2.2rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 1rem;
+                        background-color: themed('bg');
+                        border-radius: 50%;
+                        font-size: 1.6rem;
+                    }
+
+                    div {
+                        span:first-child {
+                            font-weight: bolder;
+                            font-size: 1.1rem;
+                        }
+
+                        span {
+                            font-weight: 100;
+                            font-size: 0.8rem;
+                            color: themed('textColorSoft');
+                        }
+                    }
+                }
+            }
+
+            .bottom {
+                // height: 85%;
+                .active{
+                    background-color: themed('bg');
+                }
+                .items:hover{
+                    background-color: themed('bgSoftT');
+                }
+                .items {
+                    display: flex;
+                    align-items: center;
+                    height: 10%;
+                    gap: 0.7rem;
+                    padding: 0.5rem;
+                    margin: 0.5rem auto;
+                    border-radius: 7px;
+                    width: 95%;
+                    cursor: pointer;
+
+                    img,
+                    svg {
+                        height: 2.2rem;
+                        width: 2.2rem;
+                        border-radius: 100%;
+                        object-fit: cover;
+                    }
+
+                    svg {
+                        padding: 2px;
+                        border: 1px solid themed('textColor');
+                    }
+
+                    .storyName {
+                        font-weight: bolder;
+                        font-size: 1.1rem;
+                    }
+
+                    .storyDate {
+                        font-weight: 100;
+                        font-size: 0.8rem;
+                        color: themed('textColorSoft');
+                    }
+                }
+            }
+        }
+
+        .storyView {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            align-items: center;
+            width: 70%;
+
+            div {
+                -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                border-radius: 1rem;
+                color: themed('textColor');
+            }
+
+            .left {
+                border-radius: 100%;
+
+                button {
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 100%;
+                    padding: 0.25rem;
+                    border: none;
+                    cursor: pointer;
+                    background-color: themed('bgSoftT');
+                    color: themed('textColor');
+
+                }
+            }
+
+            .center {
+                background-color: themed('bgSoftT');
+                height: 90%;
+                width: 50%;
+
+                .storyimg {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+
+                    div {
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        overflow: hidden;
+                        height: 100%;
+
+                        img {
+                            height: 100%;
+                            cursor: pointer;
+                        }
+
+                        .imgClick {
+                            height: auto;
+                            width: 100%;
+                        }
+                    }
+                }
+
+                .blurEffect {
+                    filter: blur(50px);
+                    width: 100%;
+                    position: fixed;
+                    right: 0;
+                    z-Index: -1;
+                }
+
+            }
+
+            .right {
+                border-radius: 100%;
+
+                button {
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 100%;
+                    padding: 0.25rem;
+                    border: none;
+                    cursor: pointer;
+                    background-color: themed('bgSoftT');
+                    color: themed('textColor');
+
+                }
+            }
+        }
+    }
+}
