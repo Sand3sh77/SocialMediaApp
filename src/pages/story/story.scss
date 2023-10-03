@@ -66,21 +66,24 @@
             }
 
             .middle {
-                width: 90%;
                 margin: auto;
-                margin: 1rem;
                 color: themed('textColorSoft');
 
                 h2,
                 h4 {
-                    margin-bottom: 1rem;
+                    margin: 1rem;
                 }
 
                 .createStory {
-                    height: 10%;
                     display: flex;
                     align-items: center;
+                    height: 10%;
                     gap: 0.7rem;
+                    padding: 0.5rem;
+                    margin: 0.5rem auto;
+                    width: 95%;
+                    border-radius: 7px;
+                    cursor: pointer;
 
                     .addStory {
                         height: 2.2rem;
@@ -92,6 +95,7 @@
                         background-color: themed('bg');
                         border-radius: 50%;
                         font-size: 1.6rem;
+
                     }
 
                     div {
@@ -107,16 +111,27 @@
                         }
                     }
                 }
+
+                .active {
+                    background-color: themed('bg');
+                }
+
+                .createStory:hover {
+                    background-color: themed('bgSoftT');
+                }
             }
 
             .bottom {
+
                 // height: 85%;
-                .active{
+                .active {
                     background-color: themed('bg');
                 }
-                .items:hover{
+
+                .items:hover {
                     background-color: themed('bgSoftT');
                 }
+
                 .items {
                     display: flex;
                     align-items: center;
@@ -190,6 +205,35 @@
                 background-color: themed('bgSoftT');
                 height: 90%;
                 width: 50%;
+                position: relative;
+                
+                div {
+                    color: white;
+                    box-shadow: none;
+                }
+
+                .top {
+                    position: absolute;
+                    top: 1rem;
+                    left: 1rem;
+                    display: flex;
+                    gap: 0.8rem;
+                    padding: 0.2rem 0.6rem;
+                    text-shadow: 5px 5px 10px black;
+                    
+                    img,
+                    svg {
+                        width: 2rem;
+                        height: 2rem;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+                    
+                    svg {
+                        padding: 2px;
+                        border: 1px solid white;
+                    }
+                }
 
                 .storyimg {
                     width: 100%;

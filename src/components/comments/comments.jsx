@@ -104,7 +104,7 @@ const Comments = ({ postId, TC, setTC }) => {
                         <span>{comment.name}</span>
                         <p>{comment.description}</p>
                     </div>
-                    <span className='date'>{moment(comment.createdAt).fromNow()}</span>
+                    <span className='date'>{moment.utc(comment.createdAt).local().fromNow()}</span>
                 </div>
             ))}
             {comments ? '' :

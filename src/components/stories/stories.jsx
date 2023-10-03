@@ -117,7 +117,7 @@ const Stories = () => {
 
                                 <span>
                                     <section className='date'>
-                                        {moment(story.createdAt).fromNow()}
+                                        {moment.utc(story.createdAt).local().fromNow()}
                                     </section>
                                     {story.name}
                                 </span>

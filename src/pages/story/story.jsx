@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import "./story.scss";
 import { AuthContext } from "../../context/authContext";
 import Api from "../../api/Api";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { DarkModeContext } from "../../context/darkmodeContext";
 import { ArrowLeft, ArrowRight, CrossOutlineSvg, CrossSvg, ProfileSvg } from "../../assets/svg/svg";
@@ -15,10 +15,17 @@ const Story = () => {
   const { currentUser } = useContext(AuthContext);
   const { darkMode } = useContext(DarkModeContext);
   const [count, setCount] = useState({ previous: '', next: '' });
+  const [addStory, setAddStory] = useState(true);
+  const [timeoutId, setTimeoutId] = useState(null);
 
   const params = useParams();
+  const Navigate = useNavigate('');
 
   useEffect(() => {
+    if (params.id === 'addStory') {
+      setAddStory(true);
+      setCount({ previous: null, next: null });
+    }
     //VIEW ALL STORY API CALL
     if (currentUser) {
       const url = `${Api}api/functions/stories`;
@@ -34,15 +41,28 @@ const Story = () => {
             let i = 0;
             for (i = 0; i < resp.data.data.length; i++) {
               if (resp.data.data[i].active === true) {
+                setAddStory(false);
+
                 if (i === 0) {
                   setCount({ previous: null, next: resp.data.data[i + 1].id });
                 }
-                else if (i === resp.data.data.length-1) {
+                else if (i === resp.data.data.length - 1) {
                   setCount({ previous: resp.data.data[i - 1].id, next: null });
                 }
                 else {
                   setCount({ previous: resp.data.data[i - 1].id, next: resp.data.data[i + 1].id });
                 }
+
+                if (i !== resp.data.data.length - 1) {
+                  if (timeoutId) {
+                    clearTimeout(timeoutId);
+                  }
+                  const newTimeoutId = setTimeout(() => {
+                    Navigate(`/story/${resp.data.data[i + 1].id}`);
+                  }, 5000);
+                  setTimeoutId(newTimeoutId);
+                }
+
                 setMainStory(resp.data.data[i]);
                 break;
               }
@@ -65,10 +85,16 @@ const Story = () => {
         <div className="allStories">
           <div className="topCont">
             <div className="top" onScroll={(e) => e.target.classList.add('topContScroll')}>
-              <Link to='/' style={{ textDecoration: 'none' }}>
+              <Link to='/' style={{ textDecoration: 'none' }} onClick={() => {
+                if (timeoutId) clearTimeout(timeoutId)
+              }
+              }
+              >
                 <span>SafeBook</span>
               </Link>
-              <Link to='/' style={{ textDecoration: 'none' }}>
+              <Link to='/' style={{ textDecoration: 'none' }} onClick={() => {
+                if (timeoutId) clearTimeout(timeoutId)
+              }}>
                 <div><CrossOutlineSvg /></div>
               </Link>
             </div>
@@ -76,13 +102,15 @@ const Story = () => {
           <div className="middle">
             <h2>Stories</h2>
             <h4>Your Story</h4>
-            <div className="createStory">
-              <div className="addStory">+</div>
-              <div>
-                <span>Create a story</span><br />
-                <span>Share a photo or write something.</span>
+            <Link to={`/story/addStory`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="createStory">
+                <div className="addStory">+</div>
+                <div>
+                  <span>Create a story</span><br />
+                  <span>Share a photo or write something.</span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <hr />
           <div className="bottom">
@@ -102,7 +130,7 @@ const Story = () => {
                       }
                       <div>
                         <span className="storyName">{story.name}</span><br />
-                        <span className="storyDate">{moment(story.createdAt).fromNow()}</span>
+                        <span className="storyDate">{moment.utc(story.createdAt).local().fromNow()}</span>
                       </div>
                     </div >
                   </Link>
@@ -120,12 +148,37 @@ const Story = () => {
             }
           </div>
           <div className="center">
-            <div className="storyimg" key={mainStory.id}>
-              <div style={{ zIndex: '15' }}>
-                <img src={Api + mainStory.img} onClick={(e) => { e.target.classList.toggle('imgClick') }} />
+            {!addStory ?
+              <>
+                <div className="top">
+                  {mainStory.profilePic ?
+                    <img
+                      src={Api + mainStory.profilePic}
+                      alt=""
+                      className=""
+                    />
+                    : <ProfileSvg />
+                  }
+                  <div>
+                    <div>{mainStory.name}</div>
+                    <div className="storyDate">{moment.utc(mainStory.createdAt).local().fromNow()}</div>
+                  </div>
+                </div>
+                <div className="storyimg">
+                  <div>
+                    <img src={Api + mainStory.img} onClick={(e) => { e.target.classList.toggle('imgClick') }} />
+                  </div>
+                  <img src={Api + mainStory.img} className="blurEffect" />
+                </div>
+              </>
+              :
+              <div className="storyimg">
+                <div>
+                  <img src="https://images.pexels.com/photos/7135121/pexels-photo-7135121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                </div>
+                <img src='https://images.pexels.com/photos/7135121/pexels-photo-7135121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className="blurEffect" />
               </div>
-              <img src={Api + mainStory.img} className="blurEffect" />
-            </div>
+            }
           </div>
           <div className="right">
             {count.next !== null ?

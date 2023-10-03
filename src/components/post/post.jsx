@@ -100,7 +100,7 @@ const Post = ({ post }) => {
                             <Link to={`/profile/${post.userId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <span className='name'>{post.name}</span>
                             </Link>
-                            <div className='date'>{moment(post.createdAt).fromNow()}</div>
+                            <div className='date'>{moment.utc(post.createdAt).local().fromNow()}</div>
                         </div>
                     </div>
                     {currentUser.id === post.userId ?
