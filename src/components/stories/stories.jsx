@@ -10,9 +10,7 @@ import { Link } from 'react-router-dom';
 
 const Stories = () => {
     const { currentUser } = useContext(AuthContext);
-    const [file, setFile] = useState(null);
     const [stories, setStories] = useState([]);
-    const [callApi, setCallApi] = useState('');
 
     // TO SCROLL STORIES
     const Scroll = (offset) => {
@@ -25,7 +23,7 @@ const Stories = () => {
             const url = `${Api}api/functions/stories`;
             const viewStory = async () => {
                 try {
-                    const resp = await axios.post(url,{id:currentUser.id} ,{
+                    const resp = await axios.post(url, { id: currentUser.id }, {
                         headers: {
                             "Content-Type": "multipart/form-data", "Accept": "application/json",
                         }
@@ -42,33 +40,7 @@ const Stories = () => {
             }
             viewStory();
         }
-    }, [callApi])
-
-    // ADD STORY API CALL
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const url = `${Api}api/functions/addStory`;
-        const addStory = async () => {
-            try {
-                const resp = await axios.post(url, { file: file, userId: currentUser.id }, {
-                    headers: {
-                        "Content-Type": "multipart/form-data", "Accept": "application/json",
-                    }
-                });
-                if (resp.data.status === 200) {
-                    toast.success(resp.data.message);
-                    setCallApi(resp.data);
-                    setFile(null);
-                } else {
-                    toast.error(resp.data.message);
-                }
-            }
-            catch (error) {
-                console.error("Error:", error);
-            }
-        }
-        addStory();
-    };
+    }, [])
 
     return (
         <div className='storycontainer'>
@@ -78,33 +50,16 @@ const Stories = () => {
                     <button className='right' onClick={() => Scroll(400)}><ArrowRight /></button>
                 </div>
                 <div className="story">
-                    {file ?
-                        <img src={URL.createObjectURL(file)} />
-                        :
+                    <Link to={`/story/addStory`} style={{ textDecoration: 'none', color: 'inherit' }}>
                         <img
                             src={currentUser.profilePic ? Api + currentUser.profilePic : "https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
                             alt=""
                             className=""
                             style={{ filter: 'sepia(10%)' }}
                         />
-                    }
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            type="file"
-                            id="file"
-                            name='file'
-                            style={{ display: "none" }}
-                            accept="image/png, image/jpeg,image/jpg,image/webp"
-                            onChange={(e) => setFile(e.target.files[0])}
-                        />
-                        {file ? <button type='submit'>
-                            Add
-                        </button> : ''}
-                        <label htmlFor="file">
-                            <span>Create Story</span>
-                            <div>+</div>
-                        </label>
-                    </form>
+                        <span>Create Story</span>
+                        <div>+</div>
+                    </Link>
                 </div>
                 {stories.map((story) => {
                     return (
@@ -112,7 +67,6 @@ const Stories = () => {
                             <Link to={`/story/${story.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <img
                                     src={Api + story.img}
-                                // onError={() => { this.src = 'https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }}
                                 />
 
                                 <span>

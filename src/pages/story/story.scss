@@ -17,6 +17,10 @@
             overflow-y: scroll;
             overflow-x: hidden;
 
+            @include mobile {
+                display: none;
+            }
+
             .topCont {
                 border-bottom: 0.5px solid themed('border');
                 position: sticky;
@@ -47,6 +51,12 @@
                     background-color: themed('bgSoft');
                     border-radius: 50%;
                     padding: 0.3rem;
+
+                    @include mobile {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    }
                 }
 
                 span {
@@ -177,16 +187,50 @@
             align-items: center;
             width: 70%;
 
+            @include mobile {
+                width: 100%;
+                gap: 0;
+            }
+
+            .cross {
+                svg {
+
+                    height: 2.2rem;
+                    color: themed('textColor');
+                    background-color: themed('bgSoft');
+                    border-radius: 50%;
+                    padding: 0.3rem;
+                    display: none;
+
+                    @include mobile {
+                        display: block;
+                        position: absolute;
+                        top: 1rem;
+                        right: 1rem;
+                        z-index: 10;
+                    }
+                }
+            }
+
             div {
                 -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
                 -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
                 box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
                 border-radius: 1rem;
                 color: themed('textColor');
+
+                @include mobile {
+                    border-radius: 0;
+                }
             }
 
             .left {
                 border-radius: 100%;
+
+                @include mobile {
+                    display: none;
+
+                }
 
                 button {
                     width: 3rem;
@@ -206,7 +250,21 @@
                 height: 90%;
                 width: 50%;
                 position: relative;
-                
+
+
+                @include tablet {
+                    width: 60%;
+                }
+
+                @include small-tablet {
+                    width: 70%;
+                }
+
+                @include mobile {
+                    width: 100vw;
+                    height: 100vh;
+                }
+
                 div {
                     color: white;
                     box-shadow: none;
@@ -220,7 +278,7 @@
                     gap: 0.8rem;
                     padding: 0.2rem 0.6rem;
                     text-shadow: 5px 5px 10px black;
-                    
+
                     img,
                     svg {
                         width: 2rem;
@@ -228,7 +286,7 @@
                         object-fit: cover;
                         border-radius: 50%;
                     }
-                    
+
                     svg {
                         padding: 2px;
                         border: 1px solid white;
@@ -242,9 +300,91 @@
                     justify-content: center;
                     align-items: center;
                     overflow: hidden;
+                    position: relative;
 
-                    div {
+                    form {
 
+                        .addAction {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute;
+                            z-index: 10;
+                            top: 0%;
+                            left: 0%;
+                            width: 100%;
+                            height: 100%;
+
+                            .bottom{
+                                align-self: flex-end;
+                                display: flex;
+                                justify-content: space-around;
+                                width: 100%;
+                                height: 2.3rem;
+                                gap: 0.2rem;
+
+                                span,button{
+                                    background-color: themed('bgSoftT');
+                                    width: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    cursor: pointer;
+                                    border: none;
+                                    color: themed("textColor");
+                                    font-size: 1rem;
+                                }
+                                span:hover,button:hover{
+                                    background-color: themed("bgSoft");
+                                }
+                            }
+
+                            label {
+                                height: 50%;
+                                width: 50%;
+                                background-color: themed('bgSoftT');
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                flex-direction: column;
+                                align-items: center;
+                                border-radius: 0.5rem;
+                                cursor: pointer;
+                                transition: all 0.2s ease-in-out;
+
+                                .createStory {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    flex-direction: column;
+                                    align-items: center;
+
+                                    div:first-child {
+                                        font-weight: bolder;
+                                        font-size: 1.4rem;
+                                    }
+
+                                    .plus {
+                                        height: 2.2rem;
+                                        width: 2.2rem;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        padding: 1rem;
+                                        background-color: themed('bgSoft');
+                                        border-radius: 50%;
+                                        font-size: 1.6rem;
+                                    }
+                                }
+                            }
+
+                            label:hover {
+                                scale: 1.05;
+                            }
+                        }
+                    }
+
+                    section {
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -275,6 +415,10 @@
 
             .right {
                 border-radius: 100%;
+
+                @include mobile {
+                    display: none;
+                }
 
                 button {
                     width: 3rem;
