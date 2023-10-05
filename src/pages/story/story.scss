@@ -194,13 +194,13 @@
 
             .cross {
                 svg {
-
                     height: 2.2rem;
                     color: themed('textColor');
                     background-color: themed('bgSoft');
                     border-radius: 50%;
                     padding: 0.3rem;
                     display: none;
+                    cursor: pointer;
 
                     @include mobile {
                         display: block;
@@ -250,7 +250,7 @@
                 height: 90%;
                 width: 50%;
                 position: relative;
-
+                overflow: hidden;
 
                 @include tablet {
                     width: 60%;
@@ -265,6 +265,17 @@
                     height: 100vh;
                 }
 
+                .timeBar {
+                    width: 100%;
+                    height: 0.3rem;
+                    background-color: #045de9;
+                    background-image: linear-gradient(315deg, #1461db 0%, #0f7fdb 74%);
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    z-index: 10;
+                }
+
                 div {
                     color: white;
                     box-shadow: none;
@@ -275,6 +286,8 @@
                     top: 1rem;
                     left: 1rem;
                     display: flex;
+                    width: 95%;
+                    align-items: center;
                     gap: 0.8rem;
                     padding: 0.2rem 0.6rem;
                     text-shadow: 5px 5px 10px black;
@@ -290,6 +303,21 @@
                     svg {
                         padding: 2px;
                         border: 1px solid white;
+                    }
+
+                    .playPause {
+                        cursor: pointer;
+                        position: absolute;
+                        right: 1rem;
+
+                        @include mobile {
+                            right: 3rem;
+                        }
+
+                        svg {
+                            border: none;
+                            // color: themed('textColor');
+                        }
                     }
                 }
 
@@ -315,7 +343,7 @@
                             width: 100%;
                             height: 100%;
 
-                            .bottom{
+                            .bottom {
                                 align-self: flex-end;
                                 display: flex;
                                 justify-content: space-around;
@@ -323,7 +351,8 @@
                                 height: 2.3rem;
                                 gap: 0.2rem;
 
-                                span,button{
+                                span,
+                                button {
                                     background-color: themed('bgSoftT');
                                     width: 50%;
                                     display: flex;
@@ -334,7 +363,9 @@
                                     color: themed("textColor");
                                     font-size: 1rem;
                                 }
-                                span:hover,button:hover{
+
+                                span:hover,
+                                button:hover {
                                     background-color: themed("bgSoft");
                                 }
                             }
@@ -392,22 +423,24 @@
                         height: 100%;
 
                         img {
-                            height: 100%;
                             cursor: pointer;
+                            width: 100%;
                         }
 
                         .imgClick {
-                            height: auto;
-                            width: 100%;
+                            height: 100%;
+                            width: auto;
                         }
                     }
                 }
 
                 .blurEffect {
-                    filter: blur(50px);
-                    width: 100%;
+                    filter: blur(25px);
+                    width: 140vw;
+                    height: 110vh;
                     position: fixed;
-                    right: 0;
+                    object-fit: cover;
+                    object-position: center;
                     z-Index: -1;
                 }
 

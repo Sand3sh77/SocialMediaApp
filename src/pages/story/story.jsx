@@ -5,7 +5,7 @@ import Api from "../../api/Api";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { DarkModeContext } from "../../context/darkmodeContext";
-import { ArrowLeft, ArrowRight, CrossOutlineSvg, CrossSvg, ProfileSvg } from "../../assets/svg/svg";
+import { ArrowLeft, ArrowRight, CrossOutlineSvg, CrossSvg, PauseSolid, PlaySolid, ProfileSvg } from "../../assets/svg/svg";
 import toast from "react-hot-toast";
 import moment from "moment";
 
@@ -16,10 +16,28 @@ const Story = () => {
   const { darkMode } = useContext(DarkModeContext);
   const [count, setCount] = useState({ previous: '', next: '' });
   const [addStory, setAddStory] = useState(true);
-  const [timeoutId, setTimeoutId] = useState(null);
-
   const [file, setFile] = useState(null);
   const [callApi, setCallApi] = useState('');
+
+  // THIS IS TO MOVE THE TIMEBAR ON TOP OF THE STORIES
+  const [timeoutId, setTimeoutId] = useState(null);
+  const [timeoutTime, setTimeoutTime] = useState(10000);
+  const [startTimer, setStartTimer] = useState(0);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     const currentTime = Date.now();
+  //     const elapsedTime = currentTime - startTimer;
+  //     setTimeElapsed(elapsedTime);
+
+  //     // Check if time is up, and if so, clear the interval
+  //     if (elapsedTime >= 10000) {
+  //       clearInterval(intervalId);
+  //     }
+
+  //   }, 1); // Update every 100 milliseconds
+  // }, [startTimer]);
 
   const params = useParams();
   const Navigate = useNavigate('');
@@ -62,7 +80,16 @@ const Story = () => {
                   }
                   const newTimeoutId = setTimeout(() => {
                     Navigate(`/story/${resp.data.data[i + 1].id}`);
-                  }, 5000);
+                    // setStartTimer(Date.now());
+                  }, timeoutTime);
+                  setTimeoutId(newTimeoutId);
+                } else {
+                  if (timeoutId) {
+                    clearTimeout(timeoutId);
+                  }
+                  const newTimeoutId = setTimeout(() => {
+                    Navigate(`/`);
+                  }, timeoutTime);
                   setTimeoutId(newTimeoutId);
                 }
 
@@ -110,8 +137,9 @@ const Story = () => {
 
   const Reset = () => {
     if (timeoutId) {
-      clearTimeout(timeoutId)
+      clearTimeout(timeoutId);
     }
+    setTimeoutId(null);
   }
   return (
     <div className={`theme-${darkMode ? 'dark' : 'light'}`}>
@@ -171,8 +199,8 @@ const Story = () => {
           </div>
         </div>
         <div className="storyView">
-          <Link to='/' style={{ textDecoration: 'none' }} onClick={Reset}>
-            <div className="cross"><CrossOutlineSvg /></div>
+          <Link to='/' style={{ textDecoration: 'none', zIndex: '55' }} onClick={Reset} className="cross">
+            <div><CrossOutlineSvg /></div>
           </Link>
           <div className="left">
             {count.previous !== null ?
@@ -186,6 +214,7 @@ const Story = () => {
             {/* NORMAL MAIN SECTION */}
             {!addStory ?
               <>
+                {/* <div className="timeBar" style={{ translate: `${(timeElapsed / 10000) * 100}% 0` }}></div> */}
                 <div className="top" style={{ zIndex: '50' }}>
                   {mainStory.profilePic ?
                     <img
@@ -199,6 +228,7 @@ const Story = () => {
                     <div>{mainStory.name}</div>
                     <div className="storyDate">{moment.utc(mainStory.createdAt).local().fromNow()}</div>
                   </div>
+                  <div className="playPause" onClick={() => Reset()}>{timeoutId ? <PauseSolid /> : <PlaySolid />}</div>
                 </div>
                 <div className="storyimg">
                   <section>
@@ -240,7 +270,7 @@ const Story = () => {
                     // NORMAL WITH NO IMAGE ADDED
                     <>
                       <section>
-                        <img src="https://images.pexels.com/photos/7135121/pexels-photo-7135121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                        <img src="https://images.pexels.com/photos/7135121/pexels-photo-7135121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" style={{ height: '100%' }} />
                       </section>
                       <img src='https://images.pexels.com/photos/7135121/pexels-photo-7135121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className="blurEffect" />
                     </>}
