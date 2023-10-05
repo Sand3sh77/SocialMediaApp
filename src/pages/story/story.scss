@@ -132,8 +132,7 @@
             }
 
             .bottom {
-
-                // height: 85%;
+                position: relative;
                 .active {
                     background-color: themed('bg');
                 }
@@ -163,7 +162,7 @@
 
                     svg {
                         padding: 2px;
-                        border: 1px solid themed('textColor');
+                        // border: 1px solid themed('textColor');
                     }
 
                     .storyName {
@@ -175,6 +174,37 @@
                         font-weight: 100;
                         font-size: 0.8rem;
                         color: themed('textColorSoft');
+                    }
+                }
+
+                .modal {
+                    position: absolute;
+                    right: 1rem;
+
+                    svg {
+                        width: 2rem;
+                        height: 2rem;
+                        padding: 0.2rem;
+                        border-radius: 100%;
+                        object-fit: cover;
+                    }
+
+                    svg:hover {
+                        background-color: themed('bgSoft');
+
+                    }
+
+                    button {
+                        position: absolute;
+                        top: 0rem;
+                        right: 2.5rem;
+                        background-color: #f03d37;
+                        border: none;
+                        padding: 0.5rem;
+                        color: white;
+                        cursor: pointer;
+                        border-radius: 3px;
+
                     }
                 }
             }

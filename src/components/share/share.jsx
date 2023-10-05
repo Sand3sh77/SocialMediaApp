@@ -18,7 +18,7 @@ const Share = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const url = `${Api}api/functions/addPosts`;
+        const url = `${Api}api/functions/posts/addPosts`;
 
         // CREATE POST API CALL
         const createPost = async () => {

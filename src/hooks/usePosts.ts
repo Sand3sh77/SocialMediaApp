@@ -9,7 +9,7 @@ export default function usePosts(
 ) {
   return useQuery(["posts", userId, calledFrom], () => {
     return axios.post(
-      `${Api}api/functions/posts`,
+      `${Api}api/functions/posts/posts`,
       {
         id: userId,
         location: calledFrom,

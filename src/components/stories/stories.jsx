@@ -20,7 +20,7 @@ const Stories = () => {
     //VIEW STORY API CALL
     useEffect(() => {
         if (currentUser) {
-            const url = `${Api}api/functions/stories`;
+            const url = `${Api}api/functions/stories/stories`;
             const viewStory = async () => {
                 try {
                     const resp = await axios.post(url, { id: currentUser.id }, {

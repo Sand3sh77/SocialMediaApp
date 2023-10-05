@@ -36,7 +36,7 @@ const Post = ({ post }) => {
             setTotalLikes(totalLikes + 1);
         }
 
-        const url = `${Api}api/functions/likes`;
+        const url = `${Api}api/functions/likes/likes`;
 
         const Like = async () => {
             try {
@@ -56,7 +56,7 @@ const Post = ({ post }) => {
     // DELETE POST API CALL
     const handleDelete = () => {
 
-        const url = `${Api}api/functions/deletePosts`;
+        const url = `${Api}api/functions/posts/deletePosts`;
 
         const Delete = async () => {
             try {

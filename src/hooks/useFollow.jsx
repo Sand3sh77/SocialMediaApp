@@ -3,7 +3,7 @@ import axios from 'axios';
 import Api from '../api/Api';
 
 const useFollow = async (followerId, followedId, isFollowed) => {
-    const url = `${Api}api/functions/follow`;
+    const url = `${Api}api/functions/other/follow`;
     try {
         const resp = await axios.post(url, { followerId: followerId, followedId: followedId, isFollowed: isFollowed },
             {

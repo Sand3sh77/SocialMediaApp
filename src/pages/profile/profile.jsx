@@ -26,7 +26,7 @@ const Profile = () => {
     const [isFollowed, setIsFollowed] = useState('');
 
     const params = useParams();
-    const url = `${Api}api/functions/profile`;
+    const url = `${Api}api/functions/other/profile`;
 
     useEffect(() => {
         window.scrollTo(0, 0);

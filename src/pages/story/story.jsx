@@ -8,6 +8,7 @@ import { DarkModeContext } from "../../context/darkmodeContext";
 import { ArrowLeft, ArrowRight, CrossOutlineSvg, CrossSvg, PauseSolid, PlaySolid, ProfileSvg } from "../../assets/svg/svg";
 import toast from "react-hot-toast";
 import moment from "moment";
+import AllStories from "./allStories";
 
 const Story = () => {
   const [stories, setStories] = useState([]);
@@ -49,7 +50,7 @@ const Story = () => {
     }
     //VIEW ALL STORY API CALL
     if (currentUser) {
-      const url = `${Api}api/functions/stories`;
+      const url = `${Api}api/functions/stories/stories`;
       const viewStories = async () => {
         try {
           const resp = await axios.post(url, { id: params.id }, {
@@ -112,7 +113,8 @@ const Story = () => {
   // ADD STORY API CALL
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = `${Api}api/functions/addStory`;
+    setAddStory(false);
+    const url = `${Api}api/functions/stories/addStory`;
     const addStory = async () => {
       try {
         const resp = await axios.post(url, { file: file, userId: currentUser.id }, {
@@ -175,25 +177,7 @@ const Story = () => {
           <div className="bottom">
             {stories.map((story) => {
               return (
-                <span key={story.id}>
-                  <Link to={`/story/${story.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <div className={story.active ? 'active items' : 'items'}>
-                      {story.profilePic ?
-                        <img
-                          src={Api + story.profilePic}
-                          alt=""
-                          className=""
-                        />
-                        :
-                        <ProfileSvg />
-                      }
-                      <div>
-                        <span className="storyName">{story.name}</span><br />
-                        <span className="storyDate">{moment.utc(story.createdAt).local().fromNow()}</span>
-                      </div>
-                    </div >
-                  </Link>
-                </span>
+                <AllStories story={story} key={story.id} />
               );
             })}
           </div>

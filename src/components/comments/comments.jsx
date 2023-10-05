@@ -16,7 +16,7 @@ const Comments = ({ postId, TC, setTC }) => {
 
     // VIEW COMMENT API CALL
     useEffect(() => {
-        const url = `${Api}api/functions/comments?id=${postId}`;
+        const url = `${Api}api/functions/comments/comments?id=${postId}`;
         const comment = async () => {
             try {
                 const resp = await axios.get(url, {
@@ -44,7 +44,7 @@ const Comments = ({ postId, TC, setTC }) => {
         e.preventDefault();
 
 
-        const ac_url = `${Api}api/functions/addComment`;
+        const ac_url = `${Api}api/functions/comments/addComment`;
         const addComment = async () => {
             try {
                 const resp = await axios.post(ac_url, { postId: postId, userId: currentUser.id, desc: desc }, {
