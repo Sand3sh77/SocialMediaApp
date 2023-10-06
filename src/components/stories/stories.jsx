@@ -23,7 +23,7 @@ const Stories = () => {
             const url = `${Api}api/functions/stories/stories`;
             const viewStory = async () => {
                 try {
-                    const resp = await axios.post(url, { id: currentUser.id }, {
+                    const resp = await axios.post(url, { currentUserId: currentUser.id, paramsId: 0 }, {
                         headers: {
                             "Content-Type": "multipart/form-data", "Accept": "application/json",
                         }

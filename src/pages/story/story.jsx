@@ -22,12 +22,13 @@ const Story = () => {
 
   // THIS IS TO MOVE THE TIMEBAR ON TOP OF THE STORIES
   const [timeoutId, setTimeoutId] = useState(null);
+  const [intervalId, setIntervalId] = useState(null);
   const [timeoutTime, setTimeoutTime] = useState(10000);
   const [startTimer, setStartTimer] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
 
   // useEffect(() => {
-  //   const intervalId = setInterval(() => {
+  //   const newintervalId = setInterval(() => {
   //     const currentTime = Date.now();
   //     const elapsedTime = currentTime - startTimer;
   //     setTimeElapsed(elapsedTime);
@@ -38,6 +39,7 @@ const Story = () => {
   //     }
 
   //   }, 1); // Update every 100 milliseconds
+  //   setIntervalId(newintervalId);
   // }, [startTimer]);
 
   const params = useParams();
@@ -53,7 +55,7 @@ const Story = () => {
       const url = `${Api}api/functions/stories/stories`;
       const viewStories = async () => {
         try {
-          const resp = await axios.post(url, { id: params.id }, {
+          const resp = await axios.post(url, { currentUserId: currentUser.id, paramsId: params.id }, {
             headers: {
               "Content-Type": "multipart/form-data", "Accept": "application/json",
             }
@@ -80,8 +82,8 @@ const Story = () => {
                     clearTimeout(timeoutId);
                   }
                   const newTimeoutId = setTimeout(() => {
+                    setStartTimer(Date.now());
                     Navigate(`/story/${resp.data.data[i + 1].id}`);
-                    // setStartTimer(Date.now());
                   }, timeoutTime);
                   setTimeoutId(newTimeoutId);
                 } else {
@@ -170,16 +172,24 @@ const Story = () => {
                 </div>
               </div>
             </Link>
+            <div className="bottom">
+              {stories.map((story) => (
+                currentUser.id === story.userId ?
+                  <AllStories story={story} key={story.id} />
+                  : null
+              ))}
+            </div>
           </div>
           <hr />
 
           {/* ALL STORIES NAVIGATION */}
           <div className="bottom">
-            {stories.map((story) => {
-              return (
+            <h4>All Stories</h4>
+            {stories.map((story) => (
+              currentUser.id !== story.userId ?
                 <AllStories story={story} key={story.id} />
-              );
-            })}
+                : null
+            ))}
           </div>
         </div>
         <div className="storyView">

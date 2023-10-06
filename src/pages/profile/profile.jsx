@@ -17,10 +17,12 @@ import { AuthContext } from '../../context/authContext';
 import toast from 'react-hot-toast';
 import Api from '../../api/Api';
 import useFollow from '../../hooks/useFollow';
+import { useQueryClient } from 'react-query';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
     const { currentUser, userToken, setUserToken } = useContext(AuthContext);
+    const queryClient = useQueryClient();
 
     const [isUser, setIsUser] = useState('');
     const [isFollowed, setIsFollowed] = useState('');
@@ -30,30 +32,33 @@ const Profile = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        const userDetails = async () => {
-            try {
-                const resp = await axios.post(url, { id: params.id, currentUserId: currentUser.id }, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        "Accept": "application/json",
+        if (currentUser) {
+            const userDetails = async () => {
+                try {
+                    const resp = await axios.post(url, { id: params.id, currentUserId: currentUser.id }, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            "Accept": "application/json",
+                        }
+                    })
+                    if (resp.data.status === 200) {
+                        const userData = resp.data.data[0];
+                        queryClient.invalidateQueries('posts');
+                        setUserInfo(userData);
+                        if (currentUser.id === userData.id) {
+                            setIsUser(true);
+                        } else {
+                            setIsUser(false);
+                        }
+                        setIsFollowed(resp.data.data[0].isFollowed);
                     }
-                })
-                if (resp.data.status === 200) {
-                    const userData = resp.data.data[0];
-                    setUserInfo(userData);
-                    if (currentUser.id === userData.id) {
-                        setIsUser(true);
-                    } else {
-                        setIsUser(false);
-                    }
-                    setIsFollowed(resp.data.data[0].isFollowed);
+                }
+                catch (error) {
+                    console.error("Error:", error);
                 }
             }
-            catch (error) {
-                console.error("Error:", error);
-            }
+            userDetails();
         }
-        userDetails();
     }, [params])
 
 

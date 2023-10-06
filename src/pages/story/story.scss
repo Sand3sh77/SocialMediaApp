@@ -30,40 +30,42 @@
                 box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
                 background-color: themed('bgSoftT');
                 backdrop-filter: blur(5px);
-            }
+                z-index: 50;
 
-            .topContScroll {
-                background-color: themed('bgSoft');
-            }
-
-            .top {
-                height: 4rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: 1rem;
-                width: 90%;
-                margin: 0 0.8rem;
-
-                svg {
-                    height: 2.2rem;
-                    color: themed('textColor');
+                .topContScroll {
                     background-color: themed('bgSoft');
-                    border-radius: 50%;
-                    padding: 0.3rem;
+                }
 
-                    @include mobile {
-                        position: absolute;
-                        top: 0;
-                        right: 0;
+                .top {
+                    height: 4rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 1rem;
+                    width: 90%;
+                    margin: 0 0.8rem;
+
+                    svg {
+                        height: 2.2rem;
+                        color: themed('textColor');
+                        background-color: themed('bgSoft');
+                        border-radius: 50%;
+                        padding: 0.3rem;
+
+                        @include mobile {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                        }
+                    }
+
+                    span {
+                        color: themed("logo");
+                        font-weight: bolder;
+                        font-size: 1.2rem;
                     }
                 }
 
-                span {
-                    color: themed("logo");
-                    font-weight: bolder;
-                    font-size: 1.2rem;
-                }
             }
 
             hr {
@@ -132,7 +134,11 @@
             }
 
             .bottom {
-                position: relative;
+                h4 {
+                    margin: 1rem;
+                    color: themed('textColorSoft');
+                }
+
                 .active {
                     background-color: themed('bg');
                 }
@@ -151,6 +157,7 @@
                     border-radius: 7px;
                     width: 95%;
                     cursor: pointer;
+                    position: relative;
 
                     img,
                     svg {
@@ -179,7 +186,7 @@
 
                 .modal {
                     position: absolute;
-                    right: 1rem;
+                    right: 0.5rem;
 
                     svg {
                         width: 2rem;
@@ -258,7 +265,7 @@
                 border-radius: 100%;
 
                 @include mobile {
-                    display: none;
+                    // display: ;
 
                 }
 
@@ -272,6 +279,16 @@
                     background-color: themed('bgSoftT');
                     color: themed('textColor');
 
+                    @include mobile {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        height: 100vh;
+                        border-radius: 0;
+                        width: 25vw;
+                        z-index: 10;
+                        opacity: 0;
+                    }
                 }
             }
 
@@ -471,7 +488,7 @@
                     position: fixed;
                     object-fit: cover;
                     object-position: center;
-                    z-Index: -1;
+                    z-Index: -10;
                 }
 
             }
@@ -479,9 +496,6 @@
             .right {
                 border-radius: 100%;
 
-                @include mobile {
-                    display: none;
-                }
 
                 button {
                     width: 3rem;
@@ -493,6 +507,16 @@
                     background-color: themed('bgSoftT');
                     color: themed('textColor');
 
+                    @include mobile {
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        height: 100vh;
+                        border-radius: 0;
+                        width: 25vw;
+                        z-index: 10;
+                        opacity: 0;
+                    }
                 }
             }
         }

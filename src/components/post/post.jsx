@@ -25,7 +25,7 @@ const Post = ({ post }) => {
     const [modal, setModal] = useState(false);
     const { currentUser } = useContext(AuthContext);
     const queryClient = useQueryClient();
-
+    
     // LIKE API CALL
     const handleLike = () => {
         setLiked(!liked);

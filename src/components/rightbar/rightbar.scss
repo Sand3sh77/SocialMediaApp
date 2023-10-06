@@ -83,8 +83,8 @@
                         span {
                             font-weight: 500;
                             color: themed("textColor");
-                            ;
-                            width: 70%;
+                            text-wrap:wrap;
+                            width: 7rem;
                             font-size: 0.95rem;
                         }
 
