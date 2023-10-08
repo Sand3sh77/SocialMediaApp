@@ -3,9 +3,9 @@ import { useQuery } from "react-query";
 import Api from "../api/Api";
 
 export default function usePosts(
-  userId: number,
-  calledFrom: string,
-  paramsId: number
+  userId,
+  calledFrom,
+  paramsId
 ) {
   return useQuery(["posts", userId, calledFrom], () => {
     return axios.post(

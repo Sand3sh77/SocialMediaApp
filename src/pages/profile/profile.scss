@@ -27,6 +27,44 @@
                 border-radius: 0 0 6px 6px;
             }
 
+            .coverEdit {
+                float: right;
+                position: relative;
+                bottom: 2.8rem;
+                right: 0.5rem;
+                cursor: pointer;
+                svg {
+                    height: 2.2rem;
+                    width: 2.2rem;
+                    border: 2px solid themed('textColor');
+                    border-radius: 50%;
+                    padding: 0.4rem;
+                    background-color: themed("bgSoftT");
+                }
+            }
+
+            .edit {
+                margin: auto;
+                height: 2rem;
+                width: 2rem;
+                position: relative;
+                left: 3.5rem;
+                top: 2rem;
+                z-index: 1000;
+                cursor: pointer;
+                backdrop-filter: blur(5px);
+                border-radius: 50%;
+
+                svg {
+                    height: 2.2rem;
+                    width: 2.2rem;
+                    border: 2px solid themed('textColor');
+                    border-radius: 50%;
+                    padding: 0.4rem;
+                    background-color: themed("bgSoftT");
+                }
+            }
+
             .profilePic {
                 position: absolute;
                 left: 0;
@@ -122,6 +160,111 @@
                         color: white;
                         cursor: pointer;
                         border-radius: 5px;
+                    }
+
+                    .buttons {
+                        display: flex;
+                        gap: 0.5rem;
+                    }
+                }
+
+                .modal {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: fixed;
+                    z-index: 1000;
+                    top: 0;
+                    right: 0;
+                    height: 100vh;
+                    width: 100vw;
+
+                    .blur {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        height: 100vh;
+                        width: 100vw;
+                        background-color: themed('bgSoftT');
+                        backdrop-filter: blur(10px);
+                        animation: modal 0.5s;
+                        cursor: pointer;
+
+                        @keyframes modal {
+                            0% {
+                                translate: 0 -100vh;
+                            }
+                        }
+                    }
+
+                    .items {
+                        -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+                        -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+                        box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+                        background-color: themed('bg');
+                        padding: 2rem;
+                        width: 40%;
+                        min-height: 40%;
+                        display: flex;
+                        flex-direction: column;
+                        // justify-content: center;
+                        border-radius: 10px;
+                        animation: items 0.5s;
+                        z-index: 1100;
+
+                        .cprofilePic {
+                            width: 100%;
+                            overflow: hidden;
+                            background-color: themed('textColor');
+                            margin: 1rem 0;
+                            height: 20rem;
+                            border-radius: 5px;
+                            color: themed('bg');
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            label {
+                                cursor: pointer;
+
+                            }
+
+                            img {
+                                width: 100%;
+                            }
+                        }
+
+                        .buttons {
+                            width: 30%;
+                            margin: auto;
+                            display: flex;
+                            justify-content: space-around;
+
+                            button {
+                                border: none;
+
+                                svg {
+                                    width: 1.4rem;
+                                    height: 1.4rem;
+                                    color: white;
+                                    background-color: none;
+                                }
+                            }
+
+                            button:first-child {
+                                background-color: red;
+                            }
+
+                            button:nth-child(2) {
+                                background-color: green;
+                            }
+                        }
+                    }
+
+                    @keyframes items {
+                        0% {
+                            translate: 0 200vh;
+                        }
                     }
                 }
 
