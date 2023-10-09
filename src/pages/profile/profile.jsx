@@ -222,7 +222,7 @@ const Profile = () => {
                             {userInfo.website &&
                                 <div className="item">
                                     <LanguageIcon />
-                                    <span><a target='blank' href={'https://' + userInfo.website} style={{textDecoration:'none'}}>{userInfo.website}</a></span>
+                                    <span><a target='blank' href={'https://' + userInfo.website} style={{ textDecoration: 'none', color: '#5271ff' }}>{userInfo.website}</a></span>
                                 </div>
                             }
                         </div>
