@@ -33,6 +33,7 @@
                 bottom: 2.8rem;
                 right: 0.5rem;
                 cursor: pointer;
+
                 svg {
                     height: 2.2rem;
                     width: 2.2rem;
@@ -137,7 +138,7 @@
 
                     .info {
                         display: flex;
-                        gap: 2rem;
+                        flex-wrap: wrap;
 
                         .item {
                             flex: 1;
@@ -211,11 +212,32 @@
                         border-radius: 10px;
                         animation: items 0.5s;
                         z-index: 1100;
+                        position: relative;
+
+                        @include small-tablet {
+                            width: 52%;
+                        }
+
+                        @include mobile {
+                            width: 95%;
+                        }
+
+                        .cross {
+                            width: 2rem;
+                            position: absolute;
+                            right: 1rem;
+                            top: 1rem;
+                            cursor: pointer;
+                        }
+
+                        .cross:hover {
+                            color: themed('textColorSoft');
+                        }
 
                         .cprofilePic {
                             width: 100%;
                             overflow: hidden;
-                            background-color: themed('textColor');
+                            background-color: themed('textColorSoft');
                             margin: 1rem 0;
                             height: 20rem;
                             border-radius: 5px;
@@ -257,6 +279,47 @@
 
                             button:nth-child(2) {
                                 background-color: green;
+                            }
+                        }
+
+                        form {
+                            display: flex;
+                            flex-direction: column;
+
+                            div {
+                                display: flex;
+                                flex-direction: column;
+                                margin: 0.4rem 0;
+
+                                input {
+                                    padding: 0.4rem;
+                                    border-radius: 0.3rem;
+                                    border: 1px solid themed('border');
+                                    background: transparent;
+                                    color: themed('textColor');
+                                }
+
+                                input:focus {
+                                    outline: 1.5px solid #5271ff;
+                                }
+                            }
+
+                            button {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background-color: #5271ff;
+                                height: 2.4rem;
+                                margin: 1rem 0;
+
+                                svg {
+                                    width: 2rem;
+                                    height: 2rem;
+                                }
+                            }
+
+                            button:hover {
+                                color: themed('bg')
                             }
                         }
                     }

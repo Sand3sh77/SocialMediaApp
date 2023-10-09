@@ -419,7 +419,7 @@
 
                             label {
                                 height: 50%;
-                                width: 50%;
+                                width: 60%;
                                 background-color: themed('bgSoftT');
                                 display: flex;
                                 justify-content: center;
@@ -429,6 +429,14 @@
                                 border-radius: 0.5rem;
                                 cursor: pointer;
                                 transition: all 0.2s ease-in-out;
+
+                                @include small-tablet{
+                                    width: 70%;
+                                }
+                                @include mobile{
+                                    width: 80%;
+                                    height: 40%;
+                                }
 
                                 .createStory {
                                     display: flex;

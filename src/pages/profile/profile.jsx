@@ -10,19 +10,17 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from '../../components/posts/posts';
 import { useContext, useEffect, useState } from 'react';
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { CrossOutlineSvg, CrossSvg, EditSolid, ProfileSvg, TickSvg } from '../../assets/svg/svg';
 import { AuthContext } from '../../context/authContext';
 import toast from 'react-hot-toast';
 import Api from '../../api/Api';
 import useFollow from '../../hooks/useFollow';
-import { useQueryClient } from 'react-query';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
     const { currentUser, setCurrentUser, userToken, setUserToken } = useContext(AuthContext);
-    const queryClient = useQueryClient();
     const [modal, setModal] = useState({ edit: false, profile: false, cover: false });
     const [file, setFile] = useState(null);
 
@@ -32,6 +30,20 @@ const Profile = () => {
     const params = useParams();
     const url = `${Api}api/functions/other/profile`;
 
+    const [formData, setFormData] = useState({
+        name: currentUser.name,
+        email: currentUser.email,
+        city: currentUser.city,
+        website: currentUser.website,
+        dob: currentUser.dateofBirth,
+    });
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setFormData({
+            ...formData,
+            [id]: value,
+        });
+    };
     useEffect(() => {
         window.scrollTo(0, 0);
         if (currentUser) {
@@ -45,7 +57,6 @@ const Profile = () => {
                     })
                     if (resp.data.status === 200) {
                         const userData = resp.data.data[0];
-                        queryClient.invalidateQueries('posts');
                         setUserInfo(userData);
                         if (currentUser.id === userData.id) {
                             setIsUser(true);
@@ -134,6 +145,30 @@ const Profile = () => {
         }
     }
 
+    // EDIT DETAILS API CALL
+    const handleEdit = async (e) => {
+        e.preventDefault();
+        const url = `${Api}api/functions/other/updateDetails`;
+        try {
+            const resp = await axios.post(url, { ...formData, id: currentUser.id }, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            })
+            if (resp.data.status === 200) {
+                toast.success(resp.data.message);
+                setModal({ edit: false, profile: false, cover: false });
+                setCurrentUser({ ...currentUser, ...formData });
+            }
+            else {
+                toast.error(resp.data.message);
+            }
+        }
+        catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
     return (
         <div className="profile">
             <div className="images">
@@ -142,7 +177,8 @@ const Profile = () => {
                     alt=""
                     className="cover"
                 />
-                <div className='coverEdit' onClick={() => setModal({ ...modal, cover: true })}><EditSolid /></div>
+
+                {isUser ? <div className='coverEdit' onClick={() => setModal({ ...modal, cover: true })}><EditSolid /></div> : ''}
                 {userInfo.profilePic ?
                     <img
                         src={Api + userInfo.profilePic}
@@ -153,7 +189,7 @@ const Profile = () => {
                         <ProfileSvg />
                     </div>
                 }
-                <div className='edit' onClick={() => setModal({ ...modal, profile: true })}><EditSolid /></div>
+                {isUser ? <div className='edit' onClick={() => setModal({ ...modal, profile: true })}><EditSolid /></div> : ''}
             </div>
             <div className="profileContainer">
                 <div className="uInfo">
@@ -186,7 +222,7 @@ const Profile = () => {
                             {userInfo.website &&
                                 <div className="item">
                                     <LanguageIcon />
-                                    <span>{userInfo.website}</span>
+                                    <span><a target='blank' href={'https://' + userInfo.website} style={{textDecoration:'none'}}>{userInfo.website}</a></span>
                                 </div>
                             }
                         </div>
@@ -210,6 +246,7 @@ const Profile = () => {
 
                                 {modal.profile &&
                                     <div className='items'>
+                                        <div onClick={() => setModal({ edit: false, profile: false, cover: false })} ><CrossSvg /></div>
                                         <h1>Profile</h1>
                                         <label htmlFor='profile'>
                                             Add Profile Picture
@@ -244,6 +281,7 @@ const Profile = () => {
                                 }
                                 {modal.cover &&
                                     <div className='items'>
+                                        <div onClick={() => setModal({ edit: false, profile: false, cover: false })} ><CrossSvg /></div>
                                         <h1>Cover</h1>
                                         <label htmlFor='cover'>
                                             Add Cover Picture
@@ -278,8 +316,57 @@ const Profile = () => {
                                 }
                                 {modal.edit &&
                                     <div className='items'>
+                                        <div onClick={() => setModal({ edit: false, profile: false, cover: false })} ><CrossSvg /></div>
                                         <h1>Edit</h1>
-                                        Edit
+                                        Edit your details
+                                        <form onSubmit={handleEdit}>
+                                            <div>
+                                                <label htmlFor='name'>Name</label>
+                                                <input
+                                                    type='text'
+                                                    id="name"
+                                                    placeholder='Enter your name'
+                                                    value={formData.name}
+                                                    onChange={handleChange} />
+                                            </div>
+                                            <div>
+                                                <label htmlFor='email'>Email</label>
+                                                <input
+                                                    type='email'
+                                                    id="email"
+                                                    placeholder='Enter your email'
+                                                    value={formData.email}
+                                                    onChange={handleChange} />
+                                            </div>
+                                            <div>
+                                                <label htmlFor='city'>City</label>
+                                                <input
+                                                    type='text'
+                                                    id="city"
+                                                    placeholder='Enter your city'
+                                                    value={formData.city}
+                                                    onChange={handleChange} />
+                                            </div>
+                                            <div>
+                                                <label htmlFor='website'>Website</label>
+                                                <input
+                                                    type='text'
+                                                    id="website"
+                                                    placeholder='Enter your website'
+                                                    value={formData.website}
+                                                    onChange={handleChange} />
+                                            </div>
+                                            <div>
+                                                <label htmlFor='dob'>Date of Birth</label>
+                                                <input
+                                                    type='date'
+                                                    id="dob"
+                                                    placeholder='Enter your DOB'
+                                                    value={formData.dob}
+                                                    onChange={handleChange} />
+                                            </div>
+                                            <button type='submit'><TickSvg />Update</button>
+                                        </form>
                                     </div>
                                 }
 

@@ -7,7 +7,7 @@ export default function usePosts(
   calledFrom,
   paramsId
 ) {
-  return useQuery(["posts", userId, calledFrom], () => {
+  return useQuery(["posts", userId, calledFrom,paramsId], () => {
     return axios.post(
       `${Api}api/functions/posts/posts`,
       {
