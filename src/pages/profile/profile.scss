@@ -337,6 +337,20 @@
                     align-items: center;
                     justify-content: flex-end;
                     gap: 0.2rem;
+                    position: relative;
+                    .cPassModal{
+                        position: absolute;
+                        right: 0;
+                        top: 2rem;
+                        button{
+                            padding: 0.5rem 1rem;
+                            border: 1px solid themed('border');
+                            background-color: rgb(225, 228, 77);
+                            border-radius: 5px;
+                            color: black;
+                            cursor: pointer;
+                        }
+                    }
                 }
             }
         }

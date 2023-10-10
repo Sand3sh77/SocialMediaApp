@@ -21,7 +21,7 @@ import useFollow from '../../hooks/useFollow';
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
     const { currentUser, setCurrentUser, userToken, setUserToken } = useContext(AuthContext);
-    const [modal, setModal] = useState({ edit: false, profile: false, cover: false });
+    const [modal, setModal] = useState({ edit: false, profile: false, cover: false, password: false, sPassword: false });
     const [file, setFile] = useState(null);
 
     const [isUser, setIsUser] = useState('');
@@ -36,6 +36,9 @@ const Profile = () => {
         city: currentUser.city,
         website: currentUser.website,
         dob: currentUser.dateofBirth,
+        cuPassword: '',
+        nPassword: '',
+        coPassword: '',
     });
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -157,7 +160,31 @@ const Profile = () => {
             })
             if (resp.data.status === 200) {
                 toast.success(resp.data.message);
-                setModal({ edit: false, profile: false, cover: false });
+                setModal({ edit: false, profile: false, cover: false, password: false });
+                setCurrentUser({ ...currentUser, ...formData });
+            }
+            else {
+                toast.error(resp.data.message);
+            }
+        }
+        catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+    // CHANGE PASSWORD API CALL
+    const handlePassword = async (e) => {
+        e.preventDefault();
+        const url = `${Api}api/authentication/updatePassword`;
+        try {
+            const resp = await axios.post(url, { nPassword: formData.nPassword, cuPassword: formData.cuPassword, coPassword: formData.coPassword, id: currentUser.id }, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            })
+            if (resp.data.status === 200) {
+                toast.success(resp.data.message);
+                setModal({ edit: false, profile: false, cover: false, password: false });
                 setCurrentUser({ ...currentUser, ...formData });
             }
             else {
@@ -240,13 +267,13 @@ const Profile = () => {
                                 <button style={{ backgroundColor: '#fd253a' }} onClick={handleLogout}>Log Out</button>
                             </div>
                         }
-                        {modal.cover || modal.edit || modal.profile ?
+                        {modal.cover || modal.edit || modal.profile || modal.password ?
                             <div className='modal'>
-                                <div className='blur' onClick={() => setModal({ edit: false, profile: false, cover: false })}></div>
+                                <div className='blur' onClick={() => setModal({ edit: false, profile: false, cover: false, password: false })}></div>
 
                                 {modal.profile &&
                                     <div className='items'>
-                                        <div onClick={() => setModal({ edit: false, profile: false, cover: false })} ><CrossSvg /></div>
+                                        <div onClick={() => setModal({ edit: false, profile: false, cover: false, password: false })} ><CrossSvg /></div>
                                         <h1>Profile</h1>
                                         <label htmlFor='profile'>
                                             Add Profile Picture
@@ -281,7 +308,7 @@ const Profile = () => {
                                 }
                                 {modal.cover &&
                                     <div className='items'>
-                                        <div onClick={() => setModal({ edit: false, profile: false, cover: false })} ><CrossSvg /></div>
+                                        <div onClick={() => setModal({ edit: false, profile: false, cover: false, password: false })} ><CrossSvg /></div>
                                         <h1>Cover</h1>
                                         <label htmlFor='cover'>
                                             Add Cover Picture
@@ -316,7 +343,7 @@ const Profile = () => {
                                 }
                                 {modal.edit &&
                                     <div className='items'>
-                                        <div onClick={() => setModal({ edit: false, profile: false, cover: false })} ><CrossSvg /></div>
+                                        <div onClick={() => setModal({ edit: false, profile: false, cover: false, password: false })} ><CrossSvg /></div>
                                         <h1>Edit</h1>
                                         Edit your details
                                         <form onSubmit={handleEdit}>
@@ -369,6 +396,43 @@ const Profile = () => {
                                         </form>
                                     </div>
                                 }
+                                {modal.password &&
+                                    <div className='items'>
+                                        <div onClick={() => setModal({ edit: false, profile: false, cover: false, password: false })} ><CrossSvg /></div>
+                                        <h1>Password</h1>
+                                        Change your password
+                                        <form onSubmit={handlePassword}>
+                                            <div>
+                                                <label htmlFor='cuPassword'>Current Password</label>
+                                                <input
+                                                    type='password'
+                                                    id="cuPassword"
+                                                    placeholder='Enter current password'
+                                                    value={formData.cuPassword}
+                                                    onChange={handleChange} />
+                                            </div>
+                                            <div>
+                                                <label htmlFor='nPassword'>New Password</label>
+                                                <input
+                                                    type='password'
+                                                    id="nPassword"
+                                                    placeholder='Enter new password'
+                                                    value={formData.nPassword}
+                                                    onChange={handleChange} />
+                                            </div>
+                                            <div>
+                                                <label htmlFor='coPassword'>Confirm Password</label>
+                                                <input
+                                                    type='password'
+                                                    id="coPassword"
+                                                    placeholder='Confirm new password'
+                                                    value={formData.coPassword}
+                                                    onChange={handleChange} />
+                                            </div>
+                                            <button type='submit'><TickSvg />Update</button>
+                                        </form>
+                                    </div>
+                                }
 
                             </div>
                             : ''
@@ -376,7 +440,14 @@ const Profile = () => {
                     </div>
                     <div className="right">
                         <EmailOutlinedIcon />
-                        <MoreVertIcon />
+                        <div onClick={() => setModal({ ...modal, sPassword: !modal.sPassword })} style={{ cursor: 'pointer' }}>
+                            <MoreVertIcon />
+                        </div>
+                        {modal.sPassword &&
+                            <div className='cPassModal'>
+                                <button onClick={() => setModal({ ...modal, password: true })}>Change Password</button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
