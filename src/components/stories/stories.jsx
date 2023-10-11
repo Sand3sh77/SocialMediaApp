@@ -61,24 +61,34 @@ const Stories = () => {
                         <div>+</div>
                     </Link>
                 </div>
-                {stories.map((story) => {
-                    return (
-                        <div className="story" key={story.id}>
-                            <Link to={`/story/${story.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                <img
-                                    src={Api + story.img}
-                                />
+                {stories[0] != null ?
+                    <>
+                        {
+                            stories.map((story) => {
+                                return (
+                                    <div className="story" key={story.id}>
+                                        <Link to={`/story/${story.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                            <img
+                                                src={Api + story.img}
+                                            />
 
-                                <span>
-                                    <section className='date'>
-                                        {moment.utc(story.createdAt).local().fromNow()}
-                                    </section>
-                                    {story.name}
-                                </span>
-                            </Link>
-                        </div>
-                    );
-                })}
+                                            <span>
+                                                <section className='date'>
+                                                    {moment.utc(story.createdAt).local().fromNow()}
+                                                </section>
+                                                {story.name}
+                                            </span>
+                                        </Link>
+                                    </div>
+                                );
+                            })
+                        }
+                    </>
+                    :
+                    <div className='noUsersFollowed'>
+                        No users followed.
+                    </div>
+                }
             </div>
         </div>
     )

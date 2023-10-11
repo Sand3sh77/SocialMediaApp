@@ -92,40 +92,47 @@ const Rightbar = () => {
 
         <div className="item">
           <span>Latest Activities</span>
-
-          {notifications.map((noti) => {
-            return (
-              <Link to={`/profile/${noti.userId}`} style={{ textDecoration: 'none', color: 'inherit' }} key={noti.id}>
-                <div className="user">
-                  <div className="userInfo">
-                    {noti.profilePic ?
-                      <img
-                        src={Api + noti.profilePic}
-                        alt=""
-                        className="profilePic"
-                      />
-                      :
-                      <ProfileSvg />
-                    }
-                    <p>
-                      <span>{noti.name}</span> {noti.notification}
-                    </p>
-                  </div>
-                  <span>
-                    {moment.utc(noti.createdAt).local().fromNow()
-                      .replace('a few seconds', 'a sec')
-                      .replace('a minute', '1 min')
-                      .replace(/minutes?/, 'min')
-                      .replace(/hours?/, 'h')
-                      .replace(/days?/, 'd')
-                      .replace(/months?/, 'mo')
-                      .replace(/years?/, 'y')}
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-
+          {notifications[0] != null ?
+            <>
+              {
+                notifications.map((noti) => {
+                  return (
+                    <Link to={`/profile/${noti.userId}`} style={{ textDecoration: 'none', color: 'inherit' }} key={noti.id}>
+                      <div className="user">
+                        <div className="userInfo">
+                          {noti.profilePic ?
+                            <img
+                              src={Api + noti.profilePic}
+                              alt=""
+                              className="profilePic"
+                            />
+                            :
+                            <ProfileSvg />
+                          }
+                          <p>
+                            <span>{noti.name}</span> {noti.notification}
+                          </p>
+                        </div>
+                        <span>
+                          {moment.utc(noti.createdAt).local().fromNow()
+                            .replace('a few seconds', 'a sec')
+                            .replace('a minute', '1 min')
+                            .replace(/minutes?/, 'min')
+                            .replace(/hours?/, 'h')
+                            .replace(/days?/, 'd')
+                            .replace(/months?/, 'mo')
+                            .replace(/years?/, 'y')}
+                        </span>
+                      </div>
+                    </Link>
+                  );
+                })
+              }
+            </> :
+            <div className="noUsersFollowed">
+              No users followed
+            </div>
+          }
         </div>
 
         <div className="item">
@@ -145,53 +152,73 @@ const Rightbar = () => {
             }
           </div>
           {friends ?
-            <div>
-              {allFriends.map((friend) => {
-                return (
-                  <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
-                    <div className="user">
-                      <div className="userInfo">
-                        {friend.profilePic ?
-                          <img
-                            src={Api + friend.profilePic}
-                            alt=""
-                            className="profilePic"
-                          />
-                          :
-                          <ProfileSvg />
-                        }
-                        {/* <div className="online" /> */}
-                        <span>{friend.name}</span>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+            <>
+              {allFriends[0] != null ?
+                <>
+                  {
+                    allFriends.map((friend) => {
+                      return (
+                        <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
+                          <div className="user">
+                            <div className="userInfo">
+                              {friend.profilePic ?
+                                <img
+                                  src={Api + friend.profilePic}
+                                  alt=""
+                                  className="profilePic"
+                                />
+                                :
+                                <ProfileSvg />
+                              }
+                              {/* <div className="online" /> */}
+                              <span style={{ textWrap: 'nowrap' }}>{friend.name}</span>
+                            </div>
+                          </div>
+                        </Link>
+                      );
+                    })
+                  }
+                </>
+                :
+                <div className="noUsersFollowed">
+                  No users followed
+                </div>
+              }
+            </>
             :
-            <div>
-              {allFriends.map((friend) => {
-                return (
-                  <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
-                    <div className="user">
-                      <div className="userInfo">
-                        {friend.profilePic ?
-                          <img
-                            src={Api + friend.profilePic}
-                            alt=""
-                            className="profilePic"
-                          />
-                          :
-                          <ProfileSvg />
-                        }
-                        <div className="online" />
-                        <span>{friend.name}</span>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+            <>
+              {allFriends[0] != null ?
+                <>
+                  {
+                    allFriends.map((friend) => {
+                      return (
+                        <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
+                          <div className="user">
+                            <div className="userInfo">
+                              {friend.profilePic ?
+                                <img
+                                  src={Api + friend.profilePic}
+                                  alt=""
+                                  className="profilePic"
+                                />
+                                :
+                                <ProfileSvg />
+                              }
+                              <div className="online" />
+                              <span style={{ textWrap: 'nowrap' }}>{friend.name}</span>
+                            </div>
+                          </div>
+                        </Link>
+                      );
+                    })
+                  }
+                </>
+                :
+                <div className="noUsersFollowed">
+                  No users followed
+                </div>
+              }
+            </>
           }
         </div>
       </div>

@@ -14,11 +14,20 @@ const Posts = ({ calledFrom, paramsId }) => {
             return <p>Loading ...</p>
         }
         if (data.data.data.length === 0) {
-            return (
-                <div className='noPosts'>
-                    No posts by user.
-                </div>
-            );
+            if (calledFrom === "profile") {
+                return (
+                    <div className='noPosts'>
+                        No posts by user
+                    </div>
+                );
+            }
+            else {
+                return (
+                    <div className='noPosts'>
+                        No users followed
+                    </div>
+                );
+            }
         }
 
         return (

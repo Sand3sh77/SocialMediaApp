@@ -7,6 +7,7 @@
         min-height: 100vh;
         color: themed('textColor');
         padding-right: 1rem;
+        padding-bottom: 1rem;
 
         @include small-tablet {
             padding-right: 0;

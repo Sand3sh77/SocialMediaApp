@@ -85,7 +85,7 @@
                         span {
                             font-weight: 500;
                             color: themed("textColor");
-                            // text-wrap: wrap;
+                            text-wrap: wrap;
                             width: 7rem;
                             font-size: 0.95rem;
                         }
@@ -127,7 +127,11 @@
                 .user:hover {
                     background-color: themed('bgSoftT');
                 }
-
+                .noUsersFollowed{
+                    text-align: center;
+                    color: themed('textColorSoft');
+                    margin: 5rem 0;
+                }
                 .friends {
                     display: flex;
                     justify-content: space-around;
