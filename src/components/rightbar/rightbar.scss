@@ -43,13 +43,15 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    margin: 0.8rem 0;
+                    padding: 0.6rem 0.3rem;
+                    border-radius: 5px;
 
                     @include tablet {
                         flex-wrap: wrap;
                     }
 
                     span {
+                        font-size: 0.8rem;
                         white-space: nowrap;
                     }
 
@@ -83,7 +85,7 @@
                         span {
                             font-weight: 500;
                             color: themed("textColor");
-                            text-wrap:wrap;
+                            // text-wrap: wrap;
                             width: 7rem;
                             font-size: 0.95rem;
                         }
@@ -119,6 +121,34 @@
                                 background-color: #f0544f;
                             }
                         }
+                    }
+                }
+
+                .user:hover {
+                    background-color: themed('bgSoftT');
+                }
+
+                .friends {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    width: 100%;
+                    margin-bottom: 0.5rem;
+
+                    .active {
+                        font-weight: bold;
+                        text-decoration: underline;
+                        color: themed('textColorSoft');
+                    }
+
+                    .border {
+                        height: 1.5rem;
+                        width: 2px;
+                        background-color: themed('border');
+                    }
+
+                    span {
+                        cursor: pointer;
                     }
                 }
             }

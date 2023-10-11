@@ -114,14 +114,16 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const url = `${Api}api/functions/other/uploadImage`;
-        let currentImg = "null";
-        if (e.target[2].id === "profile") {
-            currentImg = currentUser.profilePic;
-        } else if (e.target[2].id === "cover") {
-            currentImg = currentUser.coverPic;
-        }
+
 
         try {
+            let currentImg = null;
+            if (e.target[2].id === "profile") {
+                currentImg = currentUser.profilePic;
+            } else if (e.target[2].id === "cover") {
+                currentImg = currentUser.coverPic;
+            }
+            console.log(currentImg);
             const resp = await axios.post(url, { id: currentUser.id, file: file, location: e.target[2].id, currentImage: currentImg }, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
