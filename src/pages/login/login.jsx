@@ -91,13 +91,13 @@ const Login = () => {
                         </div>
                     </form>
                     <div className='externals'>
-                        <GoogleLogin
+                        {/* <GoogleLogin
                             clientId={clientId}
                             buttonText="Login with Google"
                             onSuccess={responseGoogleSuccess}
                             onFailure={responseGoogleFailure}
                             cookiePolicy={'single_host_origin'}
-                        />
+                        /> */}
                     </div>
                 </div>
             </div>
