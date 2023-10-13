@@ -5,10 +5,12 @@ import { AuthContext } from '../../context/authContext'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Api from '../../api/Api'
-// import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
     const Navigate = useNavigate();
+    const [response, setResponse] = useState([]);
     const { setUserToken } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         username: "",
@@ -24,15 +26,26 @@ const Login = () => {
 
     // LOGIN API CALL
     const url = `${Api}api/authentication/login`;
-    const clientId = '679091620787-lhnoo22beg9a3it84q1hnbqu1md2lo2c.apps.googleusercontent.com';
-    const Secret = "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";
 
-    const responseGoogleSuccess = (response) => {
-        console.log('Google login success:', response);
-    }
-
-    const responseGoogleFailure = (error) => {
-        console.error('Google login failed:', error);
+    // WITH GOOGLE
+    const onSuccess = async () => {
+        const s_url = `${Api}api/authentication/signup`;
+        try {
+            const response = await axios.post(s_url, { username: response.given_name, email: response.email, name: response.name }, {
+                headers: {
+                    "Content-Type": "multipart/form-data", "Accept": "application/json",
+                }
+            })
+            if (response.data.status === 200) {
+                navigate('/login');
+                toast.success(response.data.message);
+            }
+            else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -91,13 +104,19 @@ const Login = () => {
                         </div>
                     </form>
                     <div className='externals'>
-                        {/* <GoogleLogin
-                            clientId={clientId}
-                            buttonText="Login with Google"
-                            onSuccess={responseGoogleSuccess}
-                            onFailure={responseGoogleFailure}
+                        <GoogleLogin
+                            onSuccess={credentialResponse => {
+                                var token = credentialResponse.credential;
+                                var decoded = jwt_decode(token);
+                                setResponse(decoded);
+                                onSuccess();
+                            }}
+                            onError={() => {
+                                console.log('Login Failed');
+                            }}
+                            useOneTap
                             cookiePolicy={'single_host_origin'}
-                        /> */}
+                        />
                     </div>
                 </div>
             </div>

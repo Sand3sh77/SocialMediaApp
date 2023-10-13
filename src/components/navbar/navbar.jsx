@@ -35,15 +35,16 @@ const Navbar = () => {
     }
 
 
-    const url = `${Api}api/functions/other/search`;
     // SEARCH API CALL
     const searchApi = async (search) => {
+        const url = `${Api}api/functions/other/search`;
         try {
             const resp = await axios.post(url, { search: search, id: currentUser.id }, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Access-Control-Allow-Origin': '*',
                 }
-            });
+            })
             if (resp.data.status === 200) {
                 setResult(resp.data.data);
                 // toast.success(resp.data.message);
