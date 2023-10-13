@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/authContext'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Api from '../../api/Api'
-import { GoogleLogin } from 'react-google-login';
+// import { GoogleLogin } from 'react-google-login';
 
 const Login = () => {
     const Navigate = useNavigate();
