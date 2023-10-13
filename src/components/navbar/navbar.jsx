@@ -8,33 +8,111 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { DarkModeContext } from '../../context/darkmodeContext';
 import { AuthContext } from '../../context/authContext';
 import { ProfileSvg } from '../../assets/svg/svg';
 import { QueryClient, useQueryClient } from 'react-query';
 import Api from '../../api/Api';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 
 const Navbar = () => {
+    const [search, setSearch] = useState('');
+    const [result, setResult] = useState([]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        searchApi(search);
+    }
+    const handleChange = (search) => {
+        if (search !== "") {
+            searchApi(search);
+        } else if (search == '') {
+            setResult([]);
+        }
+    }
+
+
+    const url = `${Api}api/functions/other/search`;
+    // SEARCH API CALL
+    const searchApi = async (search) => {
+        try {
+            const resp = await axios.post(url, { search: search, id: currentUser.id }, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            });
+            if (resp.data.status === 200) {
+                setResult(resp.data.data);
+                // toast.success(resp.data.message);
+            }
+            else if (resp.data.status === 501) {
+                toast.error(resp.data.message);
+            } else {
+                setResult([]);
+            }
+        }
+        catch (error) {
+            console.error("Error:", error);
+        }
+    }
 
     const { Toggle, darkMode } = useContext(DarkModeContext);
     const { currentUser } = useContext(AuthContext);
     const QueryClient = useQueryClient();
     return (
         <div className="navbar">
+            {result[0] != null ? <div className='invisible' onClick={() => setResult([])}></div> : ''}
             <div className="left">
                 <Link to='/' style={{ textDecoration: 'none' }}>
-                    <span>SafeBook</span>
+                    <span className='logo'>SafeBook</span>
                 </Link>
                 <HomeOutlinedIcon className='icon' />
-                {!darkMode ? <DarkModeOutlinedIcon className='icon' onClick={Toggle} /> :
-                    < WbSunnyOutlinedIcon className='icon' onClick={Toggle} />}
+                {!darkMode ? <DarkModeOutlinedIcon className='icon darkMode' onClick={Toggle} /> :
+                    < WbSunnyOutlinedIcon className='icon darkMode' onClick={Toggle} />}
                 <GridViewOutlinedIcon className='icon' />
-                <div className="search">
-                    <SearchOutlinedIcon className='icon' />
-                    <input type='text' placeholder='Search...' />
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="search" type="submit">
+                        <SearchOutlinedIcon className='icon' />
+                        <input
+                            type='text'
+                            id='search'
+                            name='search'
+                            placeholder='Search...'
+                            value={search.value}
+                            onChange={(e) => { handleChange(e.target.value); setSearch(e.target.value) }}
+                        />
+                        {result[0] != null ?
+                            <div className='result'>
+                                {result.map((res) => {
+                                    return (
+                                        <Link to={`/profile/${res.id}`} style={{ textDecoration: 'none', color: 'inherit' }}
+                                            key={res.id}
+                                            onClick={() => setResult([])} >
+                                            <div className="item">
+                                                {res.profilePic ?
+                                                    <img
+                                                        src={Api + res.profilePic}
+                                                        alt=""
+                                                        className=""
+                                                    />
+                                                    :
+                                                    <div className='profilesvg'><ProfileSvg /></div>
+                                                }
+                                                <div>
+                                                    <span>{res.name}</span><br />
+                                                    <span>{res.email}</span>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                            : ''}
+                    </div>
+                </form>
             </div>
             <div className="right">
                 <PersonOutlinedIcon className='icon' />

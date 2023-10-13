@@ -20,18 +20,43 @@
             gap: 1rem;
 
             @include mobile {
-                width: 100%;
                 justify-content: flex-start;
             }
 
             .icon {
                 cursor: pointer;
+
+                @include mobile {
+                    display: none;
+                }
             }
 
-            span {
+            .darkMode {
+                @include mobile {
+                    display: block;
+                    position: fixed;
+                    top: 4.8rem;
+                    left: 0.2rem;
+                    background-color: themed('bgSoft');
+                    padding: 0.5rem;
+                    border-radius: 50%;
+                    width: 2.4rem;
+                    height: 2.4rem;
+                    border: 1px solid themed('border');
+                    -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                }
+            }
+
+            .logo {
                 font-weight: bolder;
                 font-size: 1.2rem;
                 color: themed('logo');
+
+                @include mobile {
+                    font-size: 1rem;
+                }
             }
 
             .search {
@@ -41,10 +66,11 @@
                 border: 1px solid themed("border");
                 border-radius: 5px;
                 padding: 5px;
+                position: relative;
 
                 @include mobile {
-                    position: absolute;
-                    right: 15px;
+                    position: static;
+                    width: 100%;
                 }
 
                 input {
@@ -63,12 +89,85 @@
                     }
 
                     @include mobile {
-                        display: none;
+                        width: 50%;
                     }
                 }
 
                 input:focus {
                     outline: none;
+                }
+
+                .result {
+                    -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                    width: 100%;
+                    background-color: themed('bgSoft');
+                    border: 1px solid themed('border');
+                    border-radius: 0.3rem;
+                    position: absolute;
+                    top: 3rem;
+                    overflow: hidden;
+
+                    @include tablet {
+                        width: 22rem;
+                    }
+
+                    @include small-tablet {
+                        width: 16rem;
+                    }
+
+                    @include mobile {
+                        width: 70vw;
+                        left: 3.6rem;
+                        top: 4rem
+                    }
+
+                    .item {
+                        display: flex;
+                        gap: 0.5rem;
+                        align-items: center;
+                        cursor: pointer;
+                        padding: 0.5rem 1rem;
+
+                        @include mobile {
+                            overflow: hidden;
+                            padding: 0.4rem;
+                        }
+
+                        .profilesvg {
+                            display: block;
+                        }
+
+                        img,
+                        svg {
+                            width: 2.2rem;
+                            height: 2.2rem;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+
+                        svg {
+                            padding: 2px;
+                            border: 1px solid themed('textColor');
+                        }
+
+                        div {
+                            span {
+                                color: themed('textColorSoft');
+                                font-size: 0.8rem;
+                            }
+
+                            span:first-child {
+                                color: themed('textColor');
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+
+                    .item:hover {
+                        background-color: themed('bg');
+                    }
                 }
 
             }
@@ -82,12 +181,13 @@
             justify-content: center;
             gap: 1rem;
 
-            @include mobile {
-                display: none;
-            }
 
             .icon {
                 cursor: pointer;
+
+                @include mobile {
+                    display: none;
+                }
             }
 
             .user {
@@ -96,6 +196,7 @@
                 justify-content: center;
                 gap: 0.5rem;
                 font-weight: 500;
+
 
                 img,
                 svg {
@@ -110,8 +211,21 @@
                     border: 1px solid themed('textColor');
                 }
 
-                span {}
+                span {
+                    @include mobile {
+                        display: none;
+                    }
+                }
             }
         }
+
+        .invisible {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 100vw;
+        }
     }
+
 }

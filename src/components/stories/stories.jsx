@@ -86,7 +86,7 @@ const Stories = () => {
                     </>
                     :
                     <div className='noUsersFollowed'>
-                        No users followed.
+                        Stories not available
                     </div>
                 }
             </div>

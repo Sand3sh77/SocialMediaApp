@@ -130,7 +130,7 @@ const Rightbar = () => {
               }
             </> :
             <div className="noUsersFollowed">
-              No users followed
+              No recent activities
             </div>
           }
         </div>
