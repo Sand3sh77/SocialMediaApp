@@ -93,14 +93,27 @@ const Navbar = () => {
                                             key={res.id}
                                             onClick={() => setResult([])} >
                                             <div className="item">
-                                                {res.profilePic ?
-                                                    <img
-                                                        src={Api + res.profilePic}
-                                                        alt=""
-                                                        className=""
-                                                    />
+                                                {res.method === 'normal' ?
+                                                    <>
+                                                        {
+                                                            res.profilePic ?
+                                                                <img
+                                                                    src={Api + res.profilePic}
+                                                                    alt=""
+                                                                    className=""
+                                                                />
+                                                                :
+                                                                <ProfileSvg />
+                                                        }
+                                                    </>
                                                     :
-                                                    <div className='profilesvg'><ProfileSvg /></div>
+                                                    <>
+                                                        <img
+                                                            src={res.profilePic}
+                                                            alt=""
+                                                            className=""
+                                                        />
+                                                    </>
                                                 }
                                                 <div>
                                                     <span>{res.name}</span><br />
@@ -124,14 +137,27 @@ const Navbar = () => {
                 }}>
                     <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }} >
                         <div className="user">
-                            {currentUser.profilePic ?
-                                <img
-                                    src={Api + currentUser.profilePic}
-                                    alt=""
-                                    className=""
-                                />
+                            {currentUser.method === 'normal' ?
+                                <>
+                                    {
+                                        currentUser.profilePic ?
+                                            <img
+                                                src={Api + currentUser.profilePic}
+                                                alt=""
+                                                className=""
+                                            />
+                                            :
+                                            <ProfileSvg />
+                                    }
+                                </>
                                 :
-                                <ProfileSvg />
+                                <>
+                                    <img
+                                        src={currentUser.profilePic}
+                                        alt=""
+                                        className=""
+                                    />
+                                </>
                             }
                             <span>{currentUser.name}</span>
                         </div>

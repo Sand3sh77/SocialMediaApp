@@ -49,13 +49,27 @@ const Share = () => {
         <div className='share'>
             <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
                 <div className='top'>
-                    {currentUser.profilePic ?
-                        <img
-                            src={Api + currentUser.profilePic}
-                            alt=""
-                            className=""
-                        />
-                        : <ProfileSvg />
+                    {currentUser.method === 'normal' ?
+                        <>
+                            {
+                                currentUser.profilePic ?
+                                    <img
+                                        src={Api + currentUser.profilePic}
+                                        alt=""
+                                        className=""
+                                    />
+                                    :
+                                    <ProfileSvg />
+                            }
+                        </>
+                        :
+                        <>
+                            <img
+                                src={currentUser.profilePic}
+                                alt=""
+                                className=""
+                            />
+                        </>
                     }
                     <textarea
                         rows="1"

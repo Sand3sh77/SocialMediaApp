@@ -210,13 +210,27 @@ const Story = () => {
               <>
                 {/* <div className="timeBar" style={{ translate: `${(timeElapsed / 10000) * 100}% 0` }}></div> */}
                 <div className="top" style={{ zIndex: '50' }}>
-                  {mainStory.profilePic ?
-                    <img
-                      src={Api + mainStory.profilePic}
-                      alt=""
-                      className=""
-                    />
-                    : <ProfileSvg />
+                  {mainStory.method === 'normal' ?
+                    <>
+                      {
+                        mainStory.profilePic ?
+                          <img
+                            src={Api + mainStory.profilePic}
+                            alt=""
+                            className=""
+                          />
+                          :
+                          <ProfileSvg />
+                      }
+                    </>
+                    :
+                    <>
+                      <img
+                        src={mainStory.profilePic}
+                        alt=""
+                        className=""
+                      />
+                    </>
                   }
                   <div>
                     <div>{mainStory.name}</div>
@@ -236,13 +250,27 @@ const Story = () => {
               // ADD STORY MAIN SECTION
               <>
                 <div className="top" style={{ zIndex: '50' }}>
-                  {currentUser.profilePic ?
-                    <img
-                      src={Api + currentUser.profilePic}
-                      alt=""
-                      className=""
-                    />
-                    : <ProfileSvg />
+                  {currentUser.method === 'normal' ?
+                    <>
+                      {
+                        currentUser.profilePic ?
+                          <img
+                            src={Api + currentUser.profilePic}
+                            alt=""
+                            className=""
+                          />
+                          :
+                          <ProfileSvg />
+                      }
+                    </>
+                    :
+                    <>
+                      <img
+                        src={currentUser.profilePic}
+                        alt=""
+                        className=""
+                      />
+                    </>
                   }
                   <div>
                     <div>{currentUser.name}</div>

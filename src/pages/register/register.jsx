@@ -29,7 +29,7 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(url, formData, {
+            const response = await axios.post(url,{ ...formData,method:normal}, {
                 headers: {
                     "Content-Type": "multipart/form-data", "Accept": "application/json",
                 }

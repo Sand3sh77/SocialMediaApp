@@ -100,14 +100,27 @@ const Rightbar = () => {
                     <Link to={`/profile/${noti.userId}`} style={{ textDecoration: 'none', color: 'inherit' }} key={noti.id}>
                       <div className="user">
                         <div className="userInfo">
-                          {noti.profilePic ?
-                            <img
-                              src={Api + noti.profilePic}
-                              alt=""
-                              className="profilePic"
-                            />
+                          {noti.method === 'normal' ?
+                            <>
+                              {
+                                noti.profilePic ?
+                                  <img
+                                    src={Api + noti.profilePic}
+                                    alt=""
+                                    className=""
+                                  />
+                                  :
+                                  <ProfileSvg />
+                              }
+                            </>
                             :
-                            <ProfileSvg />
+                            <>
+                              <img
+                                src={noti.profilePic}
+                                alt=""
+                                className=""
+                              />
+                            </>
                           }
                           <p>
                             <span>{noti.name}</span> {noti.notification}
@@ -161,14 +174,27 @@ const Rightbar = () => {
                         <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
                           <div className="user">
                             <div className="userInfo">
-                              {friend.profilePic ?
-                                <img
-                                  src={Api + friend.profilePic}
-                                  alt=""
-                                  className="profilePic"
-                                />
+                              {friend.method === 'normal' ?
+                                <>
+                                  {
+                                    friend.profilePic ?
+                                      <img
+                                        src={Api + friend.profilePic}
+                                        alt=""
+                                        className=""
+                                      />
+                                      :
+                                      <ProfileSvg />
+                                  }
+                                </>
                                 :
-                                <ProfileSvg />
+                                <>
+                                  <img
+                                    src={friend.profilePic}
+                                    alt=""
+                                    className=""
+                                  />
+                                </>
                               }
                               {/* <div className="online" /> */}
                               <span style={{ textWrap: 'nowrap' }}>{friend.name}</span>
@@ -195,14 +221,27 @@ const Rightbar = () => {
                         <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
                           <div className="user">
                             <div className="userInfo">
-                              {friend.profilePic ?
-                                <img
-                                  src={Api + friend.profilePic}
-                                  alt=""
-                                  className="profilePic"
-                                />
+                              {friend.method === 'normal' ?
+                                <>
+                                  {
+                                    friend.profilePic ?
+                                      <img
+                                        src={Api + friend.profilePic}
+                                        alt=""
+                                        className=""
+                                      />
+                                      :
+                                      <ProfileSvg />
+                                  }
+                                </>
                                 :
-                                <ProfileSvg />
+                                <>
+                                  <img
+                                    src={friend.profilePic}
+                                    alt=""
+                                    className=""
+                                  />
+                                </>
                               }
                               <div className="online" />
                               <span style={{ textWrap: 'nowrap' }}>{friend.name}</span>

@@ -23,14 +23,27 @@ const Suggestions = ({ suggestion, setSuggestions, suggestions }) => {
         <div className="user suggestion">
             <Link to={`/profile/${suggestion.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className="userInfo">
-                    {suggestion.profilePic ?
-                        <img
-                            src={Api + suggestion.profilePic}
-                            alt=""
-                            className="profilePic"
-                        />
+                    {suggestion.method === 'normal' ?
+                        <>
+                            {
+                                suggestion.profilePic ?
+                                    <img
+                                        src={Api + suggestion.profilePic}
+                                        alt=""
+                                        className=""
+                                    />
+                                    :
+                                    <ProfileSvg />
+                            }
+                        </>
                         :
-                        <ProfileSvg />
+                        <>
+                            <img
+                                src={suggestion.profilePic}
+                                alt=""
+                                className=""
+                            />
+                        </>
                     }
                     <span>{suggestion.name}</span>
                 </div>

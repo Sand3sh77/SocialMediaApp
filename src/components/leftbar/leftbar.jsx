@@ -26,14 +26,27 @@ const Leftbar = () => {
         <div className="menu">
           <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="user">
-              {currentUser.profilePic ?
-                <img
-                  src={Api + currentUser.profilePic}
-                  alt=""
-                  className="profilePic"
-                />
+              {currentUser.method === 'normal' ?
+                <>
+                  {
+                    currentUser.profilePic ?
+                      <img
+                        src={Api + currentUser.profilePic}
+                        alt=""
+                        className=""
+                      />
+                      :
+                      <ProfileSvg />
+                  }
+                </>
                 :
-                <ProfileSvg />
+                <>
+                  <img
+                    src={currentUser.profilePic}
+                    alt=""
+                    className=""
+                  />
+                </>
               }
               <span>{currentUser.name}</span>
             </div>

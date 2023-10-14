@@ -51,12 +51,27 @@ const Stories = () => {
                 </div>
                 <div className="story">
                     <Link to={`/story/addStory`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <img
-                            src={currentUser.profilePic ? Api + currentUser.profilePic : "https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
-                            alt=""
-                            className=""
-                            style={{ filter: 'sepia(10%)' }}
-                        />
+                        {currentUser.method === 'normal' ?
+                            <>
+                                {
+                                    <img
+                                        src={currentUser.profilePic ? Api + currentUser.profilePic : "https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
+                                        alt=""
+                                        className=""
+                                        style={{ filter: 'sepia(10%)' }}
+                                    />
+                                }
+                            </>
+                            :
+                            <>
+                                <img
+                                    src={currentUser.profilePic}
+                                    alt=""
+                                    className=""
+                                    style={{ filter: 'sepia(10%)' }}
+                                />
+                            </>
+                        }
                         <span>Create Story</span>
                         <div>+</div>
                     </Link>

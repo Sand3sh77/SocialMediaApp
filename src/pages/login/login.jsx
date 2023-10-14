@@ -10,10 +10,9 @@ import jwt_decode from "jwt-decode";
 
 const Login = () => {
     const Navigate = useNavigate();
-    const [response, setResponse] = useState([]);
     const { setUserToken } = useContext(AuthContext);
     const [formData, setFormData] = useState({
-        username: "",
+        email: "",
         password: ""
     })
 
@@ -28,31 +27,50 @@ const Login = () => {
     const url = `${Api}api/authentication/login`;
 
     // WITH GOOGLE
-    const onSuccess = async () => {
+    const onSuccess = async (response) => {
         const s_url = `${Api}api/authentication/signup`;
+        const l_url = `${Api}api/authentication/login`;
+        console.log(response);
         try {
-            const response = await axios.post(s_url, { username: response.given_name, email: response.email, name: response.name }, {
+            const resp = await axios.post(s_url, { username: response.given_name, email: response.email, name: response.name, method: 'email', profilePic: response.picture, password: 'null' }, {
                 headers: {
                     "Content-Type": "multipart/form-data", "Accept": "application/json",
                 }
             })
-            if (response.data.status === 200) {
-                navigate('/login');
-                toast.success(response.data.message);
+            if (resp.data.status === 200) {
+                try {
+                    const login_resp = await axios.post(l_url, { email: response.email, password: 'null', method: 'email' }, {
+                        headers: {
+                            "Content-Type": "multipart/form-data", "Accept": "application/json",
+                        }
+                    })
+                    if (login_resp.data.status === 200) {
+                        toast.success(login_resp.data.message);
+                        setUserToken(login_resp.data.token);
+                        Navigate('/');
+                    }
+                    else {
+                        toast.error(login_resp.data.message);
+                    }
+                }
+                catch (error) {
+                    console.error("Error:", error)
+                }
             }
             else {
-                toast.error(response.data.message);
+                toast.error(resp.data.message);
             }
         } catch (error) {
             console.error('Error:', error);
         }
+
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(url, formData, {
+            const response = await axios.post(url, { ...formData, method: 'normal' }, {
                 headers: {
                     "Content-Type": "multipart/form-data", "Accept": "application/json",
                 }
@@ -87,8 +105,8 @@ const Login = () => {
                     <h1>Login</h1>
                     <form onSubmit={handleSubmit}>
                         <input type="text"
-                            placeholder='Username'
-                            name='username'
+                            placeholder='Email'
+                            name='email'
                             value={formData.username}
                             onChange={handleChange} />
                         <input type="password"
@@ -108,11 +126,10 @@ const Login = () => {
                             onSuccess={credentialResponse => {
                                 var token = credentialResponse.credential;
                                 var decoded = jwt_decode(token);
-                                setResponse(decoded);
-                                onSuccess();
+                                onSuccess(decoded);
                             }}
                             onError={() => {
-                                console.log('Login Failed');
+                                console.error('Login Failed');
                             }}
                             useOneTap
                             cookiePolicy={'single_host_origin'}

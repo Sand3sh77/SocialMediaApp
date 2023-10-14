@@ -25,7 +25,7 @@ const Post = ({ post }) => {
     const [modal, setModal] = useState(false);
     const { currentUser } = useContext(AuthContext);
     const queryClient = useQueryClient();
-    
+
     // LIKE API CALL
     const handleLike = () => {
         setLiked(!liked);
@@ -87,13 +87,27 @@ const Post = ({ post }) => {
                     <div className="userInfo">
                         <Link onClick={() => { document.body.scrollTop = 0 }} to={`/profile/${post.userId}`} style={{ textDecoration: 'none', color: 'inherit' }} href="#">
 
-                            {post.profilePic ?
-                                <img
-                                    src={Api + post.profilePic}
-                                    alt=""
-                                    className=""
-                                />
-                                : <ProfileSvg />
+                            {post.method === 'normal' ?
+                                <>
+                                    {
+                                        post.profilePic ?
+                                            <img
+                                                src={Api + post.profilePic}
+                                                alt=""
+                                                className=""
+                                            />
+                                            :
+                                            <ProfileSvg />
+                                    }
+                                </>
+                                :
+                                <>
+                                    <img
+                                        src={post.profilePic}
+                                        alt=""
+                                        className=""
+                                    />
+                                </>
                             }
                         </Link>
                         <div className="details">

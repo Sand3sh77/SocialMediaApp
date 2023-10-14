@@ -208,18 +208,32 @@ const Profile = () => {
                 />
 
                 {isUser ? <div className='coverEdit' onClick={() => setModal({ ...modal, cover: true })}><EditSolid /></div> : ''}
-                {userInfo.profilePic ?
-                    <img
-                        src={Api + userInfo.profilePic}
-                        alt=""
-                        className="profilePic"
-                    />
-                    : <div className="profilePic svg">
-                        <ProfileSvg />
-                    </div>
+                {userInfo.method === 'normal' ?
+                    <>
+                        {
+                            userInfo.profilePic ?
+                                <img
+                                    src={Api + userInfo.profilePic}
+                                    alt=""
+                                    className="profilePic"
+                                />
+                                :
+                                <div className="profilePic svg">
+                                    <ProfileSvg />
+                                </div>
+                        }
+                    </>
+                    :
+                    <>
+                        <img
+                            src={userInfo.profilePic}
+                            alt=""
+                            className="profilePic"
+                        />
+                    </>
                 }
                 {isUser ? <div className='edit' onClick={() => setModal({ ...modal, profile: true })}><EditSolid /></div> : ''}
-            </div>
+            </div >
             <div className="profileContainer">
                 <div className="uInfo">
                     <div className="left">
