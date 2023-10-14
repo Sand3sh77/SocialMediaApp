@@ -21,6 +21,9 @@ import toast from 'react-hot-toast';
 const Navbar = () => {
     const [search, setSearch] = useState('');
     const [result, setResult] = useState([]);
+    const { Toggle, darkMode } = useContext(DarkModeContext);
+    const { currentUser } = useContext(AuthContext);
+    const QueryClient = useQueryClient();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,7 +40,7 @@ const Navbar = () => {
 
     // SEARCH API CALL
     const searchApi = async (data) => {
-        const url = `${Api}api/functions/other/search`;
+        const url = `${Api}api/functions/search`;
         try {
             const resp = await axios.post(url, { search: data, id: currentUser.id }, {
                 headers: {
@@ -60,9 +63,6 @@ const Navbar = () => {
         }
     }
 
-    const { Toggle, darkMode } = useContext(DarkModeContext);
-    const { currentUser } = useContext(AuthContext);
-    const QueryClient = useQueryClient();
     return (
         <div className="navbar">
             {result[0] != null ? <div className='invisible' onClick={() => setResult([])}></div> : ''}
