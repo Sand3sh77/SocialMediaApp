@@ -26,23 +26,23 @@ const Navbar = () => {
         e.preventDefault();
         searchApi(search);
     }
-    const handleChange = (search) => {
-        if (search !== "") {
-            searchApi(search);
-        } else if (search == '') {
+    const handleChange = (data) => {
+        if (data !== "") {
+            searchApi(data);
+        } else if (data == '') {
             setResult([]);
         }
     }
 
 
     // SEARCH API CALL
-    const searchApi = async (search) => {
+    const searchApi = async (data) => {
         const url = `${Api}api/functions/other/search`;
         try {
-            const resp = await axios.post(url, { search: search, id: currentUser.id }, {
+            const resp = await axios.post(url, { search: data, id: currentUser.id }, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Access-Control-Allow-Origin': '*',
+                    // 'Access-Control-Allow-Origin': '*',
                 }
             })
             if (resp.data.status === 200) {
