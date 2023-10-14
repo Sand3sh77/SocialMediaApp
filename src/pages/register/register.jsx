@@ -29,7 +29,7 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(url,{ ...formData,method:normal}, {
+            const response = await axios.post(url, { ...formData, method: "normal", profilePic: 'null' }, {
                 headers: {
                     "Content-Type": "multipart/form-data", "Accept": "application/json",
                 }
@@ -38,7 +38,7 @@ const Register = () => {
                 navigate('/login');
                 toast.success(response.data.message);
             }
-            else{
+            else {
                 toast.error(response.data.message);
             }
         } catch (error) {

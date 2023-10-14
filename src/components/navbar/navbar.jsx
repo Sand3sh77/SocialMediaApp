@@ -27,11 +27,11 @@ const Navbar = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        searchApi(search);
+        handleSearch(search);
     }
     const handleChange = (data) => {
         if (data !== "") {
-            searchApi(data);
+            handleSearch(data);
         } else if (data == '') {
             setResult([]);
         }
@@ -39,28 +39,31 @@ const Navbar = () => {
 
 
     // SEARCH API CALL
-    const searchApi = async (data) => {
-        const url = `${Api}api/functions/search`;
-        try {
-            const resp = await axios.post(url, { search: data, id: currentUser.id }, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    // 'Access-Control-Allow-Origin': '*',
+    const handleSearch = (data) => {
+        const searchApi = async () => {
+            const url = `${Api}api/functions/search`;
+            try {
+                const resp = await axios.post(url, { search: data, id: currentUser.id }, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        // 'Access-Control-Allow-Origin': '*',
+                    }
+                })
+                if (resp.data.status === 200) {
+                    setResult(resp.data.data);
+                    // toast.success(resp.data.message);
                 }
-            })
-            if (resp.data.status === 200) {
-                setResult(resp.data.data);
-                // toast.success(resp.data.message);
+                else if (resp.data.status === 501) {
+                    toast.error(resp.data.message);
+                } else {
+                    setResult([]);
+                }
             }
-            else if (resp.data.status === 501) {
-                toast.error(resp.data.message);
-            } else {
-                setResult([]);
+            catch (error) {
+                console.error("Error:", error);
             }
         }
-        catch (error) {
-            console.error("Error:", error);
-        }
+        searchApi();
     }
 
     return (

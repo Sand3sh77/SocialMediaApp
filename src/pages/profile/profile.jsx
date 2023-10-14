@@ -372,7 +372,7 @@ const Profile = () => {
                                                     value={formData.name}
                                                     onChange={handleChange} />
                                             </div>
-                                            <div>
+                                            {/* <div>
                                                 <label htmlFor='email'>Email</label>
                                                 <input
                                                     type='email'
@@ -380,7 +380,7 @@ const Profile = () => {
                                                     placeholder='Enter your email'
                                                     value={formData.email}
                                                     onChange={handleChange} />
-                                            </div>
+                                            </div> */}
                                             <div>
                                                 <label htmlFor='city'>City</label>
                                                 <input
@@ -456,13 +456,18 @@ const Profile = () => {
                     </div>
                     <div className="right">
                         <EmailOutlinedIcon />
-                        <div onClick={() => setModal({ ...modal, sPassword: !modal.sPassword })} style={{ cursor: 'pointer' }}>
-                            <MoreVertIcon />
-                        </div>
-                        {modal.sPassword &&
-                            <div className='cPassModal'>
-                                <button onClick={() => setModal({ ...modal, password: true })}>Change Password</button>
-                            </div>
+                        {currentUser.method === 'normal' ?
+                            <>
+                                <div onClick={() => setModal({ ...modal, sPassword: !modal.sPassword })} style={{ cursor: 'pointer' }}>
+                                    <MoreVertIcon />
+                                </div>
+                                {modal.sPassword &&
+                                    <div className='cPassModal'>
+                                        <button onClick={() => setModal({ ...modal, password: true })}>Change Password</button>
+                                    </div>
+                                }
+                            </>
+                            : ''
                         }
                     </div>
                 </div>
