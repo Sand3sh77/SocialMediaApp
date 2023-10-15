@@ -123,7 +123,6 @@ const Profile = () => {
             } else if (e.target[2].id === "cover") {
                 currentImg = currentUser.coverPic;
             }
-            console.log(currentImg);
             const resp = await axios.post(url, { id: currentUser.id, file: file, location: e.target[2].id, currentImage: currentImg }, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -208,7 +207,8 @@ const Profile = () => {
                 />
 
                 {isUser ? <div className='coverEdit' onClick={() => setModal({ ...modal, cover: true })}><EditSolid /></div> : ''}
-                {userInfo.method === 'normal' ?
+
+                {userInfo.profilePic && userInfo.profilePic.split('/')[0] === 'api' ?
                     <>
                         {
                             userInfo.profilePic ?
@@ -456,7 +456,7 @@ const Profile = () => {
                     </div>
                     <div className="right">
                         <EmailOutlinedIcon />
-                        {currentUser.method === 'normal' ?
+                        {isUser && currentUser.profilePic && isUser.profilePic.split('/')[0] === 'api' ?
                             <>
                                 <div onClick={() => setModal({ ...modal, sPassword: !modal.sPassword })} style={{ cursor: 'pointer' }}>
                                     <MoreVertIcon />

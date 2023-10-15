@@ -100,7 +100,7 @@ const Rightbar = () => {
                     <Link to={`/profile/${noti.userId}`} style={{ textDecoration: 'none', color: 'inherit' }} key={noti.id}>
                       <div className="user">
                         <div className="userInfo">
-                          {noti.method === 'normal' ?
+                          {noti.profilePic && noti.profilePic.split('/')[0] === 'api' ?
                             <>
                               {
                                 noti.profilePic ?
@@ -174,7 +174,7 @@ const Rightbar = () => {
                         <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
                           <div className="user">
                             <div className="userInfo">
-                              {friend.method === 'normal' ?
+                              {friend.profilePic && friend.profilePic.split('/')[0] === 'api' ?
                                 <>
                                   {
                                     friend.profilePic ?
@@ -221,7 +221,7 @@ const Rightbar = () => {
                         <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
                           <div className="user">
                             <div className="userInfo">
-                              {friend.method === 'normal' ?
+                              {friend.profilePic && friend.profilePic.split('/')[0] === 'api' ?
                                 <>
                                   {
                                     friend.profilePic ?

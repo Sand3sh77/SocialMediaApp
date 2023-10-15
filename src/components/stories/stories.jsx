@@ -51,7 +51,7 @@ const Stories = () => {
                 </div>
                 <div className="story">
                     <Link to={`/story/addStory`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                        {currentUser.method === 'normal' ?
+                        {currentUser.profilePic && currentUser.profilePic.split('/')[0] === 'api' ?
                             <>
                                 {
                                     <img

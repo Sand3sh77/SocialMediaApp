@@ -26,7 +26,7 @@ const Leftbar = () => {
         <div className="menu">
           <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="user">
-              {currentUser.method === 'normal' ?
+              {currentUser.profilePic && currentUser.profilePic.split('/')[0] === 'api' ?
                 <>
                   {
                     currentUser.profilePic ?

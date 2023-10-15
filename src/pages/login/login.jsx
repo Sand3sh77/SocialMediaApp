@@ -30,7 +30,6 @@ const Login = () => {
     const onSuccess = async (response) => {
         const s_url = `${Api}api/authentication/signup`;
         const l_url = `${Api}api/authentication/login`;
-        console.log(response);
         try {
             const resp = await axios.post(s_url, { username: response.given_name, email: response.email, name: response.name, method: 'email', profilePic: response.picture, password: 'null' }, {
                 headers: {

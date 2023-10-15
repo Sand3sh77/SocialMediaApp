@@ -210,7 +210,7 @@ const Story = () => {
               <>
                 {/* <div className="timeBar" style={{ translate: `${(timeElapsed / 10000) * 100}% 0` }}></div> */}
                 <div className="top" style={{ zIndex: '50' }}>
-                  {mainStory.method === 'normal' ?
+                  {mainStory.profilePic && mainStory.profilePic.split('/')[0] === 'api' ?
                     <>
                       {
                         mainStory.profilePic ?
@@ -250,7 +250,7 @@ const Story = () => {
               // ADD STORY MAIN SECTION
               <>
                 <div className="top" style={{ zIndex: '50' }}>
-                  {currentUser.method === 'normal' ?
+                  {currentUser.profilePic && currentUser.profilePic.split('/')[0] === 'api' ?
                     <>
                       {
                         currentUser.profilePic ?

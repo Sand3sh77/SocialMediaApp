@@ -73,7 +73,7 @@ const Comments = ({ postId, TC, setTC }) => {
         <div className='comments'>
             <form onSubmit={handleSubmit}>
                 <div className='write'>
-                    {currentUser.method === 'normal' ?
+                    {currentUser.profilePic && currentUser.profilePic.split('/')[0] === 'api' ?
                         <>
                             {
                                 currentUser.profilePic ?
@@ -106,28 +106,28 @@ const Comments = ({ postId, TC, setTC }) => {
             </form>
             {comments?.map((comment) => (
                 <div className="comment" key={comment.id}>
-                     {comment.method === 'normal' ?
-                                <>
-                                    {
-                                        comment.profilePic ?
-                                            <img
-                                                src={Api + comment.profilePic}
-                                                alt=""
-                                                className=""
-                                            />
-                                            :
-                                            <ProfileSvg />
-                                    }
-                                </>
-                                :
-                                <>
+                    {comment.profilePic && comment.profilePic.split('/')[0] === 'api' ?
+                        <>
+                            {
+                                comment.profilePic ?
                                     <img
-                                        src={comment.profilePic}
+                                        src={Api + comment.profilePic}
                                         alt=""
                                         className=""
                                     />
-                                </>
+                                    :
+                                    <ProfileSvg />
                             }
+                        </>
+                        :
+                        <>
+                            <img
+                                src={comment.profilePic}
+                                alt=""
+                                className=""
+                            />
+                        </>
+                    }
                     <div className="cinfo">
                         <span>{comment.name}</span>
                         <p>{comment.description}</p>

@@ -96,7 +96,7 @@ const Navbar = () => {
                                             key={res.id}
                                             onClick={() => setResult([])} >
                                             <div className="item">
-                                                {res.method === 'normal' ?
+                                                {res.profilePic && res.profilePic.split('/')[0] === 'api' ?
                                                     <>
                                                         {
                                                             res.profilePic ?
@@ -140,7 +140,7 @@ const Navbar = () => {
                 }}>
                     <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }} >
                         <div className="user">
-                            {currentUser.method === 'normal' ?
+                            {currentUser.profilePic && currentUser.profilePic.split('/')[0] === 'api' ?
                                 <>
                                     {
                                         currentUser.profilePic ?

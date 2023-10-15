@@ -49,7 +49,7 @@ const Share = () => {
         <div className='share'>
             <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
                 <div className='top'>
-                    {currentUser.method === 'normal' ?
+                    {currentUser.profilePic && currentUser.profilePic.split('/')[0] === 'api' ?
                         <>
                             {
                                 currentUser.profilePic ?

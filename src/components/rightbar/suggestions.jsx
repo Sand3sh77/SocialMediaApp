@@ -23,7 +23,7 @@ const Suggestions = ({ suggestion, setSuggestions, suggestions }) => {
         <div className="user suggestion">
             <Link to={`/profile/${suggestion.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className="userInfo">
-                    {suggestion.method === 'normal' ?
+                    {suggestion.profilePic && suggestion.profilePic.split('/')[0] === 'api' ?
                         <>
                             {
                                 suggestion.profilePic ?
