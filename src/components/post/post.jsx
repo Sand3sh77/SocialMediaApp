@@ -87,26 +87,28 @@ const Post = ({ post }) => {
                     <div className="userInfo">
                         <Link onClick={() => { document.body.scrollTop = 0 }} to={`/profile/${post.userId}`} style={{ textDecoration: 'none', color: 'inherit' }} href="#">
 
-                            {post.profilePic && post.profilePic.split('/')[0] === 'api' ?
+                            {post.profilePic ?
                                 <>
                                     {
-                                        post.profilePic ?
+                                        post.profilePic.split('/')[0] === 'api' ?
                                             <img
                                                 src={Api + post.profilePic}
                                                 alt=""
                                                 className=""
                                             />
                                             :
-                                            <ProfileSvg />
+                                            <img
+                                                src={post.profilePic}
+                                                alt=""
+                                                className=""
+                                            />
                                     }
                                 </>
                                 :
                                 <>
-                                    <img
-                                        src={post.profilePic}
-                                        alt=""
-                                        className=""
-                                    />
+                                    <div className="">
+                                        <ProfileSvg />
+                                    </div>
                                 </>
                             }
                         </Link>

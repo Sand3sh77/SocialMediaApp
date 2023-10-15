@@ -208,28 +208,28 @@ const Profile = () => {
 
                 {isUser ? <div className='coverEdit' onClick={() => setModal({ ...modal, cover: true })}><EditSolid /></div> : ''}
 
-                {userInfo.profilePic && userInfo.profilePic.split('/')[0] === 'api' ?
+                {userInfo.profilePic ?
                     <>
                         {
-                            userInfo.profilePic ?
+                            userInfo.profilePic.split('/')[0] === 'api' ?
                                 <img
                                     src={Api + userInfo.profilePic}
                                     alt=""
-                                    className="profilePic"
+                                    className=""
                                 />
                                 :
-                                <div className="profilePic svg">
-                                    <ProfileSvg />
-                                </div>
+                                <img
+                                    src={userInfo.profilePic}
+                                    alt=""
+                                    className=""
+                                />
                         }
                     </>
                     :
                     <>
-                        <img
-                            src={userInfo.profilePic}
-                            alt=""
-                            className="profilePic"
-                        />
+                        <div className="">
+                            <ProfileSvg />
+                        </div>
                     </>
                 }
                 {isUser ? <div className='edit' onClick={() => setModal({ ...modal, profile: true })}><EditSolid /></div> : ''}
@@ -456,7 +456,7 @@ const Profile = () => {
                     </div>
                     <div className="right">
                         <EmailOutlinedIcon />
-                        {isUser && currentUser.profilePic && isUser.profilePic.split('/')[0] === 'api' ?
+                        {isUser && currentUser.method === 'normal' ?
                             <>
                                 <div onClick={() => setModal({ ...modal, sPassword: !modal.sPassword })} style={{ cursor: 'pointer' }}>
                                     <MoreVertIcon />

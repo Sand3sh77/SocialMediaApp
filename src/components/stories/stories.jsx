@@ -51,25 +51,28 @@ const Stories = () => {
                 </div>
                 <div className="story">
                     <Link to={`/story/addStory`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                        {currentUser.profilePic && currentUser.profilePic.split('/')[0] === 'api' ?
+                        {currentUser.profilePic ?
                             <>
                                 {
-                                    <img
-                                        src={currentUser.profilePic ? Api + currentUser.profilePic : "https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
-                                        alt=""
-                                        className=""
-                                        style={{ filter: 'sepia(10%)' }}
-                                    />
+                                    currentUser.profilePic.split('/')[0] === 'api' ?
+                                        <img
+                                            src={Api + currentUser.profilePic}
+                                            alt=""
+                                            className=""
+                                        />
+                                        :
+                                        <img
+                                            src={currentUser.profilePic}
+                                            alt=""
+                                            className=""
+                                        />
                                 }
                             </>
                             :
                             <>
-                                <img
-                                    src={currentUser.profilePic}
-                                    alt=""
-                                    className=""
-                                    style={{ filter: 'sepia(10%)' }}
-                                />
+                                <div className="">
+                                    <ProfileSvg />
+                                </div>
                             </>
                         }
                         <span>Create Story</span>

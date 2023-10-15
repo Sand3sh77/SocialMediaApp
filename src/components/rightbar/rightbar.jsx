@@ -100,26 +100,28 @@ const Rightbar = () => {
                     <Link to={`/profile/${noti.userId}`} style={{ textDecoration: 'none', color: 'inherit' }} key={noti.id}>
                       <div className="user">
                         <div className="userInfo">
-                          {noti.profilePic && noti.profilePic.split('/')[0] === 'api' ?
+                          {noti.profilePic ?
                             <>
                               {
-                                noti.profilePic ?
+                                noti.profilePic.split('/')[0] === 'api' ?
                                   <img
                                     src={Api + noti.profilePic}
                                     alt=""
                                     className=""
                                   />
                                   :
-                                  <ProfileSvg />
+                                  <img
+                                    src={noti.profilePic}
+                                    alt=""
+                                    className=""
+                                  />
                               }
                             </>
                             :
                             <>
-                              <img
-                                src={noti.profilePic}
-                                alt=""
-                                className=""
-                              />
+                              <div className="">
+                                <ProfileSvg />
+                              </div>
                             </>
                           }
                           <p>
@@ -174,26 +176,28 @@ const Rightbar = () => {
                         <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
                           <div className="user">
                             <div className="userInfo">
-                              {friend.profilePic && friend.profilePic.split('/')[0] === 'api' ?
+                              {friend.profilePic ?
                                 <>
                                   {
-                                    friend.profilePic ?
+                                    friend.profilePic.split('/')[0] === 'api' ?
                                       <img
                                         src={Api + friend.profilePic}
                                         alt=""
                                         className=""
                                       />
                                       :
-                                      <ProfileSvg />
+                                      <img
+                                        src={friend.profilePic}
+                                        alt=""
+                                        className=""
+                                      />
                                   }
                                 </>
                                 :
                                 <>
-                                  <img
-                                    src={friend.profilePic}
-                                    alt=""
-                                    className=""
-                                  />
+                                  <div className="">
+                                    <ProfileSvg />
+                                  </div>
                                 </>
                               }
                               {/* <div className="online" /> */}
@@ -221,26 +225,28 @@ const Rightbar = () => {
                         <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
                           <div className="user">
                             <div className="userInfo">
-                              {friend.profilePic && friend.profilePic.split('/')[0] === 'api' ?
+                              {friend.profilePic ?
                                 <>
                                   {
-                                    friend.profilePic ?
+                                    friend.profilePic.split('/')[0] === 'api' ?
                                       <img
                                         src={Api + friend.profilePic}
                                         alt=""
                                         className=""
                                       />
                                       :
-                                      <ProfileSvg />
+                                      <img
+                                        src={friend.profilePic}
+                                        alt=""
+                                        className=""
+                                      />
                                   }
                                 </>
                                 :
                                 <>
-                                  <img
-                                    src={friend.profilePic}
-                                    alt=""
-                                    className=""
-                                  />
+                                  <div className="">
+                                    <ProfileSvg />
+                                  </div>
                                 </>
                               }
                               <div className="online" />

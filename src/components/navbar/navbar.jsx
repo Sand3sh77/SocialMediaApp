@@ -96,26 +96,28 @@ const Navbar = () => {
                                             key={res.id}
                                             onClick={() => setResult([])} >
                                             <div className="item">
-                                                {res.profilePic && res.profilePic.split('/')[0] === 'api' ?
+                                                {res.profilePic ?
                                                     <>
                                                         {
-                                                            res.profilePic ?
+                                                            res.profilePic.split('/')[0] === 'api' ?
                                                                 <img
                                                                     src={Api + res.profilePic}
                                                                     alt=""
                                                                     className=""
                                                                 />
                                                                 :
-                                                                <ProfileSvg />
+                                                                <img
+                                                                    src={res.profilePic}
+                                                                    alt=""
+                                                                    className=""
+                                                                />
                                                         }
                                                     </>
                                                     :
                                                     <>
-                                                        <img
-                                                            src={res.profilePic}
-                                                            alt=""
-                                                            className=""
-                                                        />
+                                                        <div className="">
+                                                            <ProfileSvg />
+                                                        </div>
                                                     </>
                                                 }
                                                 <div>
@@ -140,26 +142,28 @@ const Navbar = () => {
                 }}>
                     <Link to={`/profile/${currentUser.id}`} style={{ textDecoration: 'none', color: 'inherit' }} >
                         <div className="user">
-                            {currentUser.profilePic && currentUser.profilePic.split('/')[0] === 'api' ?
+                            {currentUser.profilePic ?
                                 <>
                                     {
-                                        currentUser.profilePic ?
+                                        currentUser.profilePic.split('/')[0] === 'api' ?
                                             <img
                                                 src={Api + currentUser.profilePic}
                                                 alt=""
                                                 className=""
                                             />
                                             :
-                                            <ProfileSvg />
+                                            <img
+                                                src={currentUser.profilePic}
+                                                alt=""
+                                                className=""
+                                            />
                                     }
                                 </>
                                 :
                                 <>
-                                    <img
-                                        src={currentUser.profilePic}
-                                        alt=""
-                                        className=""
-                                    />
+                                    <div className="">
+                                        <ProfileSvg />
+                                    </div>
                                 </>
                             }
                             <span>{currentUser.name}</span>

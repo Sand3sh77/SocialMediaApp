@@ -41,26 +41,28 @@ const AllStories = ({ story }) => {
         <span key={story.id}>
             <Link to={`/story/${story.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className={story.active ? 'active items' : 'items'}>
-                    {story.profilePic && story.profilePic.split('/')[0] === 'api' ?
+                    {story.profilePic ?
                         <>
                             {
-                                story.profilePic ?
+                                story.profilePic.split('/')[0] === 'api' ?
                                     <img
                                         src={Api + story.profilePic}
                                         alt=""
                                         className=""
                                     />
                                     :
-                                    <ProfileSvg />
+                                    <img
+                                        src={story.profilePic}
+                                        alt=""
+                                        className=""
+                                    />
                             }
                         </>
                         :
                         <>
-                            <img
-                                src={story.profilePic}
-                                alt=""
-                                className=""
-                            />
+                            <div className="">
+                                <ProfileSvg />
+                            </div>
                         </>
                     }
                     <div>

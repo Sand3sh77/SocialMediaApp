@@ -73,26 +73,28 @@ const Comments = ({ postId, TC, setTC }) => {
         <div className='comments'>
             <form onSubmit={handleSubmit}>
                 <div className='write'>
-                    {currentUser.profilePic && currentUser.profilePic.split('/')[0] === 'api' ?
+                    {currentUser.profilePic ?
                         <>
                             {
-                                currentUser.profilePic ?
+                                currentUser.profilePic.split('/')[0] === 'api' ?
                                     <img
                                         src={Api + currentUser.profilePic}
                                         alt=""
                                         className=""
                                     />
                                     :
-                                    <ProfileSvg />
+                                    <img
+                                        src={currentUser.profilePic}
+                                        alt=""
+                                        className=""
+                                    />
                             }
                         </>
                         :
                         <>
-                            <img
-                                src={currentUser.profilePic}
-                                alt=""
-                                className=""
-                            />
+                            <div className="">
+                                <ProfileSvg />
+                            </div>
                         </>
                     }
                     <input type='text'
@@ -106,26 +108,28 @@ const Comments = ({ postId, TC, setTC }) => {
             </form>
             {comments?.map((comment) => (
                 <div className="comment" key={comment.id}>
-                    {comment.profilePic && comment.profilePic.split('/')[0] === 'api' ?
+                    {comment.profilePic ?
                         <>
                             {
-                                comment.profilePic ?
+                                comment.profilePic.split('/')[0] === 'api' ?
                                     <img
                                         src={Api + comment.profilePic}
                                         alt=""
                                         className=""
                                     />
                                     :
-                                    <ProfileSvg />
+                                    <img
+                                        src={comment.profilePic}
+                                        alt=""
+                                        className=""
+                                    />
                             }
                         </>
                         :
                         <>
-                            <img
-                                src={comment.profilePic}
-                                alt=""
-                                className=""
-                            />
+                            <div className="">
+                                <ProfileSvg />
+                            </div>
                         </>
                     }
                     <div className="cinfo">
