@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import './stories.scss';
 import { AuthContext } from '../../context/authContext';
 import Api from '../../api/Api';
-import { ArrowLeft, ArrowRight } from '../../assets/svg/svg';
+import { ArrowLeft, ArrowRight, ProfileSvg } from '../../assets/svg/svg';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import moment from 'moment';
