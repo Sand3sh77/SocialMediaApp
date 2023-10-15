@@ -41,7 +41,7 @@ const Navbar = () => {
     // SEARCH API CALL
     const handleSearch = (data) => {
         const searchApi = async () => {
-            const url = `${Api}api/functions/search`;
+            const url = `${Api}api/functions/other/search`;
             try {
                 const resp = await axios.post(url, { search: data, id: currentUser.id }, {
                     headers: {
