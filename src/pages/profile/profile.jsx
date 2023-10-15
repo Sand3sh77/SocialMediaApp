@@ -215,19 +215,19 @@ const Profile = () => {
                                 <img
                                     src={Api + userInfo.profilePic}
                                     alt=""
-                                    className=""
+                                    className="profilePic"
                                 />
                                 :
                                 <img
                                     src={userInfo.profilePic}
                                     alt=""
-                                    className=""
+                                    className="profilePic"
                                 />
                         }
                     </>
                     :
                     <>
-                        <div className="">
+                        <div className="profilePic svg">
                             <ProfileSvg />
                         </div>
                     </>
