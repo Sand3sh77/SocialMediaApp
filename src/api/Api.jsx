@@ -9,6 +9,7 @@ if (currentURL === 'localhost') {
 }
 
 export const debugUrl = `http://localhost/social/`;
+export const ChatApi = isDebug ? `http://localhost:5000/api/` : 'https://sbapi.quizhunt.online/';
 const Api = isDebug ? debugUrl : 'https://sbapi.quizhunt.online/';
 
 export default Api;

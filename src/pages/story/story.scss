@@ -430,10 +430,11 @@
                                 cursor: pointer;
                                 transition: all 0.2s ease-in-out;
 
-                                @include small-tablet{
+                                @include small-tablet {
                                     width: 70%;
                                 }
-                                @include mobile{
+
+                                @include mobile {
                                     width: 80%;
                                     height: 40%;
                                 }
@@ -448,6 +449,7 @@
                                     div:first-child {
                                         font-weight: bolder;
                                         font-size: 1.4rem;
+                                        color: themed('textColor');
                                     }
 
                                     .plus {
@@ -458,6 +460,7 @@
                                         align-items: center;
                                         padding: 1rem;
                                         background-color: themed('bgSoft');
+                                        color: themed('textColor');
                                         border-radius: 50%;
                                         font-size: 1.6rem;
                                     }

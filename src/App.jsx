@@ -3,6 +3,7 @@ import './App.scss'
 import Leftbar from './components/leftbar/leftbar';
 import Navbar from './components/navbar/navbar';
 import Rightbar from './components/rightbar/rightbar';
+import Chat from './components/chat/chat';
 import Home from './pages/home/home';
 import Login from './pages/login/login';
 import Profile from './pages/profile/profile';
@@ -18,14 +19,11 @@ import {
 } from "react-router-dom";
 import { DarkModeContext } from './context/darkmodeContext';
 import { AuthContext } from './context/authContext';
-import { AlertContext } from './context/alertContext';
-import Alert from './components/alert/alert';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 function App() {
 
-  const { alert } = useContext(AlertContext);
   const { darkMode } = useContext(DarkModeContext);
   const { userToken } = useContext(AuthContext);
 
@@ -36,7 +34,6 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <div className={`theme-${darkMode ? 'dark' : 'light'}`}>
           <Navbar />
-          {/* {alert && <Alert />} */}
           <div style={{ display: "flex" }}>
             <Leftbar />
             <div style={{ flex: '6' }}>

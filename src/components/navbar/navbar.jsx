@@ -11,18 +11,23 @@ import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { DarkModeContext } from '../../context/darkmodeContext';
 import { AuthContext } from '../../context/authContext';
-import { ProfileSvg } from '../../assets/svg/svg';
+import { ChatContext } from '../../context/chatContext';
+import { ChatOutlined, ProfileSvg } from '../../assets/svg/svg';
 import { QueryClient, useQueryClient } from 'react-query';
 import Api from '../../api/Api';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import Chat from '../chat/chat';
+import Chats from '../chat/chats';
 
 
 const Navbar = () => {
+    const [chats, setChats] = useState(false);
     const [search, setSearch] = useState('');
     const [result, setResult] = useState([]);
     const { Toggle, darkMode } = useContext(DarkModeContext);
     const { currentUser } = useContext(AuthContext);
+    const { chat, setChat } = useContext(ChatContext);
     const QueryClient = useQueryClient();
 
     const handleSubmit = async (e) => {
@@ -69,14 +74,17 @@ const Navbar = () => {
     return (
         <div className="navbar">
             {result[0] != null ? <div className='invisible' onClick={() => setResult([])}></div> : ''}
+            {/* {chats === true ? <div className='invisible' onClick={() => setChats(false)}></div> : ''} */}
             <div className="left">
                 <Link to='/' style={{ textDecoration: 'none' }}>
                     <span className='logo'>SafeBook</span>
                 </Link>
-                <HomeOutlinedIcon className='icon' />
+                <Link to='/' style={{ textDecoration: 'none',color:'inherit' }}>
+                    <HomeOutlinedIcon className='icon' />
+                </Link>
                 {!darkMode ? <DarkModeOutlinedIcon className='icon darkMode' onClick={Toggle} /> :
                     < WbSunnyOutlinedIcon className='icon darkMode' onClick={Toggle} />}
-                <GridViewOutlinedIcon className='icon' />
+                {/* <GridViewOutlinedIcon className='icon' /> */}
                 <form onSubmit={handleSubmit}>
                     <div className="search" type="submit">
                         <SearchOutlinedIcon className='icon' />
@@ -134,8 +142,11 @@ const Navbar = () => {
                 </form>
             </div>
             <div className="right">
-                <PersonOutlinedIcon className='icon' />
-                <EmailOutlinedIcon className='icon' />
+                {/* <PersonOutlinedIcon className='icon' /> */}
+                <div onClick={() => setChats(!chats)} className='chats' style={{ position: "relative", display: 'flex', alignItems: 'center' }}>
+                    <ChatOutlined className='icon' />
+                </div>
+                {chats && <Chats />}
                 <NotificationsOutlinedIcon className='icon' />
                 <div onClick={() => {
                     QueryClient.invalidateQueries('posts');

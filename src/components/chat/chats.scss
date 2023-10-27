@@ -1,0 +1,85 @@
+@import "../../App.scss";
+
+.chats-container {
+    position: absolute;
+    top: 4rem;
+    right: 4rem;
+    width: 23rem;
+    max-height: 30rem;
+    padding: 0.8rem;
+    z-index: 500;
+    border-radius: 0.3rem;
+    overflow-y: scroll;
+
+    @include themify($themes) {
+        background-color: themed("bg");
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px themed("bgSoft");
+
+        h4{
+            margin: 0.4rem 0;
+            color:themed('textColorSoft')
+        }
+
+        .suggestionArea {
+            display: flex;
+            overflow-x: scroll;
+            gap:0.4rem;
+            .sitems {
+                margin: 0.4rem 0;
+                padding: 0.3rem;
+                background-color: themed("bgSoftT");
+                width: 30rem;
+                span{
+                    width: 7rem;
+                }
+            }
+        }
+        ::-webkit-scrollbar{
+            height: 0.4rem;
+        }
+
+        .items {
+            display: flex;
+            margin: 0.8rem 0;
+            gap: 0.6rem;
+            cursor: pointer;
+            padding: 0.4rem;
+            border-radius: 0.4rem;
+            align-items: center;
+            position: relative;
+
+            img,
+            svg {
+                width: 2.2rem;
+                height: 2.2rem;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            svg {
+                padding: 2px;
+                border: 1px solid themed('textColor');
+            }
+
+            div {
+                font-size: 1rem;
+
+                span {
+                    font-size: 0.9rem;
+                }
+            }
+
+            .timestamp {
+                font-size: 0.8rem;
+                position: absolute;
+                right: 0.5rem;
+            }
+        }
+
+        .items:hover {
+            background-color: themed("bgSoft");
+        }
+    }
+}
