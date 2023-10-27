@@ -6,10 +6,13 @@ import Api, { ChatApi } from "../../api/Api";
 import axios from "axios";
 import { ProfileSvg } from "../../assets/svg/svg";
 import { Link } from "react-router-dom";
+import { ChatContext } from "../../context/chatContext";
+import moment from "moment";
 
-const Chats = () => {
+const Chats = ({ setChats }) => {
     const { currentUser } = useContext(AuthContext);
-    const [chats, setChats] = useState([]);
+    const { chatId, setChatId } = useContext(ChatContext);
+    const [chatsData, setChatsData] = useState([]);
     const [suggestedChats, setSuggestedChats] = useState([]);
     const [callApi, setCallApi] = useState(true);
 
@@ -24,7 +27,7 @@ const Chats = () => {
                         }
                     })
                     if (resp.status === 200) {
-                        setChats(resp.data.resp);
+                        setChatsData(resp.data.resp);
                         setSuggestedChats(resp.data.suggestedChatUsers);
                     }
                     else {
@@ -95,12 +98,12 @@ const Chats = () => {
                 })}
             </div>
             <h4>All Chats</h4>
-            {chats != [] ?
+            {chatsData != [] ?
                 <>
                     {
-                        chats.map((chat) => {
+                        chatsData.map((chat) => {
                             return (
-                                <div className="items" key={chat.user_data.id}>
+                                <div className="items" key={chat.user_data.id} onClick={() => { setChatId(chat.user_data.id), setChats(false) }}>
                                     {chat.user_data.profilePic ?
                                         <>
                                             {
@@ -126,12 +129,19 @@ const Chats = () => {
                                         </>
                                     }
                                     <div>
-                                        <Link to={`/profile/${chat.user_data.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        {/* <Link to={`/profile/${chat.user_data.id}`} style={{ textDecoration: 'none', color: 'inherit' }}> */}
                                             {chat.user_data.name}<br />
-                                        </Link>
+                                        {/* </Link> */}
                                         <span>Text Message</span>
                                     </div>
-                                    <span className="timestamp">24 hr ago</span>
+                                    <span className="timestamp">{moment.utc(chat.chat.updatedAt).local().fromNow()
+                                        .replace('a few seconds', 'a sec')
+                                        .replace('a minute', '1 min')
+                                        .replace(/minutes?/, 'min')
+                                        .replace(/hours?/, 'h')
+                                        .replace(/days?/, 'd')
+                                        .replace(/months?/, 'mo')
+                                        .replace(/years?/, 'y')}</span>
                                 </div>
                             );
                         })

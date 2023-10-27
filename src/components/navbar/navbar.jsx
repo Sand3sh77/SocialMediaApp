@@ -26,8 +26,8 @@ const Navbar = () => {
     const [search, setSearch] = useState('');
     const [result, setResult] = useState([]);
     const { Toggle, darkMode } = useContext(DarkModeContext);
+    const { chatId, setChatId } = useContext(ChatContext);
     const { currentUser } = useContext(AuthContext);
-    const { chat, setChat } = useContext(ChatContext);
     const QueryClient = useQueryClient();
 
     const handleSubmit = async (e) => {
@@ -74,12 +74,12 @@ const Navbar = () => {
     return (
         <div className="navbar">
             {result[0] != null ? <div className='invisible' onClick={() => setResult([])}></div> : ''}
-            {/* {chats === true ? <div className='invisible' onClick={() => setChats(false)}></div> : ''} */}
+            {chats === true ? <div className='invisible' onClick={() => setChats(false)}></div> : ''}
             <div className="left">
                 <Link to='/' style={{ textDecoration: 'none' }}>
                     <span className='logo'>SafeBook</span>
                 </Link>
-                <Link to='/' style={{ textDecoration: 'none',color:'inherit' }}>
+                <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
                     <HomeOutlinedIcon className='icon' />
                 </Link>
                 {!darkMode ? <DarkModeOutlinedIcon className='icon darkMode' onClick={Toggle} /> :
@@ -146,7 +146,9 @@ const Navbar = () => {
                 <div onClick={() => setChats(!chats)} className='chats' style={{ position: "relative", display: 'flex', alignItems: 'center' }}>
                     <ChatOutlined className='icon' />
                 </div>
-                {chats && <Chats />}
+                {chats && <Chats setChats={setChats} />}
+                {chatId && <Chat />}
+
                 <NotificationsOutlinedIcon className='icon' />
                 <div onClick={() => {
                     QueryClient.invalidateQueries('posts');

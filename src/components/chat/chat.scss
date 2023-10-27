@@ -1,9 +1,18 @@
-.chat-container{
+@import "../../App.scss";
+
+.chat-container {
     position: fixed;
     bottom: 0rem;
-    right: 0rem;
+    right: 8.5rem;
     width: 20rem;
     height: 20rem;
-    background-color: black;
     z-index: 500;
+
+    @include themify($themes) {
+        background-color: themed("bg");
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px themed("bgSoft");
+
+    }
 }
