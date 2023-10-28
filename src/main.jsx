@@ -16,15 +16,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
 
   <GoogleOAuthProvider clientId='679091620787-lhnoo22beg9a3it84q1hnbqu1md2lo2c.apps.googleusercontent.com'>
-    <ChatContextProvider>
-      <DarkModeContextProvider>
-        <AuthContextProvider>
+    <AuthContextProvider>
+      <ChatContextProvider>
+        <DarkModeContextProvider>
           <AlertContextProvider>
             <App />
           </AlertContextProvider>
-        </AuthContextProvider>
-      </DarkModeContextProvider>
-    </ChatContextProvider>
+        </DarkModeContextProvider>
+      </ChatContextProvider>
+    </AuthContextProvider>
   </GoogleOAuthProvider>
 
   // </React.StrictMode>,

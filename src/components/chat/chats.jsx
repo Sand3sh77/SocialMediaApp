@@ -11,7 +11,7 @@ import moment from "moment";
 
 const Chats = ({ setChats }) => {
     const { currentUser } = useContext(AuthContext);
-    const { chatId, setChatId } = useContext(ChatContext);
+    const { setRecepientId, setChatId, onlineUsers } = useContext(ChatContext);
     const [chatsData, setChatsData] = useState([]);
     const [suggestedChats, setSuggestedChats] = useState([]);
     const [callApi, setCallApi] = useState(true);
@@ -63,47 +63,55 @@ const Chats = ({ setChats }) => {
     return (
         <div className='chats-container'>
             <h2>Chats</h2>
-            <h4>Create Chat</h4>
-            <div className="suggestionArea">
-                {suggestedChats.map((schat) => {
-                    return (
-                        <div className="items sitems" key={schat.id} onClick={() => handleClick(schat.id)}>
-                            {schat.profilePic ?
-                                <>
-                                    {
-                                        schat.profilePic.split('/')[0] === 'api' ?
-                                            <img
-                                                src={Api + schat.profilePic}
-                                                alt=""
-                                                className=""
-                                            />
-                                            :
-                                            <img
-                                                src={schat.profilePic}
-                                                alt=""
-                                                className=""
-                                            />
+            {suggestedChats.length > 0 ?
+                <>
+                    <h4>Create Chat</h4>
+                    <div className="suggestionArea">
+                        {suggestedChats.map((schat) => {
+                            return (
+                                <div className="items sitems" key={schat.id} onClick={() => handleClick(schat.id)}>
+                                    {schat.profilePic ?
+                                        <>
+                                            {
+                                                schat.profilePic.split('/')[0] === 'api' ?
+                                                    <img
+                                                        src={Api + schat.profilePic}
+                                                        alt=""
+                                                        className=""
+                                                    />
+                                                    :
+                                                    <img
+                                                        src={schat.profilePic}
+                                                        alt=""
+                                                        className=""
+                                                    />
+                                            }
+                                        </>
+                                        :
+                                        <>
+                                            <div className="">
+                                                <ProfileSvg />
+                                            </div>
+                                        </>
                                     }
-                                </>
-                                :
-                                <>
-                                    <div className="">
-                                        <ProfileSvg />
-                                    </div>
-                                </>
-                            }
-                            <span>{schat.name}</span>
-                        </div>
-                    );
-                })}
-            </div>
+                                    {onlineUsers.some((user) => user?.userId == schat?.id) ?
+                                        <div className="online" />
+                                        : ""}
+                                    <span>{schat.name}</span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </>
+                : ''
+            }
             <h4>All Chats</h4>
             {chatsData != [] ?
                 <>
                     {
                         chatsData.map((chat) => {
                             return (
-                                <div className="items" key={chat.user_data.id} onClick={() => { setChatId(chat.user_data.id), setChats(false) }}>
+                                <div className="items" key={chat.user_data.id} onClick={() => { setChatId(chat.chat._id), setRecepientId(chat.user_data.id), setChats(false) }}>
                                     {chat.user_data.profilePic ?
                                         <>
                                             {
@@ -128,9 +136,12 @@ const Chats = ({ setChats }) => {
                                             </div>
                                         </>
                                     }
+                                    {onlineUsers.some((user) => user?.userId == chat?.user_data.id) ?
+                                        <div className="online" />
+                                        : ""}
                                     <div>
                                         {/* <Link to={`/profile/${chat.user_data.id}`} style={{ textDecoration: 'none', color: 'inherit' }}> */}
-                                            {chat.user_data.name}<br />
+                                        {chat.user_data.name}<br />
                                         {/* </Link> */}
                                         <span>Text Message</span>
                                     </div>

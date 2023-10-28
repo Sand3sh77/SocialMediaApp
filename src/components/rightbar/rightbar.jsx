@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import Suggestions from './suggestions';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { ChatContext } from '../../context/chatContext';
 
 
 const Rightbar = () => {
@@ -16,6 +17,9 @@ const Rightbar = () => {
   const [notifications, setNotifications] = useState([]);
   const [friends, setFriends] = useState(true);
   const [allFriends, setAllFriends] = useState([]);
+  const { onlineUsers, setOnlineUsers } = useContext(ChatContext);
+
+  let count = false;
 
   useEffect(() => {
     if (currentUser) {
@@ -211,7 +215,7 @@ const Rightbar = () => {
                 </>
                 :
                 <div className="noUsersFollowed">
-                  No users followed
+                  No users followed.
                 </div>
               }
             </>
@@ -223,45 +227,56 @@ const Rightbar = () => {
                     allFriends.map((friend) => {
                       return (
                         <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
-                          <div className="user">
-                            <div className="userInfo">
-                              {friend.profilePic ?
-                                <>
-                                  {
-                                    friend.profilePic.split('/')[0] === 'api' ?
-                                      <img
-                                        src={Api + friend.profilePic}
-                                        alt=""
-                                        className=""
-                                      />
-                                      :
-                                      <img
-                                        src={friend.profilePic}
-                                        alt=""
-                                        className=""
-                                      />
-                                  }
-                                </>
-                                :
-                                <>
-                                  <div className="">
-                                    <ProfileSvg />
-                                  </div>
-                                </>
-                              }
-                              <div className="online" />
-                              <span style={{ textWrap: 'nowrap' }}>{friend.name}</span>
+                          {onlineUsers.some((user) => user?.userId === friend?.id) ?
+                            <div className="user">
+                              {count = true}
+                              <div className="userInfo">
+                                {friend.profilePic ?
+                                  <>
+                                    {
+                                      friend.profilePic.split('/')[0] === 'api' ?
+                                        <img
+                                          src={Api + friend.profilePic}
+                                          alt=""
+                                          className=""
+                                        />
+                                        :
+                                        <img
+                                          src={friend.profilePic}
+                                          alt=""
+                                          className=""
+                                        />
+                                    }
+                                  </>
+                                  :
+                                  <>
+                                    <div className="">
+                                      <ProfileSvg />
+                                    </div>
+                                  </>
+                                }
+                                <div className="online" />
+                                <span style={{ textWrap: 'nowrap' }}>{friend.name}</span>
+                              </div>
                             </div>
-                          </div>
+                            : ""
+                          }
                         </Link>
                       );
                     })
                   }
                 </>
                 :
+                <>
+                  <div className="noUsersFollowed">
+                    No users followed.
+                  </div>
+                </>
+              }
+              {!count ?
                 <div className="noUsersFollowed">
-                  No users followed
-                </div>
+                  No active users.
+                </div> : ''
               }
             </>
           }

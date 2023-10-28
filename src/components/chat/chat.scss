@@ -4,15 +4,173 @@
     position: fixed;
     bottom: 0rem;
     right: 8.5rem;
-    width: 20rem;
-    height: 20rem;
+    width: 21rem;
+    height: 27rem;
     z-index: 500;
+    border-radius: 0.5rem;
 
     @include themify($themes) {
         background-color: themed("bg");
         -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
         -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-        box-shadow: 0px 0px 15px 1px themed("bgSoft");
+        box-shadow: 1px 1px 20px 1px themed("shadowSoft");
 
+        .online {
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 100%;
+            background-color: limegreen;
+            position: absolute;
+            top: 0.5rem;
+            left: 2.2rem;
+        }
+
+        .top {
+            padding: 0.6rem;
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 0.5px solid themed('border');
+
+            div:first-child {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+
+                img,
+                svg {
+                    width: 2.2rem;
+                    height: 2.2rem;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+                svg {
+                    padding: 2px;
+                    border: 1px solid themed('textColor');
+                }
+            }
+
+            span {
+                cursor: pointer;
+            }
+
+            span:hover {
+                text-decoration: underline;
+            }
+
+            .cross {
+                border-radius: 50%;
+                height: 2.2rem;
+                width: 2.2rem;
+                padding: 0.2rem;
+                cursor: pointer;
+            }
+
+            .cross:hover {
+                background-color: themed("bgSoftT");
+            }
+        }
+
+        .middle {
+            padding: 0 0.5rem;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 1rem;
+            height: 72%;
+
+            img,
+            svg {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            svg {
+                padding: 2px;
+                border: 1px solid themed('textColor');
+            }
+
+            div {
+                span {
+                    // border: 1px solid themed("border");
+                    padding: 0.4rem 0.8rem;
+                    border-radius: 0.6rem;
+                    max-width: 72%;
+                    -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                    box-shadow: 1px 1px 5px themed("shadowSoft");
+                }
+            }
+
+            .message {
+                position: relative;
+
+                .online {
+                    top: -0.3rem;
+                    left: 1.5rem;
+                }
+            }
+
+            .ownMessage {
+                text-align: end;
+
+                span {
+                    background-color: #5271ff;
+                    color: white;
+                }
+            }
+
+            .otherMessage {
+                span {
+                    background-color: themed("bgSoft");
+                }
+            }
+
+            .empty {
+                position: absolute;
+                top: 50%;
+                margin: auto;
+                text-align: center;
+                width: 95%;
+                letter-spacing: 2px;
+            }
+        }
+
+        .bottom {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: themed("bg");
+
+            form {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .react-emoji {
+                    max-width: 88%;
+                }
+
+                .submit {
+                    color: #5271ff;
+                    background-color: transparent;
+                    border: none;
+                    border-radius: 50%;
+                    padding: 0.3rem;
+                    cursor: pointer;
+                    margin-right: 0.3rem;
+                    padding-left: 0.6rem;
+                    padding-top: 0.4rem;
+                }
+
+                .submit:hover {
+                    background: themed("bgSoft");
+                }
+            }
+        }
     }
 }

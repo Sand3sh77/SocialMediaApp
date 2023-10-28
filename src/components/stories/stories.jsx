@@ -70,9 +70,12 @@ const Stories = () => {
                             </>
                             :
                             <>
-                                <div className="">
-                                    <ProfileSvg />
-                                </div>
+                                <img
+                                    src="https://images.pexels.com/photos/3970396/pexels-photo-3970396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                    alt=""
+                                    className=""
+                                    style={{ filter: 'sepia(10%)' }}
+                                />
                             </>
                         }
                         <span>Create Story</span>
