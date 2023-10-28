@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./authContext";
 import { io } from "socket.io-client";
+import { SocketApi } from "../api/Api";
 
 export const ChatContext = createContext();
 
@@ -12,7 +13,7 @@ export const ChatContextProvider = ({ children }) => {
     const { currentUser } = useContext(AuthContext);
 
     useEffect(() => {
-        const newSocket = io("http://localhost:3000");
+        const newSocket = io(SocketApi);
         setSocket(newSocket);
 
         return () => {

@@ -9,7 +9,8 @@ if (currentURL === 'localhost') {
 }
 
 export const debugUrl = `http://localhost/social/`;
-export const ChatApi = isDebug ? `http://localhost:5000/api/` : 'https://chat-social-media-app-sandesh-subedis-projects.vercel.app/server/api/';
+export const ChatApi = isDebug ? `http://localhost:5000/api/` : 'https://chat-social-media-app.vercel.app/api/';
+export const SocketApi = isDebug ? `http://localhost:3000` : 'https://socket-chat-social-media-app-wve1.vercel.app/';
 const Api = isDebug ? debugUrl : 'https://sbapi.quizhunt.online/';
 
 export default Api;
