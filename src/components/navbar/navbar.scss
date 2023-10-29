@@ -190,6 +190,36 @@
                 }
             }
 
+            .chats {
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                svg {
+                    height: 1.45rem;
+
+                    @include mobile {
+                        height: 2rem;
+                        display: block;
+                        position: fixed;
+                        top: 4.8rem;
+                        right: 1rem;
+                        background-color: themed('bgSoft');
+                        padding: 0.5rem;
+                        border-radius: 50%;
+                        width: 3rem;
+                        height: 3rem;
+                        border: 1px solid themed('border');
+                        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                        z-index: 5000;
+
+                    }
+                }
+
+            }
+
             .user {
                 display: flex;
                 align-items: center;

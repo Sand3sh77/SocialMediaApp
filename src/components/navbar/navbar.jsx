@@ -143,8 +143,8 @@ const Navbar = () => {
             </div>
             <div className="right">
                 {/* <PersonOutlinedIcon className='icon' /> */}
-                <div onClick={() => setChats(!chats)} className='chats' style={{ position: "relative", display: 'flex', alignItems: 'center' }}>
-                    <ChatOutlined className='icon' />
+                <div onClick={() => setChats(!chats)} className='chats'>
+                    <ChatOutlined className='icon chatIcon' />
                 </div>
                 {chats && <Chats setChats={setChats} />}
                 {chatId && <Chat />}

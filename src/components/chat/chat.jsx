@@ -11,10 +11,10 @@ import SendIcon from '@mui/icons-material/Send';
 import toast from "react-hot-toast";
 
 const Chat = () => {
-    const { chatId, setChatId, recepientId, onlineUsers } = useContext(ChatContext);
+    const { chatId, setChatId, recepientId, onlineUsers, messages, setMessages, newMessage, setNewMessage } = useContext(ChatContext);
     const { currentUser } = useContext(AuthContext);
     const [recepientInfo, setRecepientInfo] = useState(null);
-    const [messages, setMessages] = useState([]);
+
     const [text, setText] = useState("");
 
     useEffect(() => {
@@ -73,6 +73,8 @@ const Chat = () => {
             })
             if (resp.status === 200) {
                 setText('');
+                setNewMessage(resp.data);
+                setMessages([resp.data, ...messages])
             }
             else {
                 toast.error(resp.data.message);
@@ -171,7 +173,6 @@ const Chat = () => {
                     <InputEmoji
                         value={text}
                         onChange={setText}
-                        cleanOnEnter
                         placeholder="Type a message"
                     />
                     <button type="submit" className="submit"><SendIcon /></button>

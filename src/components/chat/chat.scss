@@ -15,6 +15,18 @@
         -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
         box-shadow: 1px 1px 20px 1px themed("shadowSoft");
 
+        @include mobile {
+            max-height: 100vh;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            overflow-x: hidden;
+
+        }
+
         .online {
             width: 0.7rem;
             height: 0.7rem;
@@ -33,6 +45,7 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 0.5px solid themed('border');
+            margin-bottom: 0.5rem;
 
             div:first-child {
                 display: flex;
@@ -78,9 +91,14 @@
             padding: 0 0.5rem;
             display: flex;
             flex-direction: column-reverse;
-            gap: 1rem;
-            height: 72%;
+            gap: 0.5rem;
+            height: 73%;
+            z-index: -10;
+            overflow-y: scroll;
 
+            @include mobile{
+                height: 85%;
+            }
             img,
             svg {
                 width: 2rem;
@@ -96,7 +114,7 @@
 
             div {
                 span {
-                    // border: 1px solid themed("border");
+                    display: inline-block;
                     padding: 0.4rem 0.8rem;
                     border-radius: 0.6rem;
                     max-width: 72%;

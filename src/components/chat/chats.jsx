@@ -106,7 +106,7 @@ const Chats = ({ setChats }) => {
                 : ''
             }
             <h4>All Chats</h4>
-            {chatsData != [] ?
+            {chatsData.length > 0 ?
                 <>
                     {
                         chatsData.map((chat) => {

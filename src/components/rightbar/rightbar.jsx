@@ -160,13 +160,13 @@ const Rightbar = () => {
               <>
                 <span className='active' >All Friends</span>
                 <div className='border'></div>
-                <span onClick={() => setFriends(false)}>Online Friends</span>
+                <span onClick={() => setFriends(false)}>Active Friends</span>
               </>
               :
               <>
                 <span onClick={() => setFriends(true)}>All Friends</span>
                 <div className='border'></div>
-                <span className='active'>Online Friends</span>
+                <span className='active'>Active Friends</span>
               </>
             }
           </div>
@@ -275,7 +275,7 @@ const Rightbar = () => {
               }
               {!count ?
                 <div className="noUsersFollowed">
-                  No active users.
+                  No active friends.
                 </div> : ''
               }
             </>
