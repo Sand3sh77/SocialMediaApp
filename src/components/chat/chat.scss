@@ -96,9 +96,10 @@
             z-index: -10;
             overflow-y: scroll;
 
-            @include mobile{
+            @include mobile {
                 height: 85%;
             }
+
             img,
             svg {
                 width: 2rem;
@@ -159,8 +160,8 @@
         }
 
         .bottom {
-            position: absolute;
-            bottom: 0;
+            // position: fixed;
+            // bottom: 0;
             width: 100%;
             background-color: themed("bg");
 
