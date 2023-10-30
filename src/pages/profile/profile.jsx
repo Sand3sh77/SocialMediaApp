@@ -15,12 +15,14 @@ import { useParams } from 'react-router-dom';
 import { CrossOutlineSvg, CrossSvg, EditSolid, ProfileSvg, TickSvg } from '../../assets/svg/svg';
 import { AuthContext } from '../../context/authContext';
 import toast from 'react-hot-toast';
-import Api from '../../api/Api';
+import Api, { ChatApi } from '../../api/Api';
 import useFollow from '../../hooks/useFollow';
+import { ChatContext } from '../../context/chatContext';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
     const { currentUser, setCurrentUser, userToken, setUserToken } = useContext(AuthContext);
+    const { setChatId, setRecepientId } = useContext(ChatContext);
     const [modal, setModal] = useState({ edit: false, profile: false, cover: false, password: false, sPassword: false });
     const [file, setFile] = useState(null);
 
@@ -197,6 +199,31 @@ const Profile = () => {
         }
     }
 
+    const handleMessage = async (firstId) => {
+        const url = `${ChatApi}chats`;
+        try {
+            const resp = await axios.post(url, { firstId: firstId, secondId: JSON.parse(currentUser.id) }, {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+            if (resp.status === 200) {
+                setChatId(resp.data._id);
+                if (resp.data.members[0] == currentUser.id) {
+                    setRecepientId(resp.data.members[1]);
+                } else {
+                    setRecepientId(resp.data.members[0]);
+                }
+            }
+            else {
+                toast.error(resp.data.message);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+
     return (
         <div className="profile">
             <div className="images">
@@ -272,7 +299,10 @@ const Profile = () => {
                         {!isUser ?
                             <>
                                 {isFollowed ?
-                                    <button style={{ backgroundColor: '#fd253a' }} onClick={handleFollow}>Unfollow</button>
+                                    <div style={{ display: "flex", gap: "0.4rem" }}>
+                                        <button style={{ backgroundColor: '#5271ff' }} onClick={() => handleMessage(userInfo.id)}>Message</button>
+                                        <button style={{ backgroundColor: '#fd253a' }} onClick={handleFollow}>Unfollow</button>
+                                    </div>
                                     :
                                     <button style={{ backgroundColor: '#5271ff' }} onClick={handleFollow}>Follow</button>
                                 }
@@ -455,7 +485,7 @@ const Profile = () => {
                         }
                     </div>
                     <div className="right">
-                        <EmailOutlinedIcon />
+                        {/* <EmailOutlinedIcon /> */}
                         {isUser && currentUser.method === 'normal' ?
                             <>
                                 <div onClick={() => setModal({ ...modal, sPassword: !modal.sPassword })} style={{ cursor: 'pointer' }}>

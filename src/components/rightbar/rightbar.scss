@@ -122,6 +122,16 @@
                             }
                         }
                     }
+                    svg{
+                        cursor: pointer;
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        color: themed("textColor");
+                        z-index: 10;
+                    }
+                    svg:hover{
+                        color: #5271ff;
+                    }
                 }
 
                 .user:hover {

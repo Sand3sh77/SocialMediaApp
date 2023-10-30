@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import './rightbar.scss';
 import { AuthContext } from '../../context/authContext';
-import { ProfileSvg } from '../../assets/svg/svg';
-import Api from '../../api/Api';
+import { ChatOutlined, ProfileSvg } from '../../assets/svg/svg';
+import Api, { ChatApi } from '../../api/Api';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Suggestions from './suggestions';
@@ -17,7 +17,7 @@ const Rightbar = () => {
   const [notifications, setNotifications] = useState([]);
   const [friends, setFriends] = useState(true);
   const [allFriends, setAllFriends] = useState([]);
-  const { onlineUsers, setOnlineUsers } = useContext(ChatContext);
+  const { onlineUsers, setOnlineUsers, setChatId, setRecepientId } = useContext(ChatContext);
 
   let count = false;
 
@@ -78,6 +78,30 @@ const Rightbar = () => {
     }
 
   }, [])
+
+  const handleMessage = async (firstId) => {
+    const url = `${ChatApi}chats`;
+    try {
+      const resp = await axios.post(url, { firstId: firstId, secondId: JSON.parse(currentUser.id) }, {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      })
+      if (resp.status === 200) {
+        setChatId(resp.data._id);
+        if (resp.data.members[0] == currentUser.id) {
+          setRecepientId(resp.data.members[1]);
+        } else {
+          setRecepientId(resp.data.members[0]);
+        }
+      }
+      else {
+        toast.error(resp.data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
 
   return (
     <div className="rightbar">
@@ -226,42 +250,46 @@ const Rightbar = () => {
                   {
                     allFriends.map((friend) => {
                       return (
-                        <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={friend.id}>
-                          {onlineUsers.some((user) => user?.userId === friend?.id) ?
-                            <div className="user">
-                              {count = true}
-                              <div className="userInfo">
-                                {friend.profilePic ?
-                                  <>
-                                    {
-                                      friend.profilePic.split('/')[0] === 'api' ?
-                                        <img
-                                          src={Api + friend.profilePic}
-                                          alt=""
-                                          className=""
-                                        />
-                                        :
-                                        <img
-                                          src={friend.profilePic}
-                                          alt=""
-                                          className=""
-                                        />
+                        <div key={friend.id}>
+                          {
+                            onlineUsers.some((user) => user?.userId === friend?.id) ?
+                              <div className="user">
+                                {count = true}
+                                <Link to={`/profile/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }} >
+                                  <div className="userInfo">
+                                    {friend.profilePic ?
+                                      <>
+                                        {
+                                          friend.profilePic.split('/')[0] === 'api' ?
+                                            <img
+                                              src={Api + friend.profilePic}
+                                              alt=""
+                                              className=""
+                                            />
+                                            :
+                                            <img
+                                              src={friend.profilePic}
+                                              alt=""
+                                              className=""
+                                            />
+                                        }
+                                      </>
+                                      :
+                                      <>
+                                        <div className="">
+                                          <ProfileSvg />
+                                        </div>
+                                      </>
                                     }
-                                  </>
-                                  :
-                                  <>
-                                    <div className="">
-                                      <ProfileSvg />
-                                    </div>
-                                  </>
-                                }
-                                <div className="online" />
-                                <span style={{ textWrap: 'nowrap' }}>{friend.name}</span>
+                                    <div className="online" />
+                                    <span style={{ textWrap: 'nowrap' }}>{friend.name}</span>
+                                  </div>
+                                </Link>
+                                <div onClick={() => handleMessage(friend.id)}><ChatOutlined /></div>
                               </div>
-                            </div>
-                            : ""
+                              : ""
                           }
-                        </Link>
+                        </div>
                       );
                     })
                   }

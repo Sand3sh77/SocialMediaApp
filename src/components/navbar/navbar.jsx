@@ -143,7 +143,7 @@ const Navbar = () => {
             </div>
             <div className="right">
                 {/* <PersonOutlinedIcon className='icon' /> */}
-                <div onClick={() => setChats(!chats)} className='chats'>
+                <div onClick={() => setChats(!chats)} className={!chats ? 'chats' : "active chats"}>
                     <ChatOutlined className='icon chatIcon' />
                 </div>
                 {chats && <Chats setChats={setChats} />}
