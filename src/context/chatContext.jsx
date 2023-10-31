@@ -13,6 +13,7 @@ export const ChatContextProvider = ({ children }) => {
     const [newMessage, setNewMessage] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const { currentUser } = useContext(AuthContext);
+    const [callApi, setCallApi] = useState(true);
 
     useEffect(() => {
         const newSocket = io(SocketApi);
@@ -50,6 +51,8 @@ export const ChatContextProvider = ({ children }) => {
         if (socket === null) return;
 
         socket.on("getMessage", res => {
+            setCallApi(!callApi);
+
             if (chatId !== res.chatId) return;
 
             setMessages((prev) => [res, ...prev]);
@@ -62,7 +65,7 @@ export const ChatContextProvider = ({ children }) => {
     }, [socket, chatId]);
 
     return (
-        <ChatContext.Provider value={{ chatId, setChatId, recepientId, setRecepientId, onlineUsers, setOnlineUsers, messages, setMessages, newMessage, setNewMessage }}>
+        <ChatContext.Provider value={{ chatId, setChatId, recepientId, setRecepientId, onlineUsers, setOnlineUsers, messages, setMessages, newMessage, setNewMessage, callApi, setCallApi }}>
             {children}
         </ChatContext.Provider>
     );

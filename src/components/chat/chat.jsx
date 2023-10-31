@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import InputEmoji from "react-input-emoji";
 import SendIcon from '@mui/icons-material/Send';
 import toast from "react-hot-toast";
+import moment from "moment";
 
 const Chat = () => {
     const { chatId, setChatId, recepientId, onlineUsers, messages, setMessages, newMessage, setNewMessage } = useContext(ChatContext);
@@ -156,10 +157,14 @@ const Chat = () => {
                                                 <div className="online" /> : ""}
                                             <span >
                                                 {message.text}
+                                                <div className="timestamp">{moment.utc(message.createdAt).local().calendar()}
+                                                </div>
                                             </span>
                                         </div>
                                         : <span >
                                             {message.text}
+                                            <div className="timestamp" style={{ color: "rgba(231, 223, 223)" }}>{moment.utc(message.createdAt).local().calendar()}
+                                            </div>
                                         </span>}
                                 </div>
                             );

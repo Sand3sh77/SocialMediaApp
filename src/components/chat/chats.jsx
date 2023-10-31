@@ -5,16 +5,14 @@ import toast from "react-hot-toast";
 import Api, { ChatApi } from "../../api/Api";
 import axios from "axios";
 import { ProfileSvg } from "../../assets/svg/svg";
-import { Link } from "react-router-dom";
 import { ChatContext } from "../../context/chatContext";
 import moment from "moment";
 
 const Chats = ({ setChats }) => {
     const { currentUser } = useContext(AuthContext);
-    const { setRecepientId, setChatId, onlineUsers } = useContext(ChatContext);
+    const { setRecepientId, setChatId, onlineUsers, callApi, setCallApi } = useContext(ChatContext);
     const [chatsData, setChatsData] = useState([]);
     const [suggestedChats, setSuggestedChats] = useState([]);
-    const [callApi, setCallApi] = useState(true);
 
     useEffect(() => {
         if (currentUser) {
@@ -140,19 +138,38 @@ const Chats = ({ setChats }) => {
                                         <div className="online" />
                                         : ""}
                                     <div>
-                                        {/* <Link to={`/profile/${chat.user_data.id}`} style={{ textDecoration: 'none', color: 'inherit' }}> */}
                                         {chat.user_data.name}<br />
-                                        {/* </Link> */}
-                                        <span>Text Message</span>
+                                        <span>{chat.latestMessage ? chat.latestMessage.text : "Text Message"}</span>
                                     </div>
-                                    <span className="timestamp">{moment.utc(chat.chat.updatedAt).local().fromNow()
-                                        .replace('a few seconds', 'a sec')
-                                        .replace('a minute', '1 min')
-                                        .replace(/minutes?/, 'min')
-                                        .replace(/hours?/, 'h')
-                                        .replace(/days?/, 'd')
-                                        .replace(/months?/, 'mo')
-                                        .replace(/years?/, 'y')}</span>
+                                    <div className="timestamp">
+                                        {chat.latestMessage ?
+                                            <>
+                                                <span className="">{moment.utc(chat.latestMessage.updatedAt).format('l')}</span><br />
+                                                <span>{moment.utc(chat.latestMessage.updatedAt).local().fromNow()
+                                                    .replace('a few seconds', 'a sec')
+                                                    .replace('a minute', '1 min')
+                                                    .replace(/minutes?/, 'min')
+                                                    .replace(/hours?/, 'h')
+                                                    .replace(/days?/, 'd')
+                                                    .replace(/months?/, 'mo')
+                                                    .replace(/years?/, 'y')}
+                                                </span>
+                                            </>
+                                            :
+                                            <>
+                                                <span className="">{moment.utc(chat.chat.updatedAt).format('l')}</span><br />
+                                                <span>{moment.utc(chat.chat.updatedAt).local().fromNow()
+                                                    .replace('a few seconds', 'a sec')
+                                                    .replace('a minute', '1 min')
+                                                    .replace(/minutes?/, 'min')
+                                                    .replace(/hours?/, 'h')
+                                                    .replace(/days?/, 'd')
+                                                    .replace(/months?/, 'mo')
+                                                    .replace(/years?/, 'y')}
+                                                </span>
+                                            </>
+                                        }
+                                    </div>
                                 </div>
                             );
                         })
