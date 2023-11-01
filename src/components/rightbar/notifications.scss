@@ -1,0 +1,97 @@
+@import "../../App.scss";
+
+.notiItem {
+    @include themify($themes) {
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        background-color: themed('bg');
+        padding: 1.2rem;
+        margin-bottom: 1rem;
+
+        span {
+            color: gray;
+            font-size: 0.8rem;
+        }
+
+        .moment {
+            font-size: 0.8rem;
+            color: themed("textColorSoft");
+        }
+
+        .nuser {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.3rem;
+            border-radius: 5px;
+
+            @include tablet {
+                flex-wrap: wrap;
+            }
+
+            span {
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+
+            .userInfo {
+                display: flex;
+                align-items: center;
+                gap: 1.1rem;
+                position: relative;
+
+                img,
+                svg {
+                    width: 2.1rem;
+                    height: 2.1rem;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    color: themed('textColor');
+                }
+
+                svg {
+                    padding: 2px;
+                    border: 1px solid themed('textColor');
+                }
+
+                p {
+                    flex: 7;
+                    color: themed("textColorSoft");
+                    font-size: 0.9rem;
+                    padding-right: 10px;
+                }
+
+                span {
+                    font-weight: 500;
+                    color: themed("textColor");
+                    text-wrap: wrap;
+                    width: 7rem;
+                    font-size: 0.95rem;
+                }
+            }
+
+            svg {
+                cursor: pointer;
+                height: 1.5rem;
+                width: 1.5rem;
+                color: themed("textColor");
+                z-index: 10;
+            }
+
+            svg:hover {
+                color: #5271ff;
+            }
+        }
+
+        .nuser:hover {
+            background-color: themed('bgSoftT');
+        }
+
+        .noUsersFollowed {
+            text-align: center;
+            color: themed('textColorSoft');
+            margin: 5rem 0;
+        }
+    }
+}

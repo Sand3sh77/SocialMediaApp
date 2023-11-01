@@ -19,10 +19,12 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import Chat from '../chat/chat';
 import Chats from '../chat/chats';
+import Notifications from '../rightbar/notifications';
 
 
 const Navbar = () => {
     const [chats, setChats] = useState(false);
+    const [toggleNotifications, setToggleNotifications] = useState(false);
     const [search, setSearch] = useState('');
     const [result, setResult] = useState([]);
     const { Toggle, darkMode } = useContext(DarkModeContext);
@@ -75,6 +77,7 @@ const Navbar = () => {
         <div className="navbar">
             {result[0] != null ? <div className='invisible' onClick={() => setResult([])}></div> : ''}
             {chats === true ? <div className='invisible' onClick={() => setChats(false)}></div> : ''}
+            {toggleNotifications === true ? <div className='invisible' onClick={() => setToggleNotifications(false)}></div> : ''}
             <div className="left">
                 <Link to='/' style={{ textDecoration: 'none' }}>
                     <span className='logo'>SafeBook</span>
@@ -143,13 +146,17 @@ const Navbar = () => {
             </div>
             <div className="right">
                 {/* <PersonOutlinedIcon className='icon' /> */}
-                <div onClick={() => setChats(!chats)} className={!chats ? 'chats' : "active chats"}>
+                <div onClick={() => { setChats(!chats), setToggleNotifications(false) }} className={!chats ? 'chats' : "active chats"}>
                     <ChatOutlined className='icon chatIcon' />
                 </div>
                 {chats && <Chats setChats={setChats} />}
                 {chatId && <Chat />}
 
-                <NotificationsOutlinedIcon className='icon' />
+                <NotificationsOutlinedIcon onClick={() => { setToggleNotifications(!toggleNotifications), setChats(false) }} className={!toggleNotifications ? 'nicon icon' : "nicon active icon"} />
+                {toggleNotifications &&
+                    <div className='notifications'>
+                        <Notifications limit="10" />
+                    </div>}
                 <div onClick={() => {
                     QueryClient.invalidateQueries('posts');
                 }}>
