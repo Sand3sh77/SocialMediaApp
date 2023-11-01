@@ -42,7 +42,7 @@ const Chats = ({ setChats }) => {
     const handleClick = async (firstId) => {
         const url = `${ChatApi}chats`;
         try {
-            const resp = await axios.post(url, { firstId: firstId, secondId: JSON.parse(currentUser.id) }, {
+            const resp = await axios.post(url, { firstId: JSON.parse(firstId), secondId: JSON.parse(currentUser.id) }, {
                 headers: {
                     "Content-Type": "application/json",
                 }
